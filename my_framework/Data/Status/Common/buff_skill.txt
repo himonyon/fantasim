@@ -1,0 +1,6 @@
+id 2000 name パワーレイズⅠ type at consume 5 value 1.2 count 1 min_dis 1 max_dis 1
+id 2001 name パワーレイズⅡ type at consume 7 value 1.5 count 2 min_dis 1 max_dis 1
+id 2002 name ヘイストⅠ type evd consume 4 value 1.2 count 1 min_dis 1 max_dis 1
+id 2003 name ヘイストⅡ type evd consume 7 value 1.5 count 2 min_dis 1 max_dis 1
+id 2004 name ディフェンダーⅠ type def consume 3 value 1.2 count 1 min_dis 1 max_dis 1
+id 2005 name ディフェンダーⅡ type def consume 6 value 1.5 count 2 min_dis 1 max_dis 1

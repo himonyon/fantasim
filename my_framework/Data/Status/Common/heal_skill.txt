@@ -1,0 +1,5 @@
+id 1000 name ƒq[ƒ‹‡T isFixed 0 type hp consume 7 value 10 min_dis 1 max_dis 1
+id 1001 name ƒq[ƒ‹‡U isFixed 0 type hp consume 14 value 15 min_dis 1 max_dis 2
+id 1002 name ƒq[ƒ‹‡V isFixed 0 type hp consume 22 value 25 min_dis 1 max_dis 2
+id 1003 name MPƒpƒX isFixed 1 type mp consume 10 value 10 min_dis 1 max_dis 1
+id 1004 name ƒq[ƒ‹ƒVƒƒƒ[ isFixed 0 type all_hp consume 18 value 15 min_dis 1 max_dis 3

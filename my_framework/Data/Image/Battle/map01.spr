@@ -1,0 +1,4 @@
+texture Data/Image/Battle/map01.png
+name default uv 0.000000 1.000000 0.000000 1.000000
+name ice uv 0.375000 0.500000 0.066600 0.200000
+name fire uv 0.750000 0.875000 0.732600 0.865800

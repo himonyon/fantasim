@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Src">
+      <UniqueIdentifier>{ff24a042-6954-430c-987b-adfd2ecaa753}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework">
+      <UniqueIdentifier>{664b4b81-7414-432d-830c-8d55fe621cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Animation">
+      <UniqueIdentifier>{c8016be8-8f37-4448-bec5-cb7115438cad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public">
+      <UniqueIdentifier>{bbff6aa8-f5ac-4bf3-bcb2-46fec6453696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene">
+      <UniqueIdentifier>{f466f55e-aeef-4611-b6ae-9aa27f3ffde0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Shader">
+      <UniqueIdentifier>{0151189c-7f8d-4728-bc64-cf71a2f01716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Sound">
+      <UniqueIdentifier>{e84b4953-a320-479a-a78a-44932dfb5063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Sprite">
+      <UniqueIdentifier>{68df229c-2c0c-474a-8f57-1b949f9dc129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Direct3D">
+      <UniqueIdentifier>{4054f1d1-6648-4874-9bc2-27fbcab55d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Shader">
+      <UniqueIdentifier>{051c525e-01b7-4f18-b77a-6e0f6b238228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Input">
+      <UniqueIdentifier>{018047f7-de4b-4a2f-8ad5-8738d31a99fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Timer">
+      <UniqueIdentifier>{5206ffb4-62c7-4fa4-9292-ac757582c07b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Utility">
+      <UniqueIdentifier>{0b8d24a2-4e89-460d-9cf4-f027ed6343f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Title">
+      <UniqueIdentifier>{39cca962-789a-41c0-8b9d-b92fc9ceb34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Mesh">
+      <UniqueIdentifier>{5d693f46-8e6d-4f7d-a919-27b4b7762272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component">
+      <UniqueIdentifier>{f725e6f2-713f-4c78-87c7-c0562dc1a447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Renderer">
+      <UniqueIdentifier>{bdb8ffe9-6940-4711-927d-a70b2150ded7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Behaviour">
+      <UniqueIdentifier>{5f92258a-7be4-45f4-9f72-b3aeb087d722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Collider">
+      <UniqueIdentifier>{da8e3568-8366-4fe0-8f91-152a6b6942ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Object">
+      <UniqueIdentifier>{5282a66c-4451-49b9-87d0-89f34cdf3d40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Transform">
+      <UniqueIdentifier>{711bffcb-d46b-4c5c-beb5-422cc8d0c4bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Physics2D">
+      <UniqueIdentifier>{32d65622-3b4a-418f-94cc-a4b1e9cf285d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\MessageSystem">
+      <UniqueIdentifier>{14e4f4c8-3376-4714-9bb1-e2bedfed958c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Animator">
+      <UniqueIdentifier>{bd965b4e-8460-4505-8853-7f16f7667971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Strategy">
+      <UniqueIdentifier>{561e5d4f-e5c5-45a5-986f-0c8907331a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Title\Behaviour">
+      <UniqueIdentifier>{ff803483-d85d-414d-87f4-0178b3cf8c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Strategy\Behaviour">
+      <UniqueIdentifier>{b5d7f006-be05-4a66-9fd1-ff83c9af2718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Behaviour">
+      <UniqueIdentifier>{e11e5271-dd31-4421-b9ce-5de309ab8d62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Object">
+      <UniqueIdentifier>{272fe541-b89a-4252-a019-121c99d50e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel">
+      <UniqueIdentifier>{8c1f8d83-bfd7-4f56-9e35-5f82087f6b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Font">
+      <UniqueIdentifier>{62c95d0b-215f-4997-b52b-3a2aa5fb9bab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Object\Skill">
+      <UniqueIdentifier>{a56e3b7a-0788-4062-b3aa-919f846c2f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\Camera">
+      <UniqueIdentifier>{8972dbc9-e5c1-4c18-a4b9-a04e62adf585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Battle">
+      <UniqueIdentifier>{caef632f-bc46-494b-902e-b1e396118712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Battle\Behaviour">
+      <UniqueIdentifier>{1bebb02c-0a1c-4911-858e-6d4947bf7c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Battle\Behaviour\Charactor">
+      <UniqueIdentifier>{20cca446-127b-45bf-abb6-24f9901109c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Battle\Object">
+      <UniqueIdentifier>{b2e58d11-d07c-4800-84be-7d3eb87214f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel">
+      <UniqueIdentifier>{176e722c-9b52-4e52-a65b-fc68b5e6af80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn">
+      <UniqueIdentifier>{19dc65a6-02b1-4a02-91df-86e098f728ed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="my_framework.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="WICTextureLoader11.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="environment.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Animation\SpriteAnimation.h">
+      <Filter>ソース ファイル\Src\Framework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\GraphicsUtility.h">
+      <Filter>ソース ファイル\Src\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Main.h">
+      <Filter>ソース ファイル\Src\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Direct3D\Direct3D.h">
+      <Filter>ソース ファイル\Src\Framework\Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Input\DirectInput.h">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Input\Input.h">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Input\Joystick.h">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Input\Keyboard.h">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Input\Mouse.h">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Timer\Timer.h">
+      <Filter>ソース ファイル\Src\Framework\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Shader\Shader.h">
+      <Filter>ソース ファイル\Src\Framework\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Sprite\Sprite.h">
+      <Filter>ソース ファイル\Src\Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Sprite\SpriteManager.h">
+      <Filter>ソース ファイル\Src\Framework\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Sound\Sound.h">
+      <Filter>ソース ファイル\Src\Framework\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Sound\SoundManager.h">
+      <Filter>ソース ファイル\Src\Framework\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Utility\noDel_ptr.h">
+      <Filter>ソース ファイル\Src\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\scene.h">
+      <Filter>ソース ファイル\Src\Public\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Title\scene_title.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Mesh\Mesh.h">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Mesh\MeshManager.h">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\SceneManager.h">
+      <Filter>ソース ファイル\Src\Public\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Utility\UtilFunc.h">
+      <Filter>ソース ファイル\Src\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\InputConfig.h">
+      <Filter>ソース ファイル\Src\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Component.h">
+      <Filter>ソース ファイル\Src\Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Renderer\MeshRenderer.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Renderer\SpriteRenderer.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Collider\Collider2D.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Behaviour\Behaviour.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Object\Object.h">
+      <Filter>ソース ファイル\Src\Framework\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Object\GameObject.h">
+      <Filter>ソース ファイル\Src\Framework\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Object\GameObjectManager.h">
+      <Filter>ソース ファイル\Src\Framework\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Transform\Transform.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Physics\Physics2D.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Physics2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\MessageSystem\MessageSystem.h">
+      <Filter>ソース ファイル\Src\Framework\MessageSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Animator\Animator.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\scene_strategy.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Title\Behaviour\TitleManager.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Title\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\City.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Country.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Object\Panel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectCountryPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Font\Font.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\CityPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Object\Skill\Skill.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Object\Attribute.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Object\Charactor.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Object\Skill\BuffSkill.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Object\Skill\HealSkill.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Object\Skill\AttackSkill.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\InvestPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectNeighborPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Camera\Camera.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\BattlePanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaSelectPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Renderer\ImageRenderer.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Renderer\Renderer2D.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\scene_battle.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\FieldManager.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Charactor\BattleChara.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Charactor\EnemyChara.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Charactor\PlayerChara.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Cursor.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Cursor.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\DebugFont.h">
+      <Filter>ソース ファイル\Src\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Object\Square.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Object\Astar.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\SelectSquare.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Panel\Command.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Panel\StatusPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Turn\PlayerTurn.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Turn\Turn.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Turn\EnemyTurn.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Panel\SelectSkillPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="my_framework.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="WICTextureLoader11.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Animation\SpriteAnimation.cpp">
+      <Filter>ソース ファイル\Src\Framework\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Main.cpp">
+      <Filter>ソース ファイル\Src\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Direct3D\Direct3D.cpp">
+      <Filter>ソース ファイル\Src\Framework\Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Input\DirectInput.cpp">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Input\Input.cpp">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Input\Joystick.cpp">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Input\Keyboard.cpp">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Input\Mouse.cpp">
+      <Filter>ソース ファイル\Src\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Timer\Timer.cpp">
+      <Filter>ソース ファイル\Src\Framework\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Shader\Shader.cpp">
+      <Filter>ソース ファイル\Src\Framework\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Sprite\Sprite.cpp">
+      <Filter>ソース ファイル\Src\Framework\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Sound\Sound.cpp">
+      <Filter>ソース ファイル\Src\Framework\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\scene.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Title\scene_title.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Mesh\Mesh.cpp">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\SceneManager.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Utility\UtilFunc.cpp">
+      <Filter>ソース ファイル\Src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\InputConfig.cpp">
+      <Filter>ソース ファイル\Src\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Component.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Renderer\MeshRenderer.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Renderer\SpriteRenderer.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Collider\Collider2D.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Behaviour\Behaviour.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Object\Object.cpp">
+      <Filter>ソース ファイル\Src\Framework\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Object\GameObject.cpp">
+      <Filter>ソース ファイル\Src\Framework\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Object\GameObjectManager.cpp">
+      <Filter>ソース ファイル\Src\Framework\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Transform\Transform.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Physics\Physics2D.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Physics2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\MessageSystem\MessageSystem.cpp">
+      <Filter>ソース ファイル\Src\Framework\MessageSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Animator\Animaor.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\scene_strategy.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Title\Behaviour\TitleManager.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Title\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\City.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Country.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectCountryPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Object\Panel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Font\Font.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\CityPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Object\Skill\Skill.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Object\Attribute.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Object\Charactor.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Object\Skill\BuffSkill.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Object\Skill\HealSkill.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Object\Skill\AttackSkill.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Object\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\InvestPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectNeighborPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Camera\Camera.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\BattlePanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaSelectPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Renderer\ImageRenderer.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Renderer\Renderer2D.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\scene_battle.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\FieldManager.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Charactor\BattleChara.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Charactor\EnemyChara.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Charactor\PlayerChara.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Cursor.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Cursor.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\DebugFont.cpp">
+      <Filter>ソース ファイル\Src\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Object\Square.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Object\Astar.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\SelectSquare.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Panel\Command.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Panel\StatusPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Turn\EnemyTurn.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Turn\PlayerTurn.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Turn\Turn.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Panel\SelectSkillPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="my_framework.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="my_framework.ico">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Src\Shader\ps_2d.psh">
+      <Filter>ソース ファイル\Src\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Src\Shader\vs_2d.vsh">
+      <Filter>ソース ファイル\Src\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Src\Shader\ps_3d.psh">
+      <Filter>ソース ファイル\Src\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Src\Shader\vs_3d.vsh">
+      <Filter>ソース ファイル\Src\Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

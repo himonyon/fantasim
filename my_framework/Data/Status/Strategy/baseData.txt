@@ -1,0 +1,27 @@
+new id 0 name レダニア country 0 position 100 200 neighbor 7 8   money 4500 economic 1900 political 4612 disaster 56 support 84 business 0.7 chara 51    
+new id 1 name マスティフ country 1 position 150 620 neighbor 9 12   money 5000 economic 2346 political 4816 disaster 99 support 78 business 1.1 chara 35    
+new id 2 name メタノール country 2 position 600 100 neighbor 13 19   money 7900 economic 2307 political 5120 disaster 88 support 66 business 0.9 chara 26    
+new id 3 name ゾルフガード country 3 position 660 350 neighbor 14 23 17  money 4800 economic 2500 political 3603 disaster 72 support 95 business 1.3 chara 43    
+new id 4 name ミッドガル country 4 position 1000 600 neighbor 21 24 27  money 6400 economic 2447 political 4983 disaster 99 support 70 business 1.2 chara 19    
+new id 5 name デトロイト country 5 position 1180 200 neighbor 25 26   money 3900 economic 3836 political 2567 disaster 87 support 72 business 1.3 chara 12    
+new id 6 name ゲルダ country 0 position 300 150 neighbor 1 13   money 3400 economic 2200 political 3017 disaster 94 support 61 business 1.6 chara 13 48 36  
+new id 7 name マテルダ country 0 position 250 260 neighbor 1 11   money 6700 economic 2600 political 2046 disaster 68 support 44 business 1.8 chara 4 37 54  
+new id 8 name リニア country 1 position 210 450 neighbor 2 11   money 6700 economic 4711 political 4143 disaster 66 support 71 business 1.2 chara 16 23 24  
+new id 9 name セーリア country 2 position 400 70 neighbor 13    money 5000 economic 3584 political 2342 disaster 75 support 93 business 1.5 chara 5 53   
+new id 10 name グロキシニア country 1 position 350 350 neighbor 8 9 14 15 money 3900 economic 3551 political 2383 disaster 65 support 72 business 0.6 chara 15 31 55  
+new id 11 name ベント country 1 position 340 600 neighbor 2 15 16  money 5800 economic 2584 political 4375 disaster 58 support 88 business 0.5 chara 0 49   
+new id 12 name レニス country 2 position 470 180 neighbor 3 7 10 14 money 6700 economic 4708 political 3067 disaster 97 support 48 business 0.9 chara 14 28 27  
+new id 13 name ワット country 3 position 520 290 neighbor 11 13 4  money 2800 economic 3100 political 2818 disaster 80 support 50 business 1 chara 1 47   
+new id 14 name ニラニチア country 3 position 490 470 neighbor 11 12 17  money 3700 economic 2000 political 3821 disaster 69 support 50 business 1 chara 2 30 45  
+new id 15 name テゴス country 1 position 450 650 neighbor 12 18   money 4900 economic 3444 political 5384 disaster 46 support 44 business 0.9 chara 22 29 56  
+new id 16 name メロン country 3 position 640 490 neighbor 4 15 18 20 money 5600 economic 2100 political 5181 disaster 45 support 65 business 1 chara 10 50   
+new id 17 name キニニム country 3 position 630 619 neighbor 16 17 21  money 2200 economic 2500 political 4202 disaster 87 support 95 business 1 chara 3 38   
+new id 18 name ウォール country 2 position 770 200 neighbor 3 22 23  money 4900 economic 2521 political 4204 disaster 50 support 48 business 1 chara 11 41 58  
+new id 19 name マリア country 3 position 780 430 neighbor 17 24   money 5000 economic 1900 political 2253 disaster 40 support 58 business 1.1 chara 17 40   
+new id 20 name シーネ country 4 position 800 580 neighbor 5 18   money 4700 economic 2458 political 4286 disaster 43 support 95 business 1.3 chara 20 39 46  
+new id 21 name ニルフ country 5 position 930 100 neighbor 19 25   money 4600 economic 4843 political 3362 disaster 78 support 54 business 1.5 chara 6 32 57  
+new id 22 name アガレス country 3 position 930 260 neighbor 4 19 24  money 3200 economic 3000 political 4126 disaster 46 support 67 business 1.4 chara 18 52   
+new id 23 name ザガン country 4 position 930 400 neighbor 5 20 23 26 money 6000 economic 3194 political 2421 disaster 89 support 41 business 0.7 chara 8 34   
+new id 24 name ミステリー country 5 position 1020 140 neighbor 6 22   money 3600 economic 3857 political 2270 disaster 75 support 53 business 1 chara 21 42 59  
+new id 25 name ヤンマー country 5 position 1160 380 neighbor 6 24   money 5100 economic 2952 political 4749 disaster 55 support 57 business 1 chara 9 33   
+new id 26 name ニベア country 4 position 1180 600 neighbor 5 24   money 5100 economic 4209 political 3909 disaster 69 support 78 business 1.3 chara 7 44 25  
