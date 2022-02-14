@@ -1,12 +1,10 @@
 #include "../../../../../framework.h"
 #include "../../../../../environment.h"
-#include "Cursor.h"
 
 using namespace nsStrategy;
 
 void Cursor::Start() {
 	transform->rotation.z = 6.0f;
-	gameObject->SetObjEnable(false);
 }
 
 void Cursor::Update() {
@@ -23,5 +21,10 @@ void Cursor::Update() {
 			transform->position.y += Input::GetDY(InputConfig::input["moveY"]) * speed;
 		}
 	}
+
+	if (transform->position.x > SCREEN_WIDTH) transform->position.x = SCREEN_WIDTH;
+	if (transform->position.x < 0) transform->position.x = 0;
+	if (transform->position.y > SCREEN_HEIGHT) transform->position.y = SCREEN_HEIGHT;
+	if (transform->position.y < 0) transform->position.y = 0;
 }
 

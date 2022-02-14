@@ -8,11 +8,11 @@
 
 namespace nsStrategy {
 	class InvestPanel : public Panel {
-	private:
-		//Findobject
-		noDel_ptr<GameObject> pCityPanel;
 
 	private:
+		//Findobject
+		noDel_ptr<SoundManager> pSoundManager;
+
 		//‘ÎÛ‚Ì‘AŠX
 		noDel_ptr<City> pCity;
 		noDel_ptr<City> pCity2;

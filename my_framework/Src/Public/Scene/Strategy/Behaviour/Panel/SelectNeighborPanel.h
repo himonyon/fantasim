@@ -10,12 +10,8 @@ namespace nsStrategy {
 	class SelectNeighborPanel : public Panel {
 	private:
 		//Findobject
-		noDel_ptr<GameObject> pCityPanel;
-		noDel_ptr<GameObject> pInvestPanel;
-		noDel_ptr<GameObject> pBattlePanel;
-		noDel_ptr<GameObject> pCharaSelectPanel;
+		noDel_ptr<SoundManager> pSoundManager;
 
-	private:
 		//ëŒè€ÇÃçëÅAäX
 		noDel_ptr<City> pCity;
 

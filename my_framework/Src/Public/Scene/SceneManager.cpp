@@ -26,10 +26,12 @@ void SceneManager::SwitchScene() {
 		return;
 	}
 
+	//シーンを作成して初期化
 	if (pReservedScene == nullptr) {
 		//シーンの作成
 		CreateReserveScene(reservedScene, true);
 	}
+	//初期化が終わればシーン切り替え
 	else {
 		if (pReservedScene->isInitialized) {
 			//遷移予定のシーンの種類(reservedScene)がすでに作成している予約シーンの種類と違えば処理しない
@@ -41,7 +43,7 @@ void SceneManager::SwitchScene() {
 			//現在のシーンを設定
 			currentScene = reservedScene;
 
-			//メインのシーンに予約シーンを渡す
+			//メインシーンに予約シーンを渡す
 			pScene = pReservedScene;
 
 			//予約シーンはNullにする

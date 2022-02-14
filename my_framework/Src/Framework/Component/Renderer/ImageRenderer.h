@@ -28,7 +28,7 @@ public:
 	//FrontObjなら+10000した値、BackObjなら-10000した値を返す
 	int GetRenderPriority() override;
 
-	void SetDefaultUV(); //スプライトの状態を初期状態に戻す(ColorとUV)
+	void SetDefaultUV() override; //スプライトの状態を初期状態に戻す(ColorとUV)
 
 private:
 	void Render(void); //描画

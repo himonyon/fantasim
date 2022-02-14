@@ -25,6 +25,9 @@ protected:
 	int min_dis = 0;
 	int max_dis = 0;
 
+	bool isAllRange = false; //”ÍˆÍ“à‘S‚Ä‚ª‘ÎÛ‚©
+
+
 public:
 	virtual ~Skill() {};
 
@@ -32,10 +35,12 @@ public:
 	static noDel_ptr<Skill> GetSkill(int id) { return noDel_ptr<Skill>(umSkill[id]); }
 
 	//Getter,Setter
+	int GetID() { return id; }
 	eSkillType GetSkillType() { return skillType; }
 	std::wstring GetName() { return name; }
 	noDel_ptr<Attribute> GetAttr() { return pAttr; }
 	int GetConsumeMP() { return consumeMP; }
 	int GetMinDis() { return min_dis; }
 	int GetMaxDis() { return max_dis; }
+	bool IsAllRange() { return isAllRange; }
 };

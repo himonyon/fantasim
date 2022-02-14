@@ -37,9 +37,15 @@ void HealSkill::InitHealSkill() {
 			else if (strcmp(_key, "type") == 0) {
 				fscanf_s(fp, "%s", _key, (int)sizeof(_key));
 				if (strcmp(_key, "hp") == 0) _pInstance->healType = eHealType::HP;
-				if (strcmp(_key, "all_hp") == 0) _pInstance->healType = eHealType::ALL_HP;
+				if (strcmp(_key, "all_hp") == 0) {
+					_pInstance->isAllRange = true;
+					_pInstance->healType = eHealType::HP;
+				}
 				if (strcmp(_key, "mp") == 0) _pInstance->healType = eHealType::MP;
-				if (strcmp(_key, "all_mp") == 0) _pInstance->healType = eHealType::ALL_MP;
+				if (strcmp(_key, "all_mp") == 0) {
+					_pInstance->isAllRange = true;
+					_pInstance->healType = eHealType::MP;
+				}
 			}
 			else if (strcmp(_key, "consume") == 0) {
 				fscanf_s(fp, "%d", &_pInstance->consumeMP);

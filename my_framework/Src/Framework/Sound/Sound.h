@@ -33,5 +33,6 @@ public:
 
 	bool isPlaying();
 	void Play();
+	void Resume();
 	void Stop();
 };

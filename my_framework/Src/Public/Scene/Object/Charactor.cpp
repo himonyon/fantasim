@@ -3,9 +3,9 @@
 
 #include "Charactor.h"
 
-Charactor::Charactor(int id) {
+Charactor::Charactor(int id, std::string file) {
 	FILE* fp;
-	fopen_s(&fp, "Data/Status/Common/chara.txt", "r");
+	fopen_s(&fp, file.c_str(), "r");
 	if (fp == NULL) return;
 	char _key[256] = "";
 	bool _flag = false;
@@ -44,6 +44,9 @@ Charactor::Charactor(int id) {
 				WCHAR _attrName[8] = L"";
 				MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, (LPCCH)_key, _countof(_key), _attrName, _countof(_attrName));
 				pAttr = Attribute::GetAttr(_attrName);
+			}
+			else if (strcmp(_key, "level") == 0) {
+				fscanf_s(fp, "%d", &level);
 			}
 			else if (strcmp(_key, "power") == 0) {
 				fscanf_s(fp, "%d", &power);
@@ -88,7 +91,7 @@ Charactor::Charactor(const Charactor& c) {
 	pSprite = new Sprite(L"Data/Image/Common/chara.spr", c.sp_name.c_str()); //スプライト
 	pAttr = c.pAttr; //属性
 	vpSkill = c.vpSkill; //スキル
-	vBuff = c.vBuff;
+	umBuff = c.umBuff;
 
 	level = c.level;
 	power = c.power; //個体値
@@ -104,4 +107,19 @@ Charactor::Charactor(const Charactor& c) {
 Charactor::~Charactor() {
 	delete pSprite;
 	pSprite = NULL;
+}
+
+void Charactor::SetBuff(const stBuff buff) {
+	std::shared_ptr<stBuff> _buff = std::make_shared<stBuff>(buff);
+	umBuff[_buff->type] = _buff;
+}
+
+std::shared_ptr<stBuff> Charactor::GetBuff(eBuffType type) {
+	if (umBuff.find(type) == umBuff.end()) return NULL;
+	return umBuff[type];
+}
+
+void Charactor::DeleteBuff(eBuffType type) {
+	if (umBuff.find(type) == umBuff.end()) return;
+	 umBuff.erase(type);
 }

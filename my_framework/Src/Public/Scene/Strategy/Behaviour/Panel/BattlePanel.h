@@ -10,7 +10,8 @@ namespace nsStrategy {
 	class BattlePanel : public Panel {
 	private:
 		//Findobject
-		noDel_ptr<GameObject> pCityPanel;
+		noDel_ptr<SoundManager> pSoundManager;
+
 	private:
 		//対象の国、街
 		noDel_ptr<City> pPlayerCity;
@@ -30,11 +31,18 @@ namespace nsStrategy {
 		//遷移中のトリガー
 		bool isSwitchingScene = false;
 
+		//戻る処理が可能か
+		bool cancelEnable = true;
+
 	public:
 		void Awake() override;
 		void Update() override;
 
-		void Open(noDel_ptr<City> p_city, noDel_ptr<City> e_city);
+		void Open(noDel_ptr<City> p_city, noDel_ptr<City> e_city, bool cancel);
 		void Close() override;
+
+	private:
+		//キャラがいないか確認（いなければ勝利してパネル閉じる）
+		bool CheckNoChara();
 	};
 }

@@ -49,10 +49,9 @@ namespace nsStrategy {
 		void Start() override;
 		void Update() override;
 		void OnTriggerEnter2D(noDel_ptr<Collider2D> hitCol) override;
-		void OnTrigger2D(noDel_ptr<Collider2D> hitCol) override;
 		void OnTriggerExit2D(noDel_ptr<Collider2D> hitCol) override;
 
-		void ChangeBelongCountry(noDel_ptr<Country> country);
+		virtual void ChangeBelongCountry(noDel_ptr<Country> country);
 
 		//‰æ‘œ‘ã“ü—p
 		void SetSprite(noDel_ptr<Sprite> city, noDel_ptr<Sprite> frame);

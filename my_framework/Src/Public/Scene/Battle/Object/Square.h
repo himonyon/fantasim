@@ -6,6 +6,8 @@
 -------------------------------------------------------------*/
 #pragma once
 namespace nsBattle {
+	class BattleChara;
+
 	enum class eNeighborDir {
 		Left,
 		Top,
@@ -24,7 +26,7 @@ namespace nsBattle {
 
 		//マスに何か移動不可オブジェクトが乗っているか
 		bool OnUnMoveObj = false;
-		 
+		noDel_ptr<BattleChara> pOnBattleChara;
 		
 		//マスのオブジェクト
 		noDel_ptr<GameObject> pSquare;
@@ -39,9 +41,6 @@ namespace nsBattle {
 		struct stSearchInfo {
 			//親のマス
 			noDel_ptr<Square> pParent = NULL;
-			//オープンクローズ情報
-			bool isOpen = false;
-			bool isClose = false;
 			//移動にかかるコスト
 			int move_cost = 0;
 			//実コスト
@@ -59,7 +58,7 @@ namespace nsBattle {
 	public:
 		Square(noDel_ptr<GameObject> square, noDel_ptr<GameObject> selectSquare);
 
-		void SetUnMove(bool flag) { OnUnMoveObj = flag; }
+		void SetUnMove(bool flag, noDel_ptr<BattleChara> chara) { OnUnMoveObj = flag; pOnBattleChara = chara; }
 		bool GetIsUnMove() { return OnUnMoveObj; }
 
 		void SetMoveCost(int val) { searchInfo.move_cost = val; }
@@ -74,6 +73,9 @@ namespace nsBattle {
 		//選択マスが選択可能状態か
 		bool GetSelectEnable() { return pSelectSquare->GetComponent<SelectSquare>()->GetSelectEnable(); }
 		void ShowSelectSquare(bool flag, bool isEnable = true);
+
+		//マスに乗っているキャラの取得
+		noDel_ptr<BattleChara> GetOnChara() { return pOnBattleChara; }
 	};
 
 	//SquareRowクラス----------------------------------------------------------------------

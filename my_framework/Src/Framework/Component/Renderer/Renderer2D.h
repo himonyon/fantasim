@@ -41,7 +41,7 @@ public:
 	static void Destroy();
 
 	Renderer2D();
-	~Renderer2D(void);
+	virtual ~Renderer2D(void);
 
 	void SetSize(float width, float height);
 
@@ -51,6 +51,8 @@ public:
 	virtual void SetColor(float r, float g, float b, float a) {};
 	virtual void SetColor(stColor4 color) {};
 	virtual stColor4 GetColor() { return { 0,0,0,0 }; };
+
+	virtual void SetDefaultUV() {};
 
 private:
 	virtual void Render(void) {}; //•`‰æ

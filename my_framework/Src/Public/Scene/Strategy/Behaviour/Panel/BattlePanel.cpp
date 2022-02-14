@@ -1,13 +1,13 @@
 #include "../../../../../../framework.h"
 #include "../../../../../../environment.h"
 
-#include "BattlePanel.h"
-
 using namespace nsStrategy;
 
 void BattlePanel::Awake() {
-	pCityPanel = gameObject->FindGameObject("cityPanel");
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
+	//テキスト作成
 	float _localTop = -(gameObject->GetComponent<ImageRenderer>()->sizeY / 2);
 
 	pPlayerCityNameText = gameObject->CreateObject(0, 0, 0, transform);
@@ -51,28 +51,35 @@ void BattlePanel::Update() {
 		return;
 	}
 
-	if (Input::Trg(InputConfig::input["cancel"])) {
+	if (cancelEnable && Input::Trg(InputConfig::input["cancel"])) {
 		Close();
-		pCityPanel->GetComponent<CityPanel>()->Open(pPlayerCity);
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Back);
 	}
 
 	if (Input::Trg(InputConfig::input["decide"])) {
+		//互いにキャラが存在するか確認
+		if (CheckNoChara()) return;
+		//音
+		pSoundManager->Play("decide");
+
 		//バトルシーンを用意
 		SceneManager::CreateReserveScene(eSceneTable::Battle, false);
 
 		nsBattle::SceneBattle* _nextScene = dynamic_cast<nsBattle::SceneBattle*>(SceneManager::GetScene((int)eSceneTable::Battle));
-
+		
 		//次のシーンへキャラクター情報を渡す
 		for (auto& chara : pPlayerCity->vOwnChara) {
 			Charactor* _pCharactor = new Charactor(*chara.get());
 			_nextScene->vPlayerCharaBace.emplace_back(noDel_ptr<Charactor>(_pCharactor));
-
 		}
 		for (auto& chara : pEnemyCity->vOwnChara) {
 			Charactor* _pCharactor = new Charactor(*chara.get());
 			_nextScene->vEnemyCharaBace.emplace_back(noDel_ptr<Charactor>(_pCharactor));
-
 		}
+
+		//セーブ
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->
+			SaveBattleInfo(pPlayerCity->GetID(), pEnemyCity->GetID());
 
 		//次のシーンの初期化
 		SceneManager::InitializeReserveScene();
@@ -81,9 +88,11 @@ void BattlePanel::Update() {
 	}
 }
 
-void BattlePanel::Open(noDel_ptr<City> p_city, noDel_ptr<City> e_city) {
+void BattlePanel::Open(noDel_ptr<City> p_city, noDel_ptr<City> e_city, bool cancel) {
 	pPlayerCity = p_city;
 	pEnemyCity = e_city;
+
+	cancelEnable = cancel;
 
 	Panel::Open();
 
@@ -118,5 +127,22 @@ void BattlePanel::Open(noDel_ptr<City> p_city, noDel_ptr<City> e_city) {
 
 void BattlePanel::Close() {
 	Panel::Close();
+}
+
+bool BattlePanel::CheckNoChara() {
+	bool _flag = false;
+
+	if (pPlayerCity->vOwnChara.size() == 0) {
+		pPlayerCity->ChangeBelongCountry(pEnemyCity->pCountry);
+		Close();
+		return true;
+	}
+	if (pEnemyCity->vOwnChara.size() == 0) {
+		pEnemyCity->ChangeBelongCountry(pPlayerCity->pCountry);
+		Close();
+		return true;
+	}
+
+	return false;
 }
 

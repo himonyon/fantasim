@@ -59,6 +59,9 @@ void StatusPanel::Awake() {
 	pMPText = gameObject->CreateObject(0, 0, 0, transform);
 	pMPText->transform->SetLocalPosition(_x, _y);
 	pMPText->AddComponent<Font>();
+
+	//初期は非表示
+	gameObject->SetObjEnable(false);
 }
 
 void StatusPanel::Open(noDel_ptr<BattleChara>  battleChara) {
@@ -80,10 +83,10 @@ void StatusPanel::Open(noDel_ptr<BattleChara>  battleChara) {
 
 	//HP,MPバーのスケーリングと調整
 	float _barSize = pHPBar->GetComponent<ImageRenderer>()->sizeX;
-	float _scale = (float)(chara->hp / chara->maxHp);
+	float _scale = (float)chara->hp / (float)chara->maxHp;
 	pHPBar->transform->scale.x = _scale;
 	pHPBar->transform->position.x = pHPFrame->transform->position.x - ((_barSize - (_barSize * _scale)) / 2);
-	_scale = (float)(chara->mp / chara->maxMp);
+	_scale = (float)chara->mp / (float)chara->maxMp;
 	pMPBar->transform->scale.x = _scale;
 	pMPBar->transform->position.x = pMPFrame->transform->position.x - ((_barSize - (_barSize * _scale)) / 2);
 }

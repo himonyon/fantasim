@@ -8,9 +8,7 @@
 
 enum class eHealType {
 	HP,
-	ALL_HP,
 	MP,
-	ALL_MP
 };
 
 class HealSkill : public Skill {

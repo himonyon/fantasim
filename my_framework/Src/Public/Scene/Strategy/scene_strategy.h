@@ -13,25 +13,14 @@
 #include "Behaviour/Country.h"
 #include "Behaviour/Panel/SelectCountryPanel.h"
 #include "Behaviour/Panel/CityPanel.h"
+#include "Behaviour/Turn/Turn.h"
+#include "Behaviour/Turn/PlayerTurn.h"
+#include "Behaviour/Turn/EnemyTurn.h"
+#include "Save.h"
+#include "Behaviour/GameManager.h"
 
 namespace nsStrategy {
 	class SceneStrategy : public Scene {
-	private:
-		//ステージ
-		noDel_ptr<GameObject> pBg;
-		noDel_ptr<GameObject> pTerritories[TERRITORY_NUM];
-		std::vector<noDel_ptr<GameObject>> vpRoad;
-
-		//カーソル
-		noDel_ptr<GameObject> pCursor;
-
-		//パネル
-		noDel_ptr<GameObject> pSelectCountryPanel;
-		noDel_ptr<GameObject> pCityPanel;
-
-		//キャラクター
-		std::unordered_map<int, Charactor*> umCharactors;
-
 	private:
 		//初期化
 		void Initialize();
@@ -44,13 +33,5 @@ namespace nsStrategy {
 
 		//描画
 		void Render();
-
-		void Init();
-
-
-		//領地の初期化
-		void CreateCharactor();
-		void CreateTerritory();
-		void CreatePanels();
 	};
 }

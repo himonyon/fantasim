@@ -1,12 +1,11 @@
 #include "../../../../../../framework.h"
 #include "../../../../../../environment.h"
 
-#include "CharaSelectPanel.h"
-
 using namespace nsStrategy;
 
 void CharaSelectPanel::Awake() {
-	pCityPanel = gameObject->FindGameObject("cityPanel");
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
 	noDel_ptr<Font> _font; //コンポーネント取得用
 
@@ -57,6 +56,7 @@ void CharaSelectPanel::Awake() {
 	//初期状態で隠しておく
 	gameObject->SetObjEnable(false);
 }
+
 void CharaSelectPanel::Update() {\
 	//カーソル移動
 	if (Input::Trg(InputConfig::input["up"]) || Input::Trg(InputConfig::input["down"])) {
@@ -77,12 +77,14 @@ void CharaSelectPanel::Update() {\
 	}
 
 	if (Input::Trg(InputConfig::input["cancel"])) {
+		pSoundManager->Play("cancel"); //決定音
 		Close();
-		pCityPanel->GetComponent<CityPanel>()->Open(pCity);
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Back);
 	}
 
 	///キャラ選択と実行
 	if (Input::Trg(InputConfig::input["decide"])) {
+		pSoundManager->Play("decide"); //決定音
 		if (cursorNum == maxCursorNum) 	DecideMoveChara();
 		else AddMoveChara();
 	}
@@ -118,7 +120,6 @@ void CharaSelectPanel::Close() {
 void CharaSelectPanel::AddMoveChara() {
 	auto it = pCity->vOwnChara.begin() + cursorNum;
 	bool _flag = false;
-
 	//すでにある場合外す
 	for (auto itr = vMoveCharas.begin(); itr != vMoveCharas.end();) {
 		if (itr->get() == it->get()) {
@@ -158,6 +159,6 @@ void CharaSelectPanel::DecideMoveChara() {
 	}
 
 	Close();
-	pCityPanel->GetComponent<CityPanel>()->Open(pCity);
+	gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Command);
 }
 

@@ -50,9 +50,6 @@ void Square::ShowSelectSquare(bool flag, bool isEnable) {
 void Square::stSearchInfo::Reset() {
 	//親のマス
 	pParent = NULL;
-	//オープンクローズ情報
-	isOpen = false;
-	isClose = false;
 	//実コスト
 	curCost = 0;
 	//推定コスト

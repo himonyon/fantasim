@@ -19,8 +19,11 @@ namespace nsBattle {
 		std::vector<noDel_ptr<GameObject>> vEnemyChara;
 
 		//ターンマネージャー
-		noDel_ptr<GameObject> pPlayerTurn;
-		noDel_ptr<GameObject> pEnemyTurn;
+		noDel_ptr<PlayerTurn> pPlayerTurn;
+		noDel_ptr<EnemyTurn> pEnemyTurn;
+
+		//開始トリガー
+		bool startTrg = false;
 		
 
 	public:
@@ -36,18 +39,18 @@ namespace nsBattle {
 
 	public:
 		~FieldManager();
+
+		void ChangeTurn();
 	private:
 		//初期化
 		void Start() override;
-
-		//処理
-		void Update() override;
 
 	private:
 		//ステージとキャラクターの配置
 		void InitStage();
 		void InitCharactor();
 
-		
+	public:
+		void SetTurnState(eTurnState, int backNum = 1);
 	};
 }

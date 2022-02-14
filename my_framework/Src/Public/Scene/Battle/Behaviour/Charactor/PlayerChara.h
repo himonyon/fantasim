@@ -8,27 +8,41 @@
 namespace nsBattle {
 	class PlayerChara : public BattleChara {
 	private:
-		std::function<bool(PlayerChara&)> fCharaFunc;
+		//移動処理の関数ポインタ
+		std::function<bool(PlayerChara&)> fMoveFunc;
+		//攻撃処理の関数ポインタ
+		std::function<bool(PlayerChara&)> fSkillFunc;
 
-	public:
-		void Update() override;
+		//移動前の位置
+		noDel_ptr<Square> pBeforeSquare = {};
 
-		//移動系処理
+	private:
+		//移動処理------------------------------------------------
+		bool ShowMoveArea();
 		bool SelectMoveSquare();
-		bool Move();
+		bool MoveToTarget();
 
-		//移動常態に遷移
-		void StartMoveFunc();
-
-		//攻撃処理遷移
-		void StartAttackFunc(noDel_ptr<AttackSkill> skill);
+		//スキル処理--------------------------------------------
+		bool ShowSkillRange();
+		//攻撃時対象の選択
 		bool SelectEnemy();
-
-		//回復スキル処理遷移
-		void StartHealFunc(noDel_ptr<AttackSkill> skill);
+		//攻撃以外対象の選択
 		bool SelectFriend();
 
-		//バフスキル処理遷移
-		void StartBuffFunc(noDel_ptr<AttackSkill> skill);
+	public:
+		void Start() override;
+
+		//移動系処理
+		bool Move();
+		
+		//スキル系処理
+		bool SkillFunc();
+
+		//以前の位置に戻る
+		void BackBeforePos();
+
+		//移動前のマスを登録
+		void SetBeforeSquare() { pBeforeSquare = pCurSquare; }
+
 	};
 }

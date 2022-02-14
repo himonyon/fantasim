@@ -1,0 +1,6 @@
+newkey fr 1 sprite Data/Image/Battle/attack_effect.spr 1 end
+newkey fr 3 sprite Data/Image/Battle/attack_effect.spr 2 end
+newkey fr 5 sprite Data/Image/Battle/attack_effect.spr 3 end
+newkey fr 7 sprite Data/Image/Battle/attack_effect.spr 4 end
+newkey fr 9 sprite Data/Image/Battle/attack_effect.spr 5 end
+newkey fr 11 sprite Data/Image/Battle/attack_effect.spr 6 end

@@ -1,8 +1,6 @@
 #include "../../../../../framework.h"
 #include "../../../../../environment.h"
 
-#include "City.h"
-
 using namespace nsStrategy;
 
 void City::Start() {
@@ -22,22 +20,24 @@ void City::Update() {
 }
 
 //ìñÇΩÇËîªíË
-void City::OnTrigger2D(noDel_ptr<Collider2D> hitCol) {
-	if (Input::Trg(InputConfig::input["decide"])) {
-		pCityPanel->GetComponent<CityPanel>()->Open(noDel_ptr<City>(this));
-	}
-}
 void City::OnTriggerEnter2D(noDel_ptr<Collider2D> hitCol) {
+	gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetFocusCity(noDel_ptr<City>(this));
 	FocusCity(true);
 }
 void City::OnTriggerExit2D(noDel_ptr<Collider2D> hitCol) {
+	gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetFocusCity(NULL);
 	FocusCity(false);
 }
 
 //èäëÆïœçX
 void City::ChangeBelongCountry(noDel_ptr<Country> country) {
+	//çëÇÃäXîzóÒÇ©ÇÁî≤Ç≠
+	if(pCountry != NULL)pCountry->PullOutCity(noDel_ptr<City>(this));
+
+	//èäëÆÇÃïœçX
 	pCountry = country;
-	gameObject->GetComponent<ImageRenderer>()->SetColor(country->gameObject->GetComponent<ImageRenderer>()->GetColor());
+	pCountry->SetOwnCity(noDel_ptr<City>(this));
+	gameObject->GetComponent<ImageRenderer>()->SetColor(pCountry->gameObject->GetComponent<ImageRenderer>()->GetColor());
 }
 
 void City::SetSprite(noDel_ptr<Sprite> city, noDel_ptr<Sprite> frame) {

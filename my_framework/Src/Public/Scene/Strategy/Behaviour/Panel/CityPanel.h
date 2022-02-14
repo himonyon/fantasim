@@ -9,6 +9,7 @@
 #include "InvestPanel.h"
 #include "BattlePanel.h"
 #include "CharaSelectPanel.h"
+#include "CharaEnhancePanel.h"
 
 namespace nsStrategy {
 
@@ -27,6 +28,7 @@ namespace nsStrategy {
 	class CityPanel : public Panel {
 	private:
 		//Findする変数
+		noDel_ptr<SoundManager> pSoundManager;
 		noDel_ptr<GameObject> pMapCursor;
 
 	private:
@@ -37,12 +39,6 @@ namespace nsStrategy {
 		int cursorNum = 0;
 
 		bool isPlayerCity = false; //開かれたパネルがプレイヤーの所有物か
-
-		//遷移先のパネル
-		noDel_ptr<GameObject> pInvestPanel;
-		noDel_ptr<GameObject> pSelectNeighborPanel;
-		noDel_ptr<GameObject> pBattlePanel;
-		noDel_ptr<GameObject> pCharaSelectPanel;
 
 		//テキスト---------------------------------------------------------
 		//街の基本ステータス表示パネル
@@ -76,7 +72,7 @@ namespace nsStrategy {
 		void MoveSelectCursor();
 
 		//他のパネルへ遷移
-		void TransOtherPanel();
+		void TransOtherState();
 
 	public:
 		//パネルを開く

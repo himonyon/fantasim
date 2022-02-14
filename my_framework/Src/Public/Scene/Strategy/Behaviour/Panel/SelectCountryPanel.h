@@ -9,6 +9,9 @@
 namespace nsStrategy {
 	class SelectCountryPanel : public Panel {
 	private:
+		//Findobject
+		noDel_ptr<SoundManager> pSoundManager;
+
 		//Find•Ï”
 		noDel_ptr<GameObject> pCursor = 0;
 		noDel_ptr<Country> countries[COUNTRY_NUM] = { 0 };

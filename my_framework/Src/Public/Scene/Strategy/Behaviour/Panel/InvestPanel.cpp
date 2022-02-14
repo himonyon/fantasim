@@ -1,12 +1,11 @@
 #include "../../../../../../framework.h"
 #include "../../../../../../environment.h"
 
-#include "InvestPanel.h"
-
 using namespace nsStrategy;
 
 void InvestPanel::Awake() {
-	pCityPanel = gameObject->FindGameObject("cityPanel");
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
 	noDel_ptr<Font> _font; //コンポーネント取得用
 
@@ -69,15 +68,18 @@ void InvestPanel::Update() {
 
 	//戻るボタンを決定ボタン処理
 	if (Input::Trg(InputConfig::input["cancel"])) {
+		pSoundManager->Play("cancel"); //cancel
 		Close();
-		pCityPanel->SetObjEnable(true);
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Back);
 	}
 	if (Input::Trg(InputConfig::input["decide"])) {
 		if (isResult) {
+			pSoundManager->Play("decide"); //決定音
 			Close();
-			pCityPanel->GetComponent<CityPanel>()->Open(pCity);
+			gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Command);
 		}
 		else {
+			pSoundManager->Play("enhance");
 			isResult = true;
 			pPriceText->SetObjEnable(false);
 			pResultText->SetObjEnable(true);

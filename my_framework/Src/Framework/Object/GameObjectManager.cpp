@@ -195,7 +195,7 @@ void GameObjectManager::PullOutComponent(noDel_ptr<GameObject> obj) {
 		while (itr != umap->end()) {
 			if (com->GetInstanceID() == itr->first) {
 				auto nextItr = std::next(itr, 1);
-				umap->erase(itr->first);
+				umap->erase(itr);
 				itr = nextItr;
 				if (isOnce) break;
 			}

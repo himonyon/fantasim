@@ -1,11 +1,12 @@
 #include "../../../../../../framework.h"
 #include "../../../../../../environment.h"
 
-#include "CityPanel.h"
-
 using namespace nsStrategy;
 
 void CityPanel::Awake() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
+
 	//マップカーソル
 	pMapCursor = gameObject->FindGameObject("cursor");
 
@@ -13,24 +14,31 @@ void CityPanel::Awake() {
 	noDel_ptr<ImageRenderer> spr = gameObject->GetComponent<ImageRenderer>();
 
 	//遷移先パネル
-	pInvestPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 400, 150, spr->pRenderSprite,
-		nullptr, "investPanel");
-	pInvestPanel->AddComponent<InvestPanel>();
-	pInvestPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
-
-	pBattlePanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 400, 300, spr->pRenderSprite,
+	//投資パネル
+	noDel_ptr<GameObject> _pInvestPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 400, 150, 
+		spr->pRenderSprite,	nullptr, "investPanel");
+	_pInvestPanel->AddComponent<InvestPanel>();
+	_pInvestPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	//バトルパネル
+	noDel_ptr<GameObject> _pBattlePanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 400, 300, spr->pRenderSprite,
 		nullptr, "battlePanel");
-	pBattlePanel->AddComponent<BattlePanel>();
-	pBattlePanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
-
-	pCharaSelectPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 300, 300,
+	_pBattlePanel->AddComponent<BattlePanel>();
+	_pBattlePanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	//キャラ選択パネル
+	noDel_ptr<GameObject> _pCharaSelectPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 300, 300,
 		spr->pRenderSprite, nullptr, "charaSelectPanel");
-	pCharaSelectPanel->AddComponent<CharaSelectPanel>();
-	pCharaSelectPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
-
-	pSelectNeighborPanel = gameObject->CreateImageObject(200, 70, 350, 100, spr->pRenderSprite);
-	pSelectNeighborPanel->AddComponent<SelectNeighborPanel>();
-	pSelectNeighborPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pCharaSelectPanel->AddComponent<CharaSelectPanel>();
+	_pCharaSelectPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	//近隣選択パネル
+	noDel_ptr<GameObject> _pSelectNeighborPanel = gameObject->CreateImageObject(200, 70, 350, 100, spr->pRenderSprite,
+		nullptr, "selectNeighborPanel");
+	_pSelectNeighborPanel->AddComponent<SelectNeighborPanel>();
+	_pSelectNeighborPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	//キャラ強化パネル
+	noDel_ptr<GameObject> _pCharaEnhancePanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
+		600, 500, spr->pRenderSprite,nullptr, "charaEnhancePanel");
+	_pCharaEnhancePanel->AddComponent<CharaEnhancePanel>();
+	_pCharaEnhancePanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
 
 	//街情報テキスト
 	pCityInfoPanel = gameObject->CreateObject(0, 0, 0, transform);
@@ -113,7 +121,9 @@ void CityPanel::Update() {
 	}
 
 	if (Input::Trg(InputConfig::input["cancel"])) {
+		pSoundManager->Play("cancel"); //cancel音
 		Close();
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Field);
 		pMapCursor->SetObjEnable(true);
 	}
 	if (Input::Trg(InputConfig::input["changeTab"])) {
@@ -156,7 +166,7 @@ void CityPanel::Open(noDel_ptr<City> city) {
 
 void CityPanel::PlayerCityFunc() {
 	MoveSelectCursor();
-	TransOtherPanel();
+	TransOtherState();
 }
 
 void CityPanel::SetCityStatus(float top, float left) {
@@ -270,13 +280,19 @@ void CityPanel::MoveSelectCursor() {
 	}
 }
 
-//他のパネルへ遷移
-void CityPanel::TransOtherPanel() {
+//ターン状態遷移
+void CityPanel::TransOtherState() {
 	if (Input::Trg(InputConfig::input["decide"])) {
+		pSoundManager->Play("decide"); //決定音
+		noDel_ptr<GameManager> _pGM = gameObject->FindGameObject("gameManager")->GetComponent<GameManager>();
+		if (cursorNum == (int)eCommand::MoneyMove) _pGM->SetTurnState(eTurnState::SelMoneyMoveToCity);
+		else if (cursorNum == (int)eCommand::CharaMove) _pGM->SetTurnState(eTurnState::SelCharaMoveToCity);
+		else if (cursorNum == (int)eCommand::Battle) _pGM->SetTurnState(eTurnState::SelBattleCity);
+		else if (cursorNum == (int)eCommand::CharaEnhance) _pGM->SetTurnState(eTurnState::CharaEnhance);
+		else if (cursorNum == (int)eCommand::Economic) _pGM->SetTurnState(eTurnState::InvEconomic);
+		else if (cursorNum == (int)eCommand::Political) _pGM->SetTurnState(eTurnState::InvPolitical);
+		else if (cursorNum == (int)eCommand::Disaster) _pGM->SetTurnState(eTurnState::InvDisaster);
+		else if (cursorNum == (int)eCommand::Support) _pGM->SetTurnState(eTurnState::InvSupport);
 		Close();
-		if (cursorNum == (int)eCommand::MoneyMove || cursorNum == (int)eCommand::CharaMove ||
-			cursorNum == (int)eCommand::Battle)
-			pSelectNeighborPanel->GetComponent<SelectNeighborPanel>()->Open(pCity, cursorNum);
-		else pInvestPanel->GetComponent<InvestPanel>()->Open(pCity, cursorNum);
 	}
 }

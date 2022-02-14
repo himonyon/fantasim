@@ -38,6 +38,9 @@ namespace nsBattle {
 		void SetHealDescText(noDel_ptr<Skill> skill);
 		void SetBuffDescText(noDel_ptr<Skill> skill);
 
+		//ƒXƒLƒ‹‘I‘ð
+		bool DecideSkill();
+
 	public:
 		void Open(noDel_ptr<PlayerChara> chara);
 	};

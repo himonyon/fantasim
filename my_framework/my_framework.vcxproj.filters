@@ -130,6 +130,12 @@
     <Filter Include="ソース ファイル\Src\Public\Scene\Battle\Behaviour\Turn">
       <UniqueIdentifier>{19dc65a6-02b1-4a02-91df-86e098f728ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Turn">
+      <UniqueIdentifier>{1dcc3ea4-a1f7-49e0-b383-bacf9a220992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Src\Framework\Component\SoundManager">
+      <UniqueIdentifier>{e0ccdd5e-e46e-4405-acc6-f54438584647}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -190,9 +196,6 @@
       <Filter>ソース ファイル\Src\Framework\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Src\Framework\Sound\Sound.h">
-      <Filter>ソース ファイル\Src\Framework\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Framework\Sound\SoundManager.h">
       <Filter>ソース ファイル\Src\Framework\Sound</Filter>
     </ClInclude>
     <ClInclude Include="Src\Utility\noDel_ptr.h">
@@ -368,6 +371,33 @@
     </ClInclude>
     <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Panel\SelectSkillPanel.h">
       <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Panel\BattlePanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Save.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Battle\Behaviour\Panel\SelectCounterPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Turn\EnemyTurn.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Turn\PlayerTurn.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Turn\Turn.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Turn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\GameManager.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaEnhancePanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\SoundManager\SoundManager.h">
+      <Filter>ソース ファイル\Src\Framework\Component\SoundManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -580,6 +610,33 @@
     </ClCompile>
     <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Panel\SelectSkillPanel.cpp">
       <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Panel\BattlePanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Save.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Battle\Behaviour\Panel\SelectCounterPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Battle\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Turn\EnemyTurn.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Turn\PlayerTurn.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Turn\Turn.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Turn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\GameManager.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaEnhancePanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\SoundManager\SoundManager.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\SoundManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

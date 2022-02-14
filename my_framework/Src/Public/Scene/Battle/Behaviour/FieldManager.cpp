@@ -18,7 +18,6 @@ FieldManager::~FieldManager() {
 }
 
 //Behaviour関数-----------------------------------
-
 void FieldManager::Start() {
 	//ステージ・キャラクター作成
 	InitStage();
@@ -38,16 +37,42 @@ void FieldManager::Start() {
 	}
 
 	//ターンマネージャーの作成
-	pPlayerTurn = gameObject->CreateObject(0, 0, 0);
-	pPlayerTurn->AddComponent<PlayerTurn>();
-	pPlayerTurn->GetComponent<PlayerTurn>()->vBattleChara = vBattleChara;
-	pEnemyTurn = gameObject->CreateObject(0, 0, 0);
-	pEnemyTurn->AddComponent<EnemyTurn>();
-	pEnemyTurn->GetComponent<EnemyTurn>()->vBattleChara = vBattleChara;
+	noDel_ptr<GameObject> _turnP = gameObject->CreateObject(0, 0, 0);
+	_turnP->AddComponent<PlayerTurn>();
+	pPlayerTurn = _turnP->GetComponent<PlayerTurn>();
+	pPlayerTurn->vBattleChara = vBattleChara;
+	noDel_ptr<GameObject> _turnE = gameObject->CreateObject(0, 0, 0);
+	_turnE->AddComponent<EnemyTurn>();
+	pEnemyTurn = _turnE->GetComponent<EnemyTurn>();
+	pEnemyTurn->vBattleChara = vBattleChara;
+
+	//プレイヤーターン開始
+	pEnemyTurn->SetEnable(false);
+	static_noDel_cast<Turn>(pPlayerTurn)->TurnInit();
 }
 
-void FieldManager::Update() {
-	
+void FieldManager::ChangeTurn() {
+	if (pPlayerTurn->IsEnable()) {
+		pPlayerTurn->SetEnable(false);
+		pEnemyTurn->SetEnable(true);
+		static_noDel_cast<Turn>(pEnemyTurn)->TurnInit();
+	}
+	else {
+		pEnemyTurn->SetEnable(false);
+		pPlayerTurn->SetEnable(true);
+		static_noDel_cast<Turn>(pPlayerTurn)->TurnInit();
+		//バフカウントを減らす
+		for (auto& ch : vBattleChara) {
+			if (ch->IsDeath()) continue;
+			ch->DecreaseBuffCount();
+		}
+	}
+}
+
+//ターンの状態遷移
+void FieldManager::SetTurnState(eTurnState state, int backNum) {
+	if (pPlayerTurn->IsEnable()) pPlayerTurn->SetTurnState(state, backNum);
+	else pEnemyTurn->SetTurnState(state, backNum);
 }
 
 //Initーーーーーーーーーーーーーーーーーーーーーーーーーー
@@ -149,6 +174,8 @@ void FieldManager::InitCharactor() {
 	//プレイヤーキャラを設定
 	int _x = 0;
 	int _y = 0;
+
+	//配置マス
 	noDel_ptr<Square> _pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
 	for (auto& chara : vPlayerCharaBace) {
 		//配置マス設定

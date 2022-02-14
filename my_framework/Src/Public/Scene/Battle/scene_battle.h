@@ -13,8 +13,10 @@
 #include "Behaviour/Charactor/PlayerChara.h"
 #include "Behaviour/Charactor/EnemyChara.h"
 #include "Behaviour/Panel/StatusPanel.h"
-#include "Behaviour/Panel/SelectSkillPanel.h"
 #include "Behaviour/Panel/Command.h"
+#include "Behaviour/Panel/SelectSkillPanel.h"
+#include "Behaviour/Panel/SelectCounterPanel.h"
+#include "Behaviour/Panel/BattlePanel.h"
 #include "Behaviour/Turn/Turn.h"
 #include "Behaviour/Turn/PlayerTurn.h"
 #include "Behaviour/Turn/EnemyTurn.h"
@@ -43,6 +45,9 @@ namespace nsBattle {
 
 		//ステータスパネル
 		noDel_ptr<GameObject> pStatusPanel;
+
+		//バトルパネル
+		noDel_ptr<GameObject> pBattlePanel;
 
 	public:
 		//キャラクターステータス（前のシーンから引き継ぐ）

@@ -1,15 +1,11 @@
 #include "../../../../../../framework.h"
 #include "../../../../../../environment.h"
 
-#include "SelectNeighborPanel.h"
-
 using namespace nsStrategy;
 
 void SelectNeighborPanel::Awake() {
-	pCityPanel = gameObject->FindGameObject("cityPanel");
-	pInvestPanel = gameObject->FindGameObject("investPanel");
-	pBattlePanel = gameObject->FindGameObject("battlePanel");
-	pCharaSelectPanel = gameObject->FindGameObject("charaSelectPanel");
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
 	noDel_ptr<Font> _font; //コンポーネント取得用
 
@@ -57,18 +53,23 @@ void SelectNeighborPanel::Update() {
 	}
 
 	if (Input::Trg(InputConfig::input["cancel"])) {
+		pSoundManager->Play("cancel"); //cancel音
 		vSelectableCities[selectNum]->FocusCity(false);
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Back);
 		Close();
-		pCityPanel->GetComponent<CityPanel>()->Open(pCity);
 	}
 	if (Input::Trg(InputConfig::input["decide"])) {
+		pSoundManager->Play("decide"); //決定音
+		//ゲームマネージャー
+		noDel_ptr<GameManager> _pGM = gameObject->FindGameObject("gameManager")->GetComponent<GameManager>();
+		//フォーカス終了
 		vSelectableCities[selectNum]->FocusCity(false);
-		if(commandType == (int)eCommand::MoneyMove)
-			pInvestPanel->GetComponent<InvestPanel>()->Open(pCity,vSelectableCities[selectNum]);
-		if (commandType == (int)eCommand::Battle)
-			pBattlePanel->GetComponent<BattlePanel>()->Open(pCity, vSelectableCities[selectNum]);
-		if (commandType == (int)eCommand::CharaMove)
-			pCharaSelectPanel->GetComponent<CharaSelectPanel>()->Open(pCity, vSelectableCities[selectNum]);
+		//ターゲットに設定
+		_pGM->SetTargetCity(vSelectableCities[selectNum]);
+		//ターン遷移
+		if(commandType == (int)eCommand::MoneyMove) _pGM->SetTurnState(eTurnState::MoveMoney);
+		else if (commandType == (int)eCommand::Battle) _pGM->SetTurnState(eTurnState::Battle);
+		else if (commandType == (int)eCommand::CharaMove)_pGM->SetTurnState(eTurnState::MoveChara);
 		Close();
 	}
 }
@@ -81,7 +82,7 @@ void SelectNeighborPanel::Open(noDel_ptr<City> city, int cmd) {
 	if (cmd == (int)eCommand::Battle || cmd == (int)eCommand::CharaMove) {
 		if (pCity->vOwnChara.size() == 0) {
 			Close();
-			pCityPanel->GetComponent<CityPanel>()->Open(pCity);
+			gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Back);
 			return;
 		}
 	}
@@ -99,7 +100,7 @@ void SelectNeighborPanel::Open(noDel_ptr<City> city, int cmd) {
 	//対象が見つからない場合
 	if (vSelectableCities.size() == 0) {
 		Close();
-		pCityPanel->GetComponent<CityPanel>()->Open(pCity);
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Back);
 	}
 	//対象が見つかった場合
 	else {

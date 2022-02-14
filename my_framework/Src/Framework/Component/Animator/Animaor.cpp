@@ -23,7 +23,8 @@ void Animator::Execute() {
 
 void Animator::AddAnimation(std::string name, SpriteAnimation* anim) {
 	AnimBox* animBox = new AnimBox(name, anim);
-	animBox->anim->pAnimRenderer = gameObject->GetComponent<Renderer2D>();
+	///アニメーションさせる対象設定
+	animBox->anim->SetAnimRenderer(gameObject->GetComponent<Renderer2D>());
 	animBoxes.emplace_back(animBox);
 }
 
@@ -65,7 +66,6 @@ void Animator::StopAnim(std::string name) {
 Animator::AnimBox::AnimBox(std::string name, SpriteAnimation* anim){
 	this->name = name;
 	this->anim = anim;
-
 }
 Animator::AnimBox::~AnimBox() {
 	delete anim;

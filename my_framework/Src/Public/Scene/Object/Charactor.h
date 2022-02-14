@@ -16,7 +16,7 @@ private:
 	Sprite* pSprite = 0; //スプライト
 	noDel_ptr<Attribute> pAttr = 0; //属性
 	std::vector<noDel_ptr<Skill>> vpSkill; //スキル
-	std::vector<stBuff> vBuff;
+	std::unordered_map<eBuffType, std::shared_ptr<stBuff>> umBuff;
 
 public:
 	int level = 1;
@@ -30,14 +30,24 @@ public:
 	int move = 0; //移動量
 
 public:
-	Charactor(int id);
+	Charactor(int id, std::string file);
 	Charactor(const Charactor&);
 	~Charactor();
 
 	//getter,setter
 	int GetID() { return id; }
 	std::wstring GetName() { return name; }
+	std::wstring GetSpriteName() { return sp_name; }
 	noDel_ptr<Sprite> GetSprite() { return noDel_ptr<Sprite>(pSprite); }
 	noDel_ptr<Attribute> GetAttr() { return pAttr; }
 	std::vector<noDel_ptr<Skill>> GetSkills() const { return vpSkill; }
+	
+
+	//バフのセット
+	void SetBuff(const stBuff buff);
+	//バフ取得
+	std::unordered_map<eBuffType, std::shared_ptr<stBuff>> GetBuff() { return umBuff; };
+	std::shared_ptr<stBuff> GetBuff(eBuffType type);
+	//バフの削除
+	void DeleteBuff(eBuffType type);
 };

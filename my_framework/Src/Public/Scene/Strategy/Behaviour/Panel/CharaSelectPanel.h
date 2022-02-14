@@ -10,9 +10,8 @@ namespace nsStrategy {
 	class CharaSelectPanel : public Panel {
 	private:
 		//Findobject
-		noDel_ptr<GameObject> pCityPanel;
+		noDel_ptr<SoundManager> pSoundManager;
 
-	private:
 		//‘ÎÛ‚Ì‘AŠX
 		noDel_ptr<City> pCity = 0;
 		noDel_ptr<City> pCity2 = 0;

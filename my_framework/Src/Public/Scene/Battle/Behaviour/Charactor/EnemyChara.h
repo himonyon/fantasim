@@ -8,16 +8,25 @@
 namespace nsBattle {
 	class EnemyChara : public BattleChara {
 	private:
-
-	public:
+		std::function<bool(EnemyChara&)> fMoveFunc;
 
 	private:
-		//初期化
-		void Awake() override {};
+		//移動先の設定
+		bool StartMove();
+		//目標地点へ移動
+		bool MoveToTarget();
 
-		void Start() override {};
+	public:
+		void Start() override;
 
-		//処理
-		void Update() override {};
+		//範囲内で仕様できるスキルを返す
+		void ChooseSkill(eSkillType);
+
+		//設定されたスキルの処理
+		bool Skill();
+
+		//移動処理
+		bool Move();
+		
 	};
 }

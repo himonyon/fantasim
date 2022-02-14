@@ -35,7 +35,7 @@ public:
 	void SetColor(stColor4 color) override;
 	stColor4 GetColor() override;
 
-	void SetDefaultUV(); //スプライトの状態を初期状態に戻す(ColorとUV)
+	void SetDefaultUV() override; //スプライトの状態を初期状態に戻す(ColorとUV)
 
 private:
 	void Render(void); //描画

@@ -1,11 +1,12 @@
 #include "../../../../../../framework.h"
 #include "../../../../../../environment.h"
 
-#include "SelectCountryPanel.h"
-
 using namespace nsStrategy;
 
 void SelectCountryPanel::Awake() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
+
 	//カーソルと国の取得
 	pCursor = gameObject->FindGameObject("cursor");
 	for (int i = 0; i < COUNTRY_NUM; i++) {
@@ -51,11 +52,18 @@ void SelectCountryPanel::Update() {
 	}
 
 	if (Input::Trg(InputConfig::input["decide"])) {
+		pSoundManager->Play("decide"); //決定音
+		//操作する国を選択
 		countries[cursor]->SetIsPlayer();
+		//パネル閉じる
 		Close();
+		//ゲーム開始
+		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->GameStart();
+		//カーソル表示
 		pCursor->SetObjEnable(true);
 		pCursor->transform->position.x = countries[cursor]->transform->position.x;
 		pCursor->transform->position.y = countries[cursor]->transform->position.y;
+		//このパネルを破棄
 		gameObject->Destroy();
 		for (int i = 0; i < 4; i++) {
 			gameObject->Destroy(pText[i]);

@@ -38,7 +38,8 @@ void  SelectSkillPanel::Awake() {
 	//説明文
 	pBorder = gameObject->CreateObject(0, 0, 0, transform);
 	pBorder->AddComponent<Font>();
-	pBorder->GetComponent<Font>()->Print(L"--------------------------------------------------------");
+	pBorder->GetComponent<Font>()->SetRenderPriority(10);
+	pBorder->GetComponent<Font>()->Print(L"----------------------------------------------------");
 	pBorder->transform->SetLocalPosition(_left + _sizeX * 0.02f, _top + _sizeY * 0.45f);
 
 
@@ -56,11 +57,20 @@ void  SelectSkillPanel::Awake() {
 
 void  SelectSkillPanel::Update() {
 	if (Input::Trg(InputConfig::input["cancel"])) {
-		Turn::curState = eFieldState::Field;
+		gameObject->FindGameObject("fieldManager")->
+			GetComponent<FieldManager>()->SetTurnState(eTurnState::Back);
 		Close();
 	}
 
 	MoveCursor();
+
+	if (Input::Trg(InputConfig::input["decide"])) {
+		if (DecideSkill()) {
+			gameObject->FindGameObject("fieldManager")->
+				GetComponent<FieldManager>()->SetTurnState(eTurnState::Skill);
+			Close();
+		}
+	}
 }
 
 void SelectSkillPanel::MoveCursor() {
@@ -88,6 +98,17 @@ void SelectSkillPanel::MoveCursor() {
 	}
 }
 
+bool SelectSkillPanel::DecideSkill() {
+	noDel_ptr<Skill> _skill = pSelectChara->pCharaInfo->GetSkills()[selectNum];
+	//MPが足りない場合処理しない
+	if (pSelectChara->pCharaInfo->mp < _skill->GetConsumeMP()) {
+		return false;
+	}
+	//スキル設定
+	pSelectChara->pSelectSkill = _skill;
+	return true;
+}
+
 void SelectSkillPanel::Open(noDel_ptr<PlayerChara> chara) {
 	//初期化
 	pSelectChara = NULL;
@@ -101,6 +122,9 @@ void SelectSkillPanel::Open(noDel_ptr<PlayerChara> chara) {
 	int _count = 0;
 	for (auto& skill : chara->pCharaInfo->GetSkills()) {
 		pSkillTexts[_count]->Print(L"%s", skill->GetName().c_str());
+		//利用できないスキルは半透明に
+		if (pSelectChara->pCharaInfo->mp < skill->GetConsumeMP())
+			pSkillTexts[_count]->SetColor(0x88ffffff);
 		_count++;
 	}
 
@@ -152,10 +176,13 @@ void SelectSkillPanel::SetHealDescText(noDel_ptr<Skill> skill) {
 	_y = _top + _sizeY * 0.6f;
 
 	std::wstring _desc = L"";
-	if (dynamic_noDel_cast<HealSkill>(skill)->GetHealType() == eHealType::HP) _desc = L"単体のHP";
-	else if (dynamic_noDel_cast<HealSkill>(skill)->GetHealType() == eHealType::MP) _desc = L"単体のMP";
-	else if (dynamic_noDel_cast<HealSkill>(skill)->GetHealType() == eHealType::ALL_HP) _desc = L"全体のHP";
-	else if (dynamic_noDel_cast<HealSkill>(skill)->GetHealType() == eHealType::ALL_MP) _desc = L"全体のMP";
+	noDel_ptr<HealSkill> _healS = dynamic_noDel_cast<HealSkill>(skill);
+	if (_healS == NULL) return;
+
+	if (_healS->GetHealType() == eHealType::HP && _healS->IsAllRange()) _desc = L"全体のHP";
+	else if (_healS->GetHealType() == eHealType::MP && _healS->IsAllRange()) _desc = L"全体のMP";
+	else if (_healS->GetHealType() == eHealType::HP) _desc = L"単体のHP";
+	else if (_healS->GetHealType() == eHealType::MP) _desc = L"単体のMP";
 
 	pDescText[0]->transform->SetLocalPosition(_x, _y);
 	pDescText[0]->Print(L"%s : 味方%sを回復する", skill->GetName().c_str(), _desc.c_str());

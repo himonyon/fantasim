@@ -6,35 +6,45 @@
 
 -------------------------------------------------------------*/
 namespace nsBattle {
-	enum class eCommandState {
+	enum class eCommand {
 		Select,
 		Move,
 		Skill,
+		Wait,
 		Back,
+	};
+
+	enum class eCommandPanelType {
+		MoveBefore,
+		MoveAfter,
 	};
 
 	struct stCommand {
 		noDel_ptr<GameObject> pBackGorund;
 		noDel_ptr<GameObject> pText;
-		eCommandState type;
+		eCommand type;
+
+		void SetComEnable(bool flag) {
+			pBackGorund->SetObjEnable(flag);
+			pText->SetObjEnable(flag);
+		}
 	};
 
 	class CommandPanel : public Panel {
 	private:
 		//選択されたコマンド
-		eCommandState commandState = eCommandState::Select;
+		eCommand commandState = eCommand::Select;
 
-		//カーソル
-		noDel_ptr<Cursor> pCursor;
-
-		//スキル選択画面
-		noDel_ptr<GameObject> pSkillSelectPanel;
+		//パネルのタイプ
+		eCommandPanelType panelType;
 
 	private:
 		//選択されているキャラ
 		noDel_ptr<PlayerChara> pSelectChara;
 
 		//コマンド一覧
+		std::unordered_map<eCommand,std::shared_ptr<stCommand>> umCommand;
+		//利用するコマンド
 		std::vector<std::shared_ptr<stCommand>> vCommand;
 
 		//選択カーソル
@@ -47,13 +57,19 @@ namespace nsBattle {
 		void Update() override;
 
 		//コマンド作成
-		void CreateCommand(const WCHAR* text, noDel_ptr<Sprite> bgImage, eCommandState type);
+		void CreateCommand(const WCHAR* text, noDel_ptr<Sprite> bgImage, eCommand type);
 
 		//コマンド選択
 		void MoveSelecter();
 		void SelectCommand();
 
+		//コマンド位置設定
+		void SetCommandPos();
+
+		//戻る処理
+		void BackFunc();
+
 	public:
-		void Open(noDel_ptr<PlayerChara> chara);
+		void Open(noDel_ptr<PlayerChara> chara, eCommandPanelType type);
 	};
 }

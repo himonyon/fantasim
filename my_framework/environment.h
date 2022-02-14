@@ -60,6 +60,9 @@ using namespace DirectX;
 #include "Src//Framework//Mesh/Mesh.h"
 #include "Src//Framework//Mesh/MeshManager.h"
 
+//サウンド
+#include "Src/Framework/Sound/Sound.h"
+
 //Objectクラス
 #include "Src/Framework/Object/Object.h"
 
@@ -80,6 +83,8 @@ using namespace DirectX;
 #include "Src/Framework/Component/Renderer/ImageRenderer.h"
 #include "Src/Framework/Component/Behaviour/Behaviour.h"
 #include "Src/Framework/Component/Font/Font.h"
+#include "Src/Framework/Component/SoundManager/SoundManager.h"
+
 
 //スプライトアニメーション
 #include "Src/Framework/Animation/SpriteAnimation.h"
@@ -103,9 +108,7 @@ using namespace DirectX;
 #include "Src//Framework//Input/Joystick.h"
 #include "Src//Framework//Input/Input.h"
 
-//サウンド
-#include "Src/Framework/Sound/Sound.h"
-#include "Src/Framework/Sound/SoundManager.h"
+
 
 //シェーダー設定
 #include "Src/Framework/Shader/Shader.h"

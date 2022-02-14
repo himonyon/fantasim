@@ -21,12 +21,17 @@ void SceneBattle::Initialize() {
 	pBg = CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, SCREEN_WIDTH, SCREEN_HEIGHT, CreateSprite(new Sprite(L"Data/Image/Battle/bg.spr")));
 	pBg->GetComponent<ImageRenderer>()->isFrontImg = false;
 
-	//パネル
+	//パネル-------------------------------------------------------------------
+	//ステータス
 	pStatusPanel = CreateImageObject(0, 0, 400, 250, CreateSprite(new Sprite(L"Data/Image/Battle/status_bg.spr")), NULL, "statusPanel");
 	pStatusPanel->AddComponent<StatusPanel>();
+	//バトル
+	pBattlePanel = CreateImageObject(SCREEN_WIDTH_CENTER,SCREEN_HEIGHT_CENTER, SCREEN_WIDTH, SCREEN_HEIGHT,
+		CreateSprite(new Sprite(L"Data/Image/Battle/battle_bg_0.spr")), NULL, "battlePanel");
+	pBattlePanel->AddComponent<BattlePanel>();
 
-	//フィールドマネージャー（キャラクターを渡す）
-	pFieldManager = CreateObject(0, 0, 0);
+	//フィールドマネージャー（キャラクターを渡す）------------------------------------------
+	pFieldManager = CreateObject(0, 0, 0, NULL, "fieldManager");
 	pFieldManager->AddComponent<FieldManager>();
 	noDel_ptr<FieldManager> fieldManager = pFieldManager->GetComponent<FieldManager>();
 	fieldManager->vPlayerCharaBace = vPlayerCharaBace;
