@@ -15,12 +15,12 @@ namespace nsStrategy{
 		std::unordered_map<int, Charactor*> umCharactors;
 
 		//プレイヤー情報保管
-		void SaveBaceData();
+		void SaveBaceData(int year, int month);
 		//街のステータスセーブ
 		void SaveCities();
 		//キャラのステータスセーブ
 		void SaveCharactor();
-		//戦闘する街のIDを保管(p_id = プレイヤーの街ID e_id = 敵の街ID)
-		void SaveBattleCities(int p_id, int e_id, bool playerTurn);
+		//戦闘する街のIDを保管(year = 年, month = 月, p_id = プレイヤーの街ID e_id = 敵の街ID)
+		void SaveBattleCities(int year, int month ,int p_id, int e_id, bool playerTurn);
 	};
 };

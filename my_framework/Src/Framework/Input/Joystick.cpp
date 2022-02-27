@@ -59,6 +59,7 @@ bool Joystick::PovRel(int pov) {
 bool Joystick::StickTrg(int dir) {
 	float cr;
 	float ol;
+	//スティック方向に合わせて処理を分ける
 	if (dir == JOY_LSTICKL) {
 		cr = DirectInput::GetCurrentJoystick().lX * DirectInput::GetJoyAxisRange();
 		ol = DirectInput::GetOldJoystick().lX * DirectInput::GetJoyAxisRange();
@@ -105,6 +106,7 @@ bool Joystick::StickTrg(int dir) {
 bool Joystick::StickOn(int dir) {
 	float cr;
 	float ol;
+	//スティック方向に合わせて処理を分ける
 	if (dir == JOY_LSTICKL) {
 		cr = DirectInput::GetCurrentJoystick().lX * DirectInput::GetJoyAxisRange();
 		ol = DirectInput::GetOldJoystick().lX * DirectInput::GetJoyAxisRange();
@@ -151,6 +153,7 @@ bool Joystick::StickOn(int dir) {
 bool Joystick::StickRel(int dir) {
 	float cr;
 	float ol;
+	//スティック方向に合わせて処理を分ける
 	if (dir == JOY_LSTICKL) {
 		cr = DirectInput::GetCurrentJoystick().lX * DirectInput::GetJoyAxisRange();
 		ol = DirectInput::GetOldJoystick().lX * DirectInput::GetJoyAxisRange();

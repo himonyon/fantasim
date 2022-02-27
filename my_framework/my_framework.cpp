@@ -28,8 +28,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: ここにコードを挿入してください。
-
     // グローバル文字列を初期化する
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_MYFRAMEWORK, szWindowClass, MAX_LOADSTRING);
@@ -47,11 +45,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     Main* g_main = new Main();
 
+    //メインクラスの初期化
     if (g_main->Init(hWnd) == false) {
         return FALSE;
     }
 
-    // メイン メッセージ ループ:
+    //メイン メッセージ ループ:
     bool loop = true;
     while (loop)
     {
@@ -65,7 +64,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
 
-        //ループ処理
+        //ゲーム処理
         g_main->App();
     }
     //終了処理
@@ -73,8 +72,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     return (int)msg.wParam;
 }
-
-
 
 //
 //  関数: MyRegisterClass()

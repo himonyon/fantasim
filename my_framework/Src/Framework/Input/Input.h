@@ -7,20 +7,23 @@
 #pragma once
 #include <functional>
 
+//デバイスの種類
+enum class eDeviceType {
+	Both,
+	Keyboard,
+	Joystick,
+	Max,
+};
+
 /// <summary>
 /// ユーザーから独自設定されたInputクラス
 /// </summary>
 /// 
-
 class Input {
 private:
-	enum class eDeviceType {
-		Keyboard,
-		Joystick,
-		Both
-	};
 	static eDeviceType currentDevice;
 
+	//デバイス別に処理を分けるための関数ポインタ
 	static std::function<bool(std::vector<int>*& inputs)> funcTrg;
 	static std::function<bool(std::vector<int>*& inputs)> funcOn;
 	static std::function<bool(std::vector<int>*& inputs)> funcRel;
@@ -29,22 +32,27 @@ private:
 	static std::function<float(std::vector<int>*& inputs)> funcDX;
 	static std::function<float(std::vector<int>*& inputs)> funcDY;
 
+	//一度だけ押されたか判定
 	static bool BothDevTrg(std::vector<int>*& intuts);
 	static bool KeyboardDevTrg(std::vector<int>*& intuts);
 	static bool JoystickDevTrg(std::vector<int>*& intuts);
 
+	//押れているか判定
 	static bool BothDevOn(std::vector<int>*& inputs);
 	static bool KeyboardDevOn(std::vector<int>*& inputs);
 	static bool JoystickDevOn(std::vector<int>*& inputs);
 
+	//押されている状態が解除されたか判定
 	static bool BothDevRel(std::vector<int>*& inputs);
 	static bool KeyboardDevRel(std::vector<int>*& inputs);
 	static bool JoystickDevRel(std::vector<int>*& inputs);
 
+	//X方向への入力量を検知(規定　１)
 	static float BothDevDX(std::vector<int>*& inputs);
 	static float KeyboardDevDX(std::vector<int>*& inputs);
 	static float JoystickDevDX(std::vector<int>*& inputs);
 
+	//Y方向への入力量を検知(規定　１)
 	static float BothDevDY(std::vector<int>*& inputs);
 	static float KeyboardDevDY(std::vector<int>*& inputs);
 	static float JoystickDevDY(std::vector<int>*& inputs);

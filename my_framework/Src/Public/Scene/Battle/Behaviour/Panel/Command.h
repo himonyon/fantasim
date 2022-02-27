@@ -32,6 +32,9 @@ namespace nsBattle {
 
 	class CommandPanel : public Panel {
 	private:
+		//サウンドマネージャー
+		noDel_ptr<SoundManager> pSoundManager;
+
 		//選択されたコマンド
 		eCommand commandState = eCommand::Select;
 

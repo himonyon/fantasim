@@ -1,7 +1,7 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	Transformクラス
+	Transformコンポーネント
 		座標、回転、スケール変換
 
 -------------------------------------------------------------*/
@@ -26,7 +26,8 @@ public:
 private:
 	noDel_ptr<Transform> pParent = 0; //親のオブジェクト
 	std::vector<noDel_ptr<Transform>> pChildren; //子オブジェクト
-
+	
+	//１フレーム前の座標
 	stVector3 b_position;
 	stVector3 b_rotation;
 	stVector3 b_scale;
@@ -47,6 +48,7 @@ public:
 	//親のオブジェクトが有効状態かどうか
 	bool IsParentObjEnable();
 
+	//Getter,Setter
 	noDel_ptr<Transform> GetParent() { return pParent; }
 	void SetParent(noDel_ptr<Transform> obj);
 	void SetPosition(float x, float y, float z);

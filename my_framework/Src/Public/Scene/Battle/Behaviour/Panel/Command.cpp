@@ -5,6 +5,8 @@
 using namespace nsBattle;
 
 void CommandPanel::Awake() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
 	//親の位置設定
 	transform->SetPosition(SCREEN_WIDTH - 100.0f, 50.0f);
@@ -50,6 +52,7 @@ void CommandPanel::Update() {
 
 	//移動処理
 	if (commandState == eCommand::Move) {
+		pSoundManager->Play("decide"); //決定音
 		gameObject->FindGameObject("fieldManager")->
 			GetComponent<FieldManager>()->SetTurnState(eTurnState::Move);
 		Close();
@@ -57,6 +60,7 @@ void CommandPanel::Update() {
 
 	//スキル処理
 	if (commandState == eCommand::Skill) {
+		pSoundManager->Play("decide"); //決定音
 		gameObject->FindGameObject("fieldManager")->
 			GetComponent<FieldManager>()->SetTurnState(eTurnState::SelectSkill);
 		Close();
@@ -64,6 +68,7 @@ void CommandPanel::Update() {
 
 	//待機処理
 	if (commandState == eCommand::Wait) {
+		pSoundManager->Play("decide"); //決定音
 		pSelectChara->SetActionEnable(false);
 		gameObject->FindGameObject("fieldManager")->
 			GetComponent<FieldManager>()->SetTurnState(eTurnState::Field);
@@ -85,6 +90,12 @@ void CommandPanel::Open(noDel_ptr<PlayerChara> chara, eCommandPanelType type) {
 	selectNum = 0;
 	for (auto& com : umCommand) com.second->SetComEnable(false);
 	vCommand.clear();
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
 
 	//コマンド作成
 	panelType = type;
@@ -177,6 +188,8 @@ void CommandPanel::SetCommandPos() {
 }
 
 void CommandPanel::BackFunc() {
+	pSoundManager->Play("cancel"); //キャンセル音
+
 	//移動後なら元の位置に戻す
 	if (panelType == eCommandPanelType::MoveAfter) pSelectChara->BackBeforePos();
 	//フィールドマネージャーに状態変更を送る

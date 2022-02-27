@@ -18,14 +18,26 @@ FieldManager::~FieldManager() {
 }
 
 //Behaviour関数-----------------------------------
+void FieldManager::Awake() {
+	//サウンドマネージャー
+	CreateSound();
+	//操作説明画面
+	noDel_ptr<GameObject> _pOprObj = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT - 25, SCREEN_WIDTH, 50.0f,
+		CreateSprite(new Sprite(L"Data/Image/Common/cover.spr")), nullptr, "operation");
+	_pOprObj->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_pOprObj->GetComponent<ImageRenderer>()->SetColor(1, 1, 1, 0.5f);
+	_pOprObj->AddComponent<Operation>();
+	pOperation = _pOprObj->GetComponent<Operation>();
+}
+
 void FieldManager::Start() {
 	//ステージ・キャラクター作成
 	InitStage();
 	InitCharactor();
 
 	//カメラの初期位置設定
-	Camera::main->transform->position.x = umStageRows[SquareNum_Y/2]->umRow[SquareNum_X/2]->transform->position.x;
-	Camera::main->transform->position.y = umStageRows[SquareNum_Y/2]->umRow[SquareNum_X/2]->transform->position.y;
+	Camera::main->transform->position.x = umStageRows[SquareNum_Y / 2]->umRow[SquareNum_X / 2]->transform->position.x;
+	Camera::main->transform->position.y = umStageRows[SquareNum_Y / 2]->umRow[SquareNum_X / 2]->transform->position.y;
 
 	//バトルキャラのコンポーネント取得
 	for (auto& chara : vPlayerChara) {
@@ -49,6 +61,9 @@ void FieldManager::Start() {
 	//プレイヤーターン開始
 	pEnemyTurn->SetEnable(false);
 	static_noDel_cast<Turn>(pPlayerTurn)->TurnInit();
+
+	//BGMスタート
+	pSoundManager->Play("bgm");
 }
 
 void FieldManager::ChangeTurn() {
@@ -79,14 +94,25 @@ void FieldManager::SetTurnState(eTurnState state, int backNum) {
 void FieldManager::InitStage() {
 	FILE* fp;
 
-	fopen_s(&fp, "Data/Status/Battle/stage1.csv", "r");
+	std::string _stageFile = ChooseStage();
+
+	fopen_s(&fp, _stageFile.c_str(), "r");
 
 	if (fp == NULL) return;
 
 	//フィールド画像
-	noDel_ptr<Sprite> fieldSprite = CreateSprite(new Sprite(L"Data/Image/Battle/map03.spr", L"grass"));
+	noDel_ptr<Sprite> fieldSprite = GetRoad();
 	//障害物画像
-	noDel_ptr<Sprite> obstacleSprite = CreateSprite(new Sprite(L"Data/Image/Battle/map02.spr", L"water"));
+	noDel_ptr<Sprite> obstacleSprite = GetObstacle();
+	//バトル画面の背景も設定
+	noDel_ptr<ImageRenderer> _pBattlePanel = gameObject->FindGameObject("battlePanel")->GetComponent<ImageRenderer>();
+	std::wstring _battleBG[3] = {
+		L"Data/Image/Battle/battle_bg_0.spr",
+		L"Data/Image/Battle/battle_bg_1.spr",
+		L"Data/Image/Battle/battle_bg_2.spr",
+	};
+	_pBattlePanel->SetUpRenderer2D(SCREEN_WIDTH, SCREEN_HEIGHT,
+		CreateSprite(new Sprite(_battleBG[stageType - 1].c_str())));
 	//選択時画像
 	noDel_ptr<Sprite> selectSquare = CreateSprite(new Sprite(L"Data/Image/Battle/square.spr"));
 
@@ -169,8 +195,34 @@ void FieldManager::InitStage() {
 	SquareNum_X = _curNum / _squareY_num;
 	SquareNum_Y = _squareY_num;
 }
+std::string FieldManager::ChooseStage() {
+	srand((unsigned int)time(NULL));
+	int _stage = rand() % 3 + 1;
+	if (_stage == 1) return "Data/Status/Battle/stage1.csv";
+	if (_stage == 2) return "Data/Status/Battle/stage2.csv";
+	if (_stage == 3) return "Data/Status/Battle/stage3.csv";
+	return "Data/Status/Battle/stage1.csv";
+}
+noDel_ptr<Sprite> FieldManager::GetRoad(){
+	srand((unsigned int)time(NULL));
+	int _stage = rand() % 3 + 1;
+	stageType = _stage;
+	if (stageType == 1) return CreateSprite(new Sprite(L"Data/Image/Battle/map03.spr", L"road1"));
+	if (stageType == 2) return CreateSprite(new Sprite(L"Data/Image/Battle/map01.spr", L"road2"));
+	if (stageType == 3) return CreateSprite(new Sprite(L"Data/Image/Battle/map01.spr", L"road3"));
 
+	return NULL;
+}
+noDel_ptr<Sprite> FieldManager::GetObstacle() {
+	srand((unsigned int)time(NULL));
+	int _stage = rand() % 3 + 1;
+	if (stageType == 1) return CreateSprite(new Sprite(L"Data/Image/Battle/map02.spr", L"obj1"));
+	if (stageType == 2) return CreateSprite(new Sprite(L"Data/Image/Battle/map01.spr", L"obj2"));
+	if (stageType == 3) return CreateSprite(new Sprite(L"Data/Image/Battle/map01.spr", L"obj3"));
+	return NULL;
+}
 void FieldManager::InitCharactor() {
+	srand((unsigned int)time(NULL));
 	//プレイヤーキャラを設定
 	int _x = 0;
 	int _y = 0;
@@ -178,12 +230,17 @@ void FieldManager::InitCharactor() {
 	//配置マス
 	noDel_ptr<Square> _pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
 	for (auto& chara : vPlayerCharaBace) {
+		//キャラの初期化
+		chara->hp = chara->maxHp;
+		chara->mp = chara->maxMp;
+		
 		//配置マス設定
+		_y = rand() % SquareNum_Y;
 		_pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
 
 		noDel_ptr<GameObject> _pChara = gameObject->CreateObject(_pTargetSquare->transform->position.x,
 			_pTargetSquare->transform->position.y, 0, 0.9f, 0.9f, chara->GetSprite());
-		_pChara->GetComponent<SpriteRenderer>()->SetRenderPriority((int)eRenderOrder::Object);
+		_pChara->GetComponent<SpriteRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
 		_pChara->AddComponent<Collider2D>();
 		_pChara->GetComponent<Collider2D>()->SetUpCollider2D(StageSize * 0.5f, StageSize * 0.5f, false);
 		_pChara->AddComponent<PlayerChara>();
@@ -195,7 +252,6 @@ void FieldManager::InitCharactor() {
 
 		//登録
 		vPlayerChara.emplace_back(_pChara);
-		_y++;
 	}
 
 	//座標初期設定
@@ -204,12 +260,16 @@ void FieldManager::InitCharactor() {
 
 	//敵キャラを設定
 	for (auto& chara : vEnemyCharaBace) {
+		//キャラの初期化
+		chara->hp = chara->maxHp;
+		chara->mp = chara->maxMp;
 		//配置マス設定
+		_y = rand() % SquareNum_Y;
 		_pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
 
 		noDel_ptr<GameObject> _pChara = gameObject->CreateObject(_pTargetSquare->transform->position.x,
 			_pTargetSquare->transform->position.y, 0, 0.9f, 0.9f, chara->GetSprite());
-		_pChara->GetComponent<SpriteRenderer>()->SetRenderPriority((int)eRenderOrder::Object);
+		_pChara->GetComponent<SpriteRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
 		_pChara->AddComponent<Collider2D>();
 		_pChara->GetComponent<Collider2D>()->SetUpCollider2D(StageSize * 0.5f, StageSize * 0.5f, false);
 		_pChara->AddComponent<EnemyChara>();
@@ -218,8 +278,31 @@ void FieldManager::InitCharactor() {
 
 		//登録
 		vEnemyChara.emplace_back(_pChara);
-		_y++;
 	}
 }
 
+void FieldManager::CreateSound() {
+	noDel_ptr<GameObject> _pSoundObj = gameObject->CreateObject(0, 0, 0, nullptr, "soundManager");
+	_pSoundObj->AddComponent<SoundManager>();
+	pSoundManager = _pSoundObj->GetComponent<SoundManager>();
+	//BGM
+	pSoundManager->AddSound("bgm", L"Data/Sound/Battle/bgm.wav");
+	pSoundManager->SetVolume("bgm", 0.5f);
+	//決定音
+	pSoundManager->AddSound("decide", L"Data/Sound/Common/circle.wav");
+	//キャンセル音
+	pSoundManager->AddSound("cancel", L"Data/Sound/Common/cross.wav");
+	//バトル時BGM
+	pSoundManager->AddSound("battle", L"Data/Sound/Battle/battle.wav");
+	pSoundManager->SetVolume("battle", 0.5f);
+	//ダメージ
+	pSoundManager->AddSound("damage", L"Data/Sound/Battle/damage.wav");
+	//死亡
+	pSoundManager->AddSound("death", L"Data/Sound/Battle/death.wav");
+	//攻撃
+	pSoundManager->AddSound("attack", L"Data/Sound/Battle/attack.wav");
+
+	///ユーザー情報反映
+	if (UserSetting::sound == false) pSoundManager->SetVolume(0);
+}
 

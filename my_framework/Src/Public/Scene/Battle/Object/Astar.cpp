@@ -193,6 +193,8 @@ int Astar::ReturnDistance(noDel_ptr<Square> start, noDel_ptr<Square> goal) {
 		}
 	}
 
+	if (count > 1) count--;
+
 	return count;
 }
 void Astar::GetDistanceToGoal(noDel_ptr<Square> start, noDel_ptr<Square> goal) {

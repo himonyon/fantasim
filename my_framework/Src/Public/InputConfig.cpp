@@ -12,7 +12,6 @@ bool InputConfig::SetUpConfig() {
 
 	std::vector<int>* temp_vec = nullptr;
 
-	//まずは頂点数、ポリゴン数を調べる
 	while (!feof(fp))
 	{
 		//キーワード読み込み
@@ -33,6 +32,9 @@ bool InputConfig::SetUpConfig() {
 			temp_vec->emplace_back(temp_i);
 		}
 	}
+
+	//ジョイスティックが無効ならキーボード限定にする
+	if (Joystick::IsValid() == false) Input::SetKeyboardDevice();
 
 	return true;
 }

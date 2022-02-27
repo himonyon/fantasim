@@ -5,6 +5,9 @@
 using namespace nsBattle;
 
 void BattlePanel::Awake() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
+
 	float _sizeX = gameObject->GetComponent<ImageRenderer>()->sizeX;
 	float _sizeY = gameObject->GetComponent<ImageRenderer>()->sizeY;
 	float _top = -_sizeY / 2;
@@ -75,8 +78,13 @@ void BattlePanel::Update() {
 	timer.Execute();
 
 	if (fBattleFunc(*this) == false) {
+		pSoundManager->Stop("battle"); //バトルBGMストップ
+		pSoundManager->Resume("bgm"); //フィールドBGM再開
 		gameObject->FindGameObject("fieldManager")->
 			GetComponent<FieldManager>()->SetTurnState(eTurnState::Field);
+		//操作説明テキスト表示
+		noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+		_opr->Open();
 		Close();
 	}
 }
@@ -96,6 +104,10 @@ void BattlePanel::Open(noDel_ptr<PlayerChara> player, noDel_ptr<EnemyChara> enem
 		pAttacker = static_noDel_cast<BattleChara>(enemy);
 		pDefender = static_noDel_cast<BattleChara>(player);;
 	}
+
+	//操作説明テキスト隠す
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->Hide();
 	
 	//タイマー開始
 	timer.Start();
@@ -209,6 +221,8 @@ void BattlePanel::SetBarPosition(noDel_ptr<ImageRenderer> pImage, noDel_ptr<Imag
 bool BattlePanel::InitFunc() {
 	//一度だけ処理したい変更
 	if (onceTrg) {
+		pSoundManager->Stop("bgm"); //フィールドBGMストップ
+		pSoundManager->Play("battle"); //バトルBGMスタート
 		pBattleText->Print(L"戦闘を開始します...");
 		onceTrg = false;
 	}
@@ -227,6 +241,9 @@ bool BattlePanel::InitFunc() {
 bool BattlePanel::Attack() {
 	//一度だけ処理したい変更
 	if (onceTrg) {
+		//サウンド
+		pSoundManager->Play("attack");
+
 		//テキスト変更
 		pBattleText->Print(L"%sの攻撃 : %s", pAttacker->pCharaInfo->GetName().c_str(),
 			pAttacker->pSelectSkill->GetName().c_str());
@@ -264,6 +281,10 @@ bool BattlePanel::Attack() {
 bool BattlePanel::Damage() {
 	//一度だけ処理したい変更
 	if (onceTrg) {
+		//サウンド
+		if (pDefender->IsDeath()) pSoundManager->Play("death");
+		else pSoundManager->Play("damage");
+
 		//テキスト変更
 		if (pDefender->IsDeath())
 			pBattleText->Print(L"%s%sに%dのダメージ\n%sは死亡した。",
@@ -275,9 +296,6 @@ bool BattlePanel::Damage() {
 		else
 			pBattleText->Print(L"%sは回避した。", pDefender->pCharaInfo->GetName().c_str());
 
-		//回避トリガーリセット
-		evadeTrg = false;
-
 		//アニメーション
 		if (evadeTrg == false) {
 			noDel_ptr<GameObject> _pDefenderView;
@@ -287,6 +305,9 @@ bool BattlePanel::Damage() {
 			if (pDefender->IsDeath()) _pDefenderView->GetComponent<Animator>()->PlayAnim("death");
 			else _pDefenderView->GetComponent<Animator>()->PlayAnim("damage");
 		}
+
+		//回避トリガーリセット
+		evadeTrg = false;
 
 		//ステータス反映
 		SetStatusBar();

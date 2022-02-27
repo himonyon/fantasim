@@ -4,11 +4,12 @@
 using namespace nsStrategy;
 
 
-void Save::SaveBaceData() {
+void Save::SaveBaceData(int year, int month) {
 	FILE* fp;
 	fopen_s(&fp, "Data/SaveData/base.txt", "w");
 	if (fp == NULL) return;
-	fprintf_s(fp, "save");
+	fprintf_s(fp, "save\n");
+	fprintf_s(fp, "date %d %d", year, month);
 
 	fclose(fp);
 }
@@ -58,6 +59,8 @@ void Save::SaveCities() {
 		fprintf_s(fp, "disaster %d ", pCities[i]->disaster);
 		//支持率
 		fprintf_s(fp, "support %d ", pCities[i]->support);
+		//行動回数
+		fprintf_s(fp, "action %d ", pCities[i]->actionCount);
 		//景気
 		fprintf_s(fp, "bussiness %f ", pCities[i]->bussiness);
 		//所持キャラID
@@ -79,8 +82,6 @@ void Save::SaveCharactor() {
 	for (auto& ch: umCharactors) {
 		Charactor* chara = ch.second;
 
-		//生成
-		fprintf_s(fp, "new ");
 		//ID
 		fprintf_s(fp, "id %d ", chara->GetID());
 		//名前
@@ -119,9 +120,9 @@ void Save::SaveCharactor() {
 
 	fclose(fp);
 }
-void Save::SaveBattleCities(int p_id, int e_id, bool playerTurn) {
+void Save::SaveBattleCities(int year, int month, int p_id, int e_id, bool playerTurn) {
 	//全体保存
-	SaveBaceData();
+	SaveBaceData(year, month);
 	SaveCities();
 	SaveCharactor();
 

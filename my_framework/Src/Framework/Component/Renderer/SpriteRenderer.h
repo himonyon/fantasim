@@ -1,8 +1,8 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	SpriteRendererクラス
-		スプライトを描画するクラス
+	SpriteRendererコンポーネント
+		スプライトを描画する
 
 -------------------------------------------------------------*/
 
@@ -13,8 +13,11 @@ private:
 
 	static const int indexNum = 6;
 
+	static XMMATRIX View;
+	static XMMATRIX Proj;
+
 public:
-	float color[4] = { 1,1,1,1 };
+	stColor4 color = { 1,1,1,1 };
 
 public:
 	SpriteRenderer();
@@ -29,42 +32,43 @@ public:
 	//コンポーネント処理
 	void Execute() override;
 
+	//コンポーネント初期化
 	void SetUpRenderer2D(float sizeX, float sizeY, noDel_ptr<Sprite> sprite);
 
+	//色の設定、取得
 	void SetColor(float r, float g, float b, float a) override;
 	void SetColor(stColor4 color) override;
 	stColor4 GetColor() override;
 
-	void SetDefaultUV() override; //スプライトの状態を初期状態に戻す(ColorとUV)
+	//スプライトの状態を初期状態に戻す(ColorとUV)
+	void SetDefaultUV() override; 
 
 private:
-	void Render(void); //描画
+	//描画
+	void Render(void);
 
+	//頂点情報の更新
 	void SetVertexState();
 
+	//座標、回転、スケールの行列計算
 	XMMATRIX GetPosMatrix();
 	XMMATRIX GetRotMatrix();
 	XMMATRIX GetScaleMatrix();
 
-	// XZ平面とスクリーン座標の交点算出関数
+public:
 	static XMVECTOR CalcScreenToWorld(
 		XMVECTOR& pout,
 		int Sx,
 		int Sy,
 		float fZ,
 		int Screen_w,
-		int Screen_h,
-		XMMATRIX& View,
-		XMMATRIX& Prj
+		int Screen_h
 	);
-
-	static XMVECTOR CalcScreenToXZ(
-		XMVECTOR& pout,
+	// XZ平面とスクリーン座標の交点算出関数
+	static stVector3 CalcScreenToXZ(
 		int Sx,
 		int Sy,
 		int Screen_w,
-		int Screen_h,
-		XMMATRIX& View,
-		XMMATRIX& Prj
+		int Screen_h
 	);
 };

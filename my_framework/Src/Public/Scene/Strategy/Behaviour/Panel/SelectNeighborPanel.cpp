@@ -87,6 +87,12 @@ void SelectNeighborPanel::Open(noDel_ptr<City> city, int cmd) {
 		}
 	}
 
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
+
 	//対象の町を設定する
 	for (auto& city : pCity->GetNeighbor()) {
 		if (cmd == (int)eCommand::Battle) {

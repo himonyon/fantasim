@@ -1,13 +1,16 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	SelectSkillPanelクラス(Panelの派生)
-	スキル選択画面の管理
+	SelectCounterPanelクラス(Panelの派生)
+	反撃スキル選択画面の管理
 
 -------------------------------------------------------------*/
 namespace nsBattle {
 	class SelectCounterPanel : public Panel {
 	private:
+		//サウンドマネージャー
+		noDel_ptr<SoundManager> pSoundManager;
+
 		//選択されたキャラクタ
 		noDel_ptr<PlayerChara> pSelectChara;
 

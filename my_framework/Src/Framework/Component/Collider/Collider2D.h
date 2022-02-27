@@ -1,14 +1,16 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	コライダー2Dクラス
-		2Dの四角形の当たり判定
+	コライダー2Dコンポーネント
+		四角形の当たり判定
 
 -------------------------------------------------------------*/
 
 class Collider2D : public Component {
 public:
+	//接触判定
 	bool isCollision = true;
+
 	float sizeX = 0;
 	float sizeY = 0;
 
@@ -31,6 +33,8 @@ public:
 	//コンポーネント処理
 	void Execute();
 	void Execute(noDel_ptr<Collider2D> hitCollider) override;
+
+	//当たっているコライダーを格納
 	void AddHitCollisions(noDel_ptr<Collider2D> hitColider);
 	void AddHitTriggers(noDel_ptr<Collider2D> hitColider);
 
@@ -38,5 +42,6 @@ public:
 	void ClearHitState();
 
 private:
+	//当たり判定
 	void IsCollide(noDel_ptr<Collider2D> hitColider);
 };

@@ -17,6 +17,7 @@ public:
 	float time = 0;
 
 public:
+	//フレームタイム計算
 	static void FrameTimeExecute();
 
 	void Start();

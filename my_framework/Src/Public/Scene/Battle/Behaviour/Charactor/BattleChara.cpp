@@ -80,6 +80,27 @@ bool BattleChara::Move(noDel_ptr<Square> start) {
 		moveCount++;
 	}
 
+	//カメラの移動
+	stVector3 _befCamPos = {
+		Camera::main->transform->position.x,
+		Camera::main->transform->position.y ,
+		Camera::main->transform->position.z
+	};
+	Camera::main->transform->position.x = transform->position.x;
+	Camera::main->transform->position.y = transform->position.y;
+	//制限
+	float _padding = 1.0f;
+	float _moveX = Camera::main->transform->position.x - transform->position.x;
+	float _moveY = Camera::main->transform->position.y - transform->position.y;
+	float _left = FieldManager::StageLeft - _padding;
+	float _right = FieldManager::StageLeft + (FieldManager::StageSize * (FieldManager::SquareNum_X - 1)) + _padding;
+	float _top = FieldManager::StageTop + _padding;
+	float _bottom = FieldManager::StageTop - (FieldManager::StageSize * (FieldManager::SquareNum_Y - 1)) - _padding;
+	if (SpriteRenderer::WorldWHPos[1] < _right) Camera::main->transform->position.x += _moveX;
+	if (SpriteRenderer::WorldWHPos[0] > _left) Camera::main->transform->position.x += _moveX;
+	if (SpriteRenderer::WorldWHPos[2] < _top) Camera::main->transform->position.y += _moveY;
+	if (SpriteRenderer::WorldWHPos[3] > _bottom) Camera::main->transform->position.y += _moveY;
+
 	//移動力よりカウントが大きければ終了
 	if (pCharaInfo->move <= moveCount) {
 		moveCount = 0;

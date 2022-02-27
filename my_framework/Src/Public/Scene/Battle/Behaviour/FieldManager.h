@@ -8,7 +8,13 @@
 namespace nsBattle {
 	class FieldManager : public Behaviour {
 	private:
+		//サウンドマネージャー
+		noDel_ptr<SoundManager> pSoundManager;
+		//操作説明
+		noDel_ptr<Operation> pOperation;
+
 		//ステージ
+		int stageType = 0;
 		std::unordered_map<int, SquareRow*> umStageRows;
 
 		//キャラクターのBattleCharaクラス取得
@@ -43,12 +49,19 @@ namespace nsBattle {
 		void ChangeTurn();
 	private:
 		//初期化
+		void Awake() override;
 		void Start() override;
 
 	private:
 		//ステージとキャラクターの配置
 		void InitStage();
+		std::string ChooseStage(); //ステージを選ぶ
+		noDel_ptr<Sprite> GetRoad(); //道画像取得
+		noDel_ptr<Sprite> GetObstacle(); //ステージ障害物取得
 		void InitCharactor();
+
+		//サウンド作成
+		void CreateSound();
 
 	public:
 		void SetTurnState(eTurnState, int backNum = 1);

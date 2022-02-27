@@ -18,7 +18,9 @@ public:
 	GameObjectManager() {};
 	~GameObjectManager();
 
+	//処理
 	void Execute();
+	//描画
 	void Render();
 
 	//オブジェクトの削除予約
@@ -66,6 +68,7 @@ public:
 	void SetSortEnable() { isSortEnable = true; }
 
 private:
+	//ゲームオブジェクト配列
 	std::unordered_map<std::string, GameObject*> umObjects;
 
 	//コンポーネントの配列

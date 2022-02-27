@@ -116,14 +116,6 @@ void CharaEnhancePanel::Awake() {
 	Close();
 }
 
-//テキスト作成
-void CharaEnhancePanel::CreateText(noDel_ptr<Font>& target, float posX, float posY) {
-	noDel_ptr<GameObject> _tempObj = gameObject->CreateObject(posX, posY, 0, transform);
-	_tempObj->AddComponent<Font>();
-	target = _tempObj->GetComponent<Font>();
-	target->SetRenderPriority((int)eRenderOrder::FrontUI);
-}
-
 //処理
 void CharaEnhancePanel::Update() {
 	//確認画面が開いた状態
@@ -198,6 +190,12 @@ void CharaEnhancePanel::Open(noDel_ptr<City> city) {
 	//初期化
 	cursorNum = 0;
 	pSelectCity = city;
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
 
 
 	//テキスト設定

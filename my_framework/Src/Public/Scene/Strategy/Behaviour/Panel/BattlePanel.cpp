@@ -52,6 +52,7 @@ void BattlePanel::Update() {
 	}
 
 	if (cancelEnable && Input::Trg(InputConfig::input["cancel"])) {
+		pSoundManager->Play("cancel");
 		Close();
 		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Back);
 	}
@@ -61,6 +62,7 @@ void BattlePanel::Update() {
 		if (CheckNoChara()) return;
 		//音
 		pSoundManager->Play("decide");
+		if(cancelEnable) pPlayerCity->IncActCount(); //行動した回数を増加させる
 
 		//バトルシーンを用意
 		SceneManager::CreateReserveScene(eSceneTable::Battle, false);
@@ -93,6 +95,12 @@ void BattlePanel::Open(noDel_ptr<City> p_city, noDel_ptr<City> e_city, bool canc
 	pEnemyCity = e_city;
 
 	cancelEnable = cancel;
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
 
 	Panel::Open();
 

@@ -5,6 +5,9 @@
 using namespace nsBattle;
 
 void  SelectCounterPanel::Awake() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
+
 	pSelecter = gameObject->CreateImageObject(0, 0, 150.0f, 30.0f,
 		CreateSprite(new Sprite(L"Data/Image/Common/square.spr")), transform);
 	pSelecter->GetComponent<ImageRenderer>()->SetRenderPriority(5);
@@ -34,13 +37,14 @@ void  SelectCounterPanel::Awake() {
 		_temp->GetComponent<Font>()->SetRenderPriority(10);
 		pSkillTexts[i] = _temp->GetComponent<Font>();
 	}
+	pSkillTexts[MAX_OWN_SKILL]->transform->position.y = _top + _sizeY * 0.4f;
 
 	//説明文
 	pBorder = gameObject->CreateObject(0, 0, 0, transform);
 	pBorder->AddComponent<Font>();
 	pBorder->GetComponent<Font>()->SetRenderPriority(10);
 	pBorder->GetComponent<Font>()->Print(L"----------------------------------------------------");
-	pBorder->transform->SetLocalPosition(_left + _sizeX * 0.02f, _top + _sizeY * 0.45f);
+	pBorder->transform->SetLocalPosition(_left + _sizeX * 0.02f, _top + _sizeY * 0.5f);
 
 
 	//スキル名
@@ -60,6 +64,7 @@ void  SelectCounterPanel::Update() {
 
 	if (Input::Trg(InputConfig::input["decide"])) {
 		if (DecideSkill()) {
+			pSoundManager->Play("decide"); //決定音
 			gameObject->FindGameObject("fieldManager")->
 				GetComponent<FieldManager>()->SetTurnState(eTurnState::Battle);
 			Close();
@@ -121,6 +126,11 @@ void SelectCounterPanel::Open(noDel_ptr<PlayerChara> chara, int range) {
 		pSkillTexts[i]->Print(L"");
 		pSkillTexts[i]->SetColor(0xffffffff);
 	}
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
 
 	//Open処理
 	Panel::Open();

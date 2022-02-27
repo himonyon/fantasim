@@ -1,14 +1,17 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	SelectSkillPanelクラス(Panelの派生)
-	スキル選択画面の管理
+	Battleクラス(Panelの派生)
+	バトル画面の管理
 
 -------------------------------------------------------------*/
 namespace nsBattle {
 	class BattlePanel : public Panel {
 	private:
 		std::function<bool(BattlePanel&)> fBattleFunc;
+
+		//サウンドマネージャー
+		noDel_ptr<SoundManager> pSoundManager;
 
 		//配列識別番号
 		const int playerNum = 0;

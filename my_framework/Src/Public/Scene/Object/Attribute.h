@@ -23,12 +23,13 @@ public:
 
 	~Attribute();
 
+	//Getter,Setter
 	static noDel_ptr<Attribute> GetAttr(std::wstring name) { return noDel_ptr<Attribute>(attrs[name]); }
-
 	std::wstring GetName() { return name; }
 	noDel_ptr<Sprite> GetSprite() { return noDel_ptr<Sprite>(pSprite); }
 	float GetDamageRate(std::wstring name) { return damage_rate[name]; }
 
 private:
+	//‘®«‚É‚ ‚Á‚½‰æ‘œ‚Ìİ’è
 	void SetSprite();
 };

@@ -5,6 +5,9 @@
 using namespace nsBattle;
 
 void PlayerTurn::Awake() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
+
 	//ターン切り替え時画像obj
 	noDel_ptr<GameObject> _startAnimObj = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 800, 300,
 		CreateSprite(new Sprite(L"Data/Image/Battle/player_turn.spr")));
@@ -37,22 +40,24 @@ void PlayerTurn::Start() {
 }
 
 void PlayerTurn::Update() {
+	if (Keyboard::Trg(DIK_F10)) Debug::open = true;
+
 	//ターン開始アニメーション中は処理しない
 	if (pTurnStartAnim->IsPlayAnim("turn")) return;
 
 	//終了確認
-	CheckGameEnd();
-	if (isGameEnd) {
-		TransScene();
-		return;
+	if (curState->state != eTurnState::Battle) {
+		CheckGameEnd();
+		if (isGameEnd) {
+			TransScene();
+			return;
+		}
 	}
 
-	if (Keyboard::Trg(DIK_Q)) vEnemy[0]->pCharaInfo->hp -= 10;
-	if (Keyboard::Trg(DIK_W)) vEnemy[1]->pCharaInfo->hp -= 10;
-	if (Keyboard::Trg(DIK_E)) vEnemy[2]->pCharaInfo->hp -= 10;
-	if (Keyboard::Trg(DIK_A)) vPlayer[0]->pCharaInfo->hp -= 10;
-	if (Keyboard::Trg(DIK_S)) vPlayer[1]->pCharaInfo->hp -= 10;
-	if (Keyboard::Trg(DIK_D)) vPlayer[2]->pCharaInfo->hp -= 10;
+	//音楽のループ
+	if (curState->state != eTurnState::Battle) {
+		if (pSoundManager->IsPlaying("bgm") == false) pSoundManager->Play("bgm");
+	}
 
 	//通常時コマンド
 	if (curState->state == eTurnState::Field) FieldFunc();
@@ -82,6 +87,10 @@ void PlayerTurn::Update() {
 		curState->state == eTurnState::Skill) {
 		MoveCamera();
 	}
+
+	if (curState->state != checkState) {
+		checkState = curState->state;
+	}
 }
 
 void PlayerTurn::TurnInit() {
@@ -95,6 +104,7 @@ void PlayerTurn::SelectChara() {
 			//プレイヤーキャラならコマンドを開く
 			noDel_ptr<PlayerChara> _playerC = dynamic_noDel_cast<PlayerChara>(chara);
 			if (_playerC != NULL) {
+				pSoundManager->Play("decide");
 				SetTurnState(eTurnState::BeforeCommand);
 				pSelectChara = chara;
 			}
@@ -122,6 +132,14 @@ void PlayerTurn::ShowCharaInfo() {
 void PlayerTurn::FieldFunc() {
 	//カーソル動かす
 	if (pCursor->IsEnable() == false) pCursor->SetEnable(true);
+
+	if (curState->state != checkState) {
+		//操作説明テキスト変更
+		noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+		_opr->ResetOperation();
+		_opr->AddOperation("decide", L"キャラ選択");
+		_opr->AddOperation("option", L"ターン終了");
+	}
 
 	//キャラの情報を出す
 	ShowCharaInfo();

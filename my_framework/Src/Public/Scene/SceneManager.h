@@ -12,6 +12,7 @@
 #include "Strategy/scene_strategy.h"
 #include "Battle/scene_battle.h"
 
+
 //ƒV[ƒ“‚Ìí—Ş
 enum class eSceneTable
 {

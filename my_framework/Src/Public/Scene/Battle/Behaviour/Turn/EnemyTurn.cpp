@@ -27,11 +27,16 @@ void EnemyTurn::Update() {
 	if (pTurnStartAnim->IsPlayAnim("turn")) return;
 
 	//終了確認
-	CheckGameEnd();
-	if (isGameEnd) {
-		TransScene();
-		return;
+	if (curState->state != eTurnState::Battle) {
+		CheckGameEnd();
+		if (isGameEnd) {
+			TransScene();
+			return;
+		}
 	}
+
+	//タイマー処理
+	timer.Execute();
 
 	//反撃スキル選択処理
 	if (curState->state == eTurnState::SelectSkill) {
@@ -72,8 +77,11 @@ void EnemyTurn::Update() {
 	}
 	//行動終了時
 	else {
+		if (timer.time < 1000) return;
 		//次の敵を捜索
 		enemyNum++;
+		//タイマー初期化
+		timer.Start();
 		//全ての敵の行動を終えるとターン終了
 		if (enemyNum == vEnemy.size())
 			gameObject->FindGameObject("fieldManager")->
@@ -105,6 +113,7 @@ void EnemyTurn::SetTargetEnemy() {
 void EnemyTurn::SetTargetFriend() {
 	//現在の最大値
 	float maxDir = 100000;
+	vEnemy[enemyNum]->pTargetChara = NULL;
 	//キャラの位置
 	stVector3 _pos = vEnemy[enemyNum]->transform->position;
 	for (auto& enemy : vEnemy) {
@@ -126,6 +135,8 @@ void EnemyTurn::TurnInit() {
 	pTurnStartAnim->PlayAnim("turn");
 	SetTurnState(eTurnState::EnemyAttack);
 	enemyNum = 0;
+	//タイマー初期化
+	timer.Start();
 	//はじめに処理する敵の設定
 	for (int i = 0; i < vEnemy.size(); i++) {
 		if (vEnemy[enemyNum]->IsDeath()) continue;
@@ -140,19 +151,24 @@ void EnemyTurn::SelectSkill() {
 	//ターゲット(味方)設定
 	vEnemy[enemyNum]->pSelectSkill = NULL;
 	SetTargetFriend();
-	int _maxHp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->maxHp;
-	int _maxMp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->maxMp;
-	int _hp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->hp;
-	int _mp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->mp;
-	if (_hp < _maxHp / 2) vEnemy[enemyNum]->ChooseSkill(eSkillType::Heal);
-	if (_mp < _maxMp / 2) vEnemy[enemyNum]->ChooseSkill(eSkillType::Heal);
+	//ターゲットがない場合終了
+	if (vEnemy[enemyNum]->pTargetChara != NULL) {
+		int _maxHp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->maxHp;
+		int _maxMp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->maxMp;
+		int _hp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->hp;
+		int _mp = vEnemy[enemyNum]->pTargetChara->pCharaInfo->mp;
+		if (_hp < _maxHp / 2) vEnemy[enemyNum]->ChooseSkill(eSkillType::Heal);
+		if (_mp < _maxMp / 2) vEnemy[enemyNum]->ChooseSkill(eSkillType::Heal);
+	}
 	//スキルが設定されていれば終了
 	if (vEnemy[enemyNum]->pSelectSkill != NULL) return;
 
 	//攻撃スキル設定
 	//ターゲット(敵)設定
 	SetTargetEnemy();
-	vEnemy[enemyNum]->ChooseSkill(eSkillType::Attack);
+	if (vEnemy[enemyNum]->pTargetChara != NULL) {
+		vEnemy[enemyNum]->ChooseSkill(eSkillType::Attack);
+	}
 	//スキルが設定されていれば終了
 	if (vEnemy[enemyNum]->pSelectSkill != NULL) return;
 
@@ -163,7 +179,9 @@ void EnemyTurn::SelectSkill() {
 	int _rand = rand() & 100;
 	if (_rand < _rate) {
 		SetTargetFriend();
-		vEnemy[enemyNum]->ChooseSkill(eSkillType::Buff);
+		if (vEnemy[enemyNum]->pTargetChara != NULL) {
+			vEnemy[enemyNum]->ChooseSkill(eSkillType::Buff);
+		}
 	}
 	
 	return;

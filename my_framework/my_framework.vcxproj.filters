@@ -399,6 +399,30 @@
     <ClInclude Include="Src\Framework\Component\SoundManager\SoundManager.h">
       <Filter>ソース ファイル\Src\Framework\Component\SoundManager</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\InfoPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionMenu.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\UserSetting.h">
+      <Filter>ソース ファイル\Src\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Behaviour\Operation.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Debug.h">
+      <Filter>ソース ファイル\Src\Public\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\EventPanel.h">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\FileCreate.h">
+      <Filter>ソース ファイル\Src\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="my_framework.cpp">
@@ -637,6 +661,30 @@
     </ClCompile>
     <ClCompile Include="Src\Framework\Component\SoundManager\SoundManager.cpp">
       <Filter>ソース ファイル\Src\Framework\Component\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\InfoPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionMenuPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\UserSetting.cpp">
+      <Filter>ソース ファイル\Src\Public</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Behaviour\Operation.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Behaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Debug.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\EventPanel.cpp">
+      <Filter>ソース ファイル\Src\Public\Scene\Strategy\Behaviour\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\FileCreate.cpp">
+      <Filter>ソース ファイル\Src\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

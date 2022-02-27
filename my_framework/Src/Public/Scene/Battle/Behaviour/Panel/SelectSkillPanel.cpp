@@ -5,6 +5,9 @@
 using namespace nsBattle;
 
 void  SelectSkillPanel::Awake() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
+
 	pSelecter = gameObject->CreateImageObject(0, 0, 150.0f, 30.0f,
 		CreateSprite(new Sprite(L"Data/Image/Common/square.spr")), transform);
 	pSelecter->GetComponent<ImageRenderer>()->SetRenderPriority(5);
@@ -57,6 +60,7 @@ void  SelectSkillPanel::Awake() {
 
 void  SelectSkillPanel::Update() {
 	if (Input::Trg(InputConfig::input["cancel"])) {
+		pSoundManager->Play("cancel"); //キャンセル音
 		gameObject->FindGameObject("fieldManager")->
 			GetComponent<FieldManager>()->SetTurnState(eTurnState::Back);
 		Close();
@@ -66,6 +70,7 @@ void  SelectSkillPanel::Update() {
 
 	if (Input::Trg(InputConfig::input["decide"])) {
 		if (DecideSkill()) {
+			pSoundManager->Play("decide"); //決定音
 			gameObject->FindGameObject("fieldManager")->
 				GetComponent<FieldManager>()->SetTurnState(eTurnState::Skill);
 			Close();
@@ -114,6 +119,12 @@ void SelectSkillPanel::Open(noDel_ptr<PlayerChara> chara) {
 	pSelectChara = NULL;
 	selectNum = 0;
 	for (int i = 0; i < MAX_OWN_SKILL; i++) pSkillTexts[i]->Print(L"");
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
 
 	//Open処理
 	Panel::Open();

@@ -3,6 +3,8 @@
 namespace nsTitle {
 	class TitleManager : public Behaviour {
 	private:
+		int stopFunc = false;
+
 		int cursor = 0;
 		std::unique_ptr<Sound> pOpening_sd;
 
@@ -15,6 +17,14 @@ namespace nsTitle {
 		void Awake() override;
 
 		void Update() override;
+
+		//ƒJ[ƒ\ƒ‹ˆÚ“®
+		void MoveCursor();
+
+		//‘JˆÚ
+		void TransScene();
+
+		void LoadSetting();
 	};
 }
 

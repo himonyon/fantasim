@@ -25,8 +25,8 @@ public:
 	Sprite(const WCHAR* sprite_file, const WCHAR* sprite_name = L"default");
 	~Sprite(void);
 
+	//Getter,Setter
 	stVertex2D GetVertexState(int index) { return vtx[index]; }
-
 	ID3D11Resource* GetTexture() { return pTexture; }
 	ID3D11ShaderResourceView* GetTextureView() { return pTextureView; }
 	ID3D11Buffer* GetPVertexBuffer() { return pVertexBuffer; }

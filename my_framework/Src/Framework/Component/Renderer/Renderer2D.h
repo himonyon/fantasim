@@ -1,8 +1,8 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	SpriteRendererクラス
-		スプライトを描画するクラス
+	Rendererクラス
+		2D描画の基底クラス
 
 -------------------------------------------------------------*/
 
@@ -18,7 +18,6 @@ public:
 	//画像の幅
 	float sizeX = 0;
 	float sizeY = 0;
-
 
 protected:
 	static ID3D11Buffer* pConstantBuffer; //Image用
@@ -37,23 +36,30 @@ protected:
 	int renderPriority = 0;
 
 public:
+	//初期化
 	static bool Initialize();
+	//破棄
 	static void Destroy();
 
 	Renderer2D();
 	virtual ~Renderer2D(void);
 
+	//サイズ設定
 	void SetSize(float width, float height);
 
-	void SetRenderPriority(int value); //描画順位の設定
-	virtual int GetRenderPriority(); //描画順位の所得
+	//描画順位の設定
+	void SetRenderPriority(int value); 
+	virtual int GetRenderPriority();
 
+	//色の設定
 	virtual void SetColor(float r, float g, float b, float a) {};
 	virtual void SetColor(stColor4 color) {};
 	virtual stColor4 GetColor() { return { 0,0,0,0 }; };
 
+	//UVの初期化
 	virtual void SetDefaultUV() {};
 
 private:
-	virtual void Render(void) {}; //描画
+	//描画
+	virtual void Render(void) {};
 };

@@ -21,3 +21,14 @@ void Turn::SetTurnState(eTurnState state, int backNum) {
 	if (turnState != NULL) umTurnStates[state]->bef = turnState; //以前の状態をセット
 	turnState = umTurnStates[state]; //現在の状態をセット
 }
+
+//ゲーム終了
+void Turn::EndGame(bool isClear) {
+	if (pInfoPanel == NULL) pInfoPanel = gameObject->FindGameObject("infoPanel")->GetComponent<InfoPanel>();
+	if (isClear) {
+		pInfoPanel->Open(L"ゲームクリア！！");
+	}
+	else {
+		pInfoPanel->Open(L"ゲームオーバー、、、");
+	}
+}

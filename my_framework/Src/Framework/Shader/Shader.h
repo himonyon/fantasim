@@ -14,7 +14,6 @@ public:
 		VS_3D,
 		VS_MAX,
 	};
-
 	enum class ePixelShader
 	{
 		PS_2D,
@@ -22,6 +21,7 @@ public:
 		PS_MAX,
 	};
 
+	//シェーダー基底クラス
 	class ShaderBase {
 	protected:
 		const BYTE* code;
@@ -33,7 +33,7 @@ public:
 		const BYTE* getCode() { return code; }
 		long getLength() { return length; }
 	};
-
+	//頂点シェーダークラス
 	class VertexShader : public ShaderBase{
 	private:
 		ID3D11VertexShader* vs;
@@ -43,7 +43,7 @@ public:
 
 		ID3D11VertexShader* getShader() { return vs; }
 	};
-
+	//ピクセルシェーダークラス
 	class PixelShader : public ShaderBase {
 	private:
 		ID3D11PixelShader* ps;
@@ -59,9 +59,12 @@ private:
 	static PixelShader** pixelShader;
 
 public:
+	//初期化
 	static bool InitShader();
+	//破棄
 	static void DestroyShader();
 
+	//Getter,Setter
 	static VertexShader* getVertexShader(eVertexShader vs) { return vertexShader[(unsigned int)vs]; }
 	static PixelShader* getPixelShader(ePixelShader ps) { return pixelShader[(unsigned int)ps]; }
 };

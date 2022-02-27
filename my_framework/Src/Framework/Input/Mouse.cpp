@@ -32,6 +32,7 @@ bool Mouse::On(int mouse) {
 }
 bool Mouse::Trg(int mouse) {
 	mouse -= 500;
+	if (mouse < 0) mouse = 0;
 	return (mouse & trg);
 }
 bool Mouse::Rel(int mouse) {

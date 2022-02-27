@@ -6,24 +6,53 @@ using namespace nsStrategy;
 void PlayerTurn::Awake() {
 	CreatePanels();
 
-	//サウンドマネージャー
-	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
-
 	//ターン状態を初期化
 	SetTurnState(eTurnState::Field, 0);
 }
 
 void PlayerTurn::Start() {
+	//サウンドマネージャー
+	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
+	//操作説明
+	pOperation = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+
+	//パネル
 	pInvestPanel = gameObject->FindGameObject("investPanel")->GetComponent<InvestPanel>();
 	pSelectNeighborPanel = gameObject->FindGameObject("selectNeighborPanel")->GetComponent<SelectNeighborPanel>();
 	pBattlePanel = gameObject->FindGameObject("battlePanel")->GetComponent<BattlePanel>();
 	pCharaSelectPanel = gameObject->FindGameObject("charaSelectPanel")->GetComponent<CharaSelectPanel>();
 	pCharaEnhancePanel = gameObject->FindGameObject("charaEnhancePanel")->GetComponent<CharaEnhancePanel>();
+	pOptionMenu = gameObject->FindGameObject("optionMenu")->GetComponent<OptionMenu>();
+	pOptionPanel = gameObject->FindGameObject("optionPanel")->GetComponent<OptionPanel>();
+	pInfoPanel = gameObject->FindGameObject("infoPanel")->GetComponent<InfoPanel>();
+	pEventPanel = gameObject->FindGameObject("eventPanel")->GetComponent<EventPanel>();
+}
+
+void PlayerTurn::TurnInit() {
+	pEventPanel->Open();
+	SetTurnState(eTurnState::Field, 0);
 }
 
 void PlayerTurn::Update() {
+	if(Keyboard::Trg(DIK_F10)) Debug::open = true;
+
+	//音楽のループ
+	if (pSoundManager->IsPlaying("bgm") == false) pSoundManager->Play("bgm");
+	//情報パネルが開いていれば処理しない
+	if (pInfoPanel->IsOpen()) return;
+	//イベントパネルが開いていれば処理しない
+	if (pEventPanel->IsOpen()) return;
+
 	//フィールド状態
 	if (turnState->state == eTurnState::Field) FieldFunc();
+	//セーブ
+	if (turnState->state == eTurnState::Save) SaveFunc();
+	//ターンエンド
+	if (turnState->state == eTurnState::TurnEnd) TurnEndFunc();
+	//オプションメニュー
+	if (turnState->state == eTurnState::OptionMenu) OptionMenuFunc();
+	//フィールド状態
+	if (turnState->state == eTurnState::Option) OptionFunc();
 	//コマンド選択状態
 	if (turnState->state == eTurnState::Command) CommandFunc();
 	//経済力向上コマンド
@@ -48,21 +77,26 @@ void PlayerTurn::Update() {
 	if (turnState->state == eTurnState::Battle) BattleFunc();
 	//キャラ強化コマンド
 	if (turnState->state == eTurnState::CharaEnhance) CharaEnhance();
+
+	if (turnState->state != checkState) {
+		checkState = turnState->state;
+	}
 }
 
 void PlayerTurn::CreatePanels() {
-	//パネル画像
-	noDel_ptr<Sprite> panel_sp = CreateSprite(new Sprite(L"Data/Image/Common/menu_button.spr", L"panel"));
-
-	//街の情報と行動一覧画面作成
-	noDel_ptr<GameObject> _pCityPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 700, 480, panel_sp, nullptr, "cityPanel");
-	_pCityPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
-	_pCityPanel->AddComponent<CityPanel>();
-	pCityPanel = _pCityPanel->GetComponent<CityPanel>();
+	pCityPanel = gameObject->FindGameObject("cityPanel")->GetComponent<CityPanel>();
 }
 
-//各処理（パネルを開く）
+//各処理
 void PlayerTurn::FieldFunc() {
+	//一度だけ処理
+	if (turnState->state != checkState) {
+		//操作説明テキスト変更
+		pOperation->ResetOperation();
+		pOperation->AddOperation("decide", L"街選択");
+		pOperation->AddOperation("option", L"メニュー");
+	}
+
 	//コマンドメニューへ移行
 	if (Input::Trg(InputConfig::input["decide"])) {
 		if (pFocusCity != NULL) {
@@ -73,15 +107,32 @@ void PlayerTurn::FieldFunc() {
 		}
 	}
 
-	//ターン切り替え
+	//オプションメニューへ移行
 	if (Input::Trg(InputConfig::input["option"])) {
-		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->ChangeTurn();
+		pSoundManager->Play("decide"); //決定音
+		//状態遷移
+		SetTurnState(eTurnState::OptionMenu, 0);
 	}
-
+}
+void PlayerTurn::SaveFunc() {
 	//セーブ
-	if (Keyboard::Trg(DIK_O)) {
-		gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SaveGame();
-	}
+	gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SaveGame();
+	//状態遷移
+	SetTurnState(eTurnState::Field, 0);
+	//情報パネル表示
+	pInfoPanel->Open(L"セーブしました");
+}
+void PlayerTurn::TurnEndFunc() {
+	//ターン終了
+	gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->ChangeTurn();
+}
+void PlayerTurn::OptionMenuFunc() {
+	//オプションメニューを開く
+	if (pOptionMenu->IsOpen() == false) pOptionMenu->Open();
+}
+void PlayerTurn::OptionFunc() {
+	//オプションパネルを開く
+	if (pOptionPanel->IsOpen() == false) pOptionPanel->Open();
 }
 void PlayerTurn::CommandFunc() {
 	//街のパネルを開く

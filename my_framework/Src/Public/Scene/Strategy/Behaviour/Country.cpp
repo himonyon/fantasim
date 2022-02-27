@@ -28,6 +28,8 @@ void Country::ChangeBelongCountry(noDel_ptr<Country> country) {
 	//変更前の国
 	noDel_ptr<Country> _befCountry = pCountry;
 
+	if (country == pCountry) return; //同国なら処理しない
+
 	//国の街配列から抜く
 	if (pCountry != NULL) pCountry->PullOutCity(noDel_ptr<City>(this));
 
@@ -35,6 +37,9 @@ void Country::ChangeBelongCountry(noDel_ptr<Country> country) {
 	pCountry = country;
 	pCountry->SetOwnCity(noDel_ptr<City>(this));
 	gameObject->GetComponent<ImageRenderer>()->SetColor(pCountry->gameObject->GetComponent<ImageRenderer>()->GetColor());
+
+	//プレイヤーの国ならゲーム終了
+	if (isPlayer) gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->EndGame(false);
 
 	if (isFalled) return;
 
@@ -54,6 +59,9 @@ void Country::ChangeBelongCountry(noDel_ptr<Country> country) {
 		gameObject->GetComponent<ImageRenderer>()->SetUpRenderer2D(CITY_SIZE, CITY_SIZE, pCity_sp);
 		if(pCityFrame != NULL) pCityFrame->SetObjEnable(true);
 	}
+
+	//ゲームクリアチェック
+	gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->CheckClear();
 }
 
 void Country::SetIsPlayer() {

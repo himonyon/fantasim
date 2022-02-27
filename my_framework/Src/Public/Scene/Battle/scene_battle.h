@@ -23,12 +23,6 @@
 #include "Behaviour/FieldManager.h"
 
 namespace nsBattle {
-	enum class eRenderOrder {
-		Backgorund,
-		Object = 10,
-		UI = 20,
-	};
-
 	class SceneBattle : public Scene {
 	private:
 		//ƒJƒƒ‰

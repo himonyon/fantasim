@@ -17,11 +17,13 @@ enum class eTextAlignment {
 
 class Font : public Renderer2D {
 private:
+	//Direct2D初期化用変数
 	static ID2D1Factory* pD2d1Factory;
 	static IDWriteFactory* pDWFactory;
 	static ID2D1RenderTarget* pRenderTarget;
 
 public:
+	//ワールドオブジェクトの手前に表示するか奥に表示するか
 	bool isFrontFont = true;
 
 private:
@@ -41,24 +43,34 @@ private:
 	WCHAR* ptr;
 	UINT32 count;
 
+	//呼ばれた文字列の登録
 	void registerString(const WCHAR* string, UINT32 count);
+	//フォントの作成
 	bool Create(const WCHAR* fontname, float size);
-
+	//テキストの表示基準位置の適用
 	void AdjustTextAlignment();
 
 public:
+	//初期化
 	static bool Initialize(void* hdl);
+	//破棄
 	static void Destroy(void);
 
 	Font();
 	~Font();
 
+	//コンポーネント処理
 	void Execute() override;
 
+	//文字の出力
 	void RenderString();
+
+	//出力文字の登録
 	void Print(const WCHAR* string, ...);
 	void Print(float left, float top, const WCHAR* string, ...);
 	void Print(float left, float top, eTextAlignment alignment, const WCHAR* string, ...);
+
+	//描画
 	void Render();
 
 	//Setter,Getter
@@ -71,6 +83,4 @@ public:
 	void SetTextAlignment(eTextAlignment alignment);
 	int GetRenderPriority() override;
 	float GetTextLength();
-
-	static ID2D1RenderTarget* GetD2DRenderTarget();
 };

@@ -1,13 +1,13 @@
 #include "../../../framework.h"
 #include "../../../environment.h"
 
-//一度すべての配列の情報を初期化
 SpriteAnimation::SpriteAnimation(const WCHAR* animation_file, bool loop) {
 	isLoop = loop;
 
 	FILE* fp = NULL;
 	WCHAR _key[256] = { 0 };
 
+	//ファイルを開く
 	_wfopen_s(&fp, animation_file, L"rt");
 	if (fp == NULL) {
 		return;
@@ -64,7 +64,6 @@ SpriteAnimation::SpriteAnimation(const WCHAR* animation_file, bool loop) {
 	}
 }
 
-//初期化
 void SpriteAnimation::SetUpDefaultValue(KeyFrame* key) {
 	key->pSprite = NULL;
 	key->frame = 0;
@@ -75,7 +74,6 @@ void SpriteAnimation::SetUpDefaultValue(KeyFrame* key) {
 	key->rot = 0;
 }
 
-//対象セット
 void SpriteAnimation::SetAnimRenderer(noDel_ptr<Renderer2D> renderer) {
 	if (renderer == NULL) return;
 	pAnimRenderer = renderer;
@@ -156,7 +154,6 @@ void SpriteAnimation::AnimOn() {
 
 	frameCount++; //フレームカウント更新
 }
-
 void SpriteAnimation::AnimOff() {
 	isEnd = true;
 	frameCount = 0;

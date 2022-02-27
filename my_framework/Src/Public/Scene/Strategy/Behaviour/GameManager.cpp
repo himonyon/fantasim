@@ -14,18 +14,27 @@ GameManager::~GameManager() {
 void GameManager::Awake() {
 	//セーブデータがあるか確認--------------------
 	bool _saveData = false;
-	char _key[256] = { 0 };
-	FILE* fp = NULL;
-	fopen_s(&fp, "Data/SaveData/base.txt", "r");
-	if (fp != NULL) {
-		fscanf_s(fp, "%s", _key, (int)sizeof(_key));
-		if (strcmp(_key, "save") == 0) _saveData = true;
-	}
-	if (fp != NULL) fclose(fp);
+	if (LoadBaceDate()) _saveData = true;
 	//-------------------------------------------
-
+	
+	//年月テキスト
+	noDel_ptr<GameObject> _pDateObj = gameObject->CreateObject(50, 50, 0);
+	_pDateObj->AddComponent<Font>();
+	pDateText = _pDateObj->GetComponent<Font>();
+	pDateText->SetRenderPriority((int)eRenderOrder::UI - 1);
+	pDateText->SetFontSize(20.0f);
+	pDateText->Print(L"%d年 %d月", year, month);
+	
 	//サウンド
 	CreateSound();
+
+	//操作説明画面
+	noDel_ptr<GameObject> _pOprObj = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT - 25, SCREEN_WIDTH, 50.0f,
+		CreateSprite(new Sprite(L"Data/Image/Common/cover.spr")), nullptr, "operation");
+	_pOprObj->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_pOprObj->GetComponent<ImageRenderer>()->SetColor(1,1,1,0.5f);
+	_pOprObj->AddComponent<Operation>();
+	pOperation = _pOprObj->GetComponent<Operation>();
 
 	//カーソル
 	pCursor = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 32.0f, 32.0f,
@@ -42,10 +51,20 @@ void GameManager::Awake() {
 	CreateCharactor(_saveData);
 	CreateTerritory();
 
+	//デバッグ設定---------------------------------------------------------------------------
+	Debug::SetStrategy(pCities);
+	Debug::scene = (int) eSceneTable::Strategy;
+
 	//セーブマネージャー作成
 	saveManager = std::make_unique<Save>();
 	for (int i = 0; i < TERRITORY_NUM; i++) saveManager->pCities[i] = pCities[i];
 	saveManager->umCharactors = umCharactors;
+
+	//パネル作成ー－－－－－－－－－－－－－－－－－－－－－－－－
+	noDel_ptr<Sprite> panel_sp = CreateSprite(new Sprite(L"Data/Image/Common/menu_button.spr", L"panel"));
+	noDel_ptr<GameObject> _pCityPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 700, 480, panel_sp, nullptr, "cityPanel");
+	_pCityPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pCityPanel->AddComponent<CityPanel>();
 
 	//ターン作成
 	noDel_ptr<GameObject> _pPlayerTemp = gameObject->CreateObject(0, 0, 0);
@@ -54,9 +73,6 @@ void GameManager::Awake() {
 	noDel_ptr<GameObject> _pEnemyTemp = gameObject->CreateObject(0, 0, 0);
 	_pEnemyTemp->AddComponent<EnemyTurn>();
 	pEnemyTurn = _pEnemyTemp->GetComponent<EnemyTurn>();
-	//非処理
-	pPlayerTurn->SetEnable(false);
-	pEnemyTurn->SetEnable(false);
 	
 	//セーブ引き継ぎ----------------------------------------
 	//戦闘結果データロード
@@ -68,9 +84,12 @@ void GameManager::Awake() {
 	}
 	//-------------------------------------------------------
 
+	//非処理
+	pPlayerTurn->SetEnable(false);
+	pEnemyTurn->SetEnable(false);
+
 	//セーブデータがなければ、操作する国を選択するパネル表示
 	pSoundManager->Play("bgm");
-	noDel_ptr<Sprite> panel_sp = CreateSprite(new Sprite(L"Data/Image/Common/menu_button.spr", L"panel"));
 	noDel_ptr<GameObject> _pSelCountryPanel = gameObject->CreateImageObject(400, 200, 300, 280, panel_sp);
 	_pSelCountryPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
 	_pSelCountryPanel->AddComponent<SelectCountryPanel>();
@@ -80,18 +99,29 @@ void GameManager::Awake() {
 void GameManager::GameStart() {
 	if(pSoundManager->IsPlaying("bgm") == false) pSoundManager->Play("bgm");
 	pCursor->SetObjEnable(true);
+	pEnemyTurn->SetEnable(false);
 	pPlayerTurn->SetEnable(true);
 	//バトルデータ引継ぎ時
+	if (battleData.data == false) return;
 	//敵のシミュレートの途中の場合、再開する
-	if (battleData.isPlayerTurn == false) {
+	if ( battleData.isPlayerTurn == false) {
 		pPlayerTurn->SetEnable(false);
 		pEnemyTurn->SetEnable(true);
 		pEnemyTurn->TurnInit(battleData.pE_City->GetID());
 	}
+
+	//バトルデータ削除
+	battleData.data = false;
 }
 
 //ターン切り替え
 void GameManager::ChangeTurn() {
+	//行動回数リセット
+	for (auto& city : pCities) {
+		city->ResetActCount();
+	}
+
+	//ターン切り替え
 	if (pPlayerTurn->IsEnable()) {
 		pPlayerTurn->SetEnable(false);
 		pEnemyTurn->SetEnable(true);
@@ -100,6 +130,27 @@ void GameManager::ChangeTurn() {
 	else {
 		pEnemyTurn->SetEnable(false);
 		pPlayerTurn->SetEnable(true);
+		pPlayerTurn->TurnInit();
+	}
+}
+
+//ゲーム終了
+void GameManager::EndGame(bool isClear) {
+	if (pPlayerTurn->IsEnable()) pPlayerTurn->EndGame(isClear);
+	else pEnemyTurn->EndGame(isClear);
+
+	isGameEnd = true;
+}
+bool GameManager::IsEndGame() {
+	return isGameEnd;
+}
+void GameManager::CheckClear() {
+	bool _clear = false;
+	for (int i = 0; i < COUNTRY_NUM; i++) {
+		if (pCities[i]->pCountry == NULL) return;
+		if (pCities[i]->pCountry->vOwnCities.size() >= TERRITORY_NUM - 1) {
+			EndGame(true);
+		}
 	}
 }
 
@@ -131,7 +182,7 @@ noDel_ptr<City> GameManager::GetCity(int id) {
 
 //セーブ
 void GameManager::SaveGame() {
-	saveManager->SaveBaceData();
+	saveManager->SaveBaceData(year, month);
 	saveManager->SaveCharactor();
 	saveManager->SaveCities();
 }
@@ -140,7 +191,17 @@ void GameManager::SaveBattleInfo(int p_id, int e_id) {
 	bool _playerTurn = false;
 	if (pPlayerTurn->IsEnable()) _playerTurn = true;
 	else _playerTurn = false;
-	saveManager->SaveBattleCities(p_id, e_id, _playerTurn);
+	saveManager->SaveBattleCities(year, month, p_id, e_id, _playerTurn);
+}
+
+//年月更新
+void GameManager::UpdateMonth() {
+	month++; 
+	if (month > 12) {
+		year++;
+		month = 1;
+	}
+	pDateText->Print(L"%d年 %d月", year, month);
 }
 
 //初期化
@@ -279,6 +340,9 @@ void GameManager::CreateTerritory() {
 			else if (strcmp(_key, "support") == 0) {
 				fscanf_s(fp, "%d", &city->support);
 			}
+			else if (strcmp(_key, "action") == 0) {
+				fscanf_s(fp, "%d", &city->actionCount);
+			}
 			else if (strcmp(_key, "business") == 0) {
 				fscanf_s(fp, "%f", &city->bussiness);
 			}
@@ -325,12 +389,16 @@ void GameManager::CreateSound() {
 	pSoundManager = _soundObj->GetComponent<SoundManager>();
 	//BGM
 	pSoundManager->AddSound("bgm", L"Data/Sound/Strategy/bgm.wav");
+	pSoundManager->SetVolume("bgm", 0.5f);
 	//決定音
 	pSoundManager->AddSound("decide", L"Data/Sound/Common/circle.wav");
 	//cancel音
 	pSoundManager->AddSound("cancel", L"Data/Sound/Common/cross.wav");
 	//強化音
 	pSoundManager->AddSound("enhance", L"Data/Sound/Strategy/statusUp.wav");
+
+	///ユーザー情報反映
+	if (UserSetting::sound == false) pSoundManager->SetVolume(0);
 }
 
 //ロード
@@ -372,6 +440,7 @@ bool GameManager::LoadBattleInfo() {
 		}
 	}
 	fclose(fp);
+
 	//IDから街を探す
 	for (int i = 0; i < TERRITORY_NUM; i++) {
 		if (pCities[i]->GetID() == _p_id) _pPlayerCity = pCities[i];
@@ -379,6 +448,7 @@ bool GameManager::LoadBattleInfo() {
 
 		if (_pPlayerCity != NULL && _pEnemyCity != NULL) break;
 	}
+
 	//結果を反映
 	if (_isWin) _pEnemyCity->ChangeBelongCountry(_pPlayerCity->pCountry);
 	else _pPlayerCity->ChangeBelongCountry(_pEnemyCity->pCountry);
@@ -393,5 +463,27 @@ bool GameManager::LoadBattleInfo() {
 	//ファイル削除
 	remove("Data/SaveData/result.txt");
 
+	return true;
+}
+
+bool GameManager::LoadBaceDate() {
+	bool _flag = false; //セーブデータがあるか
+	char _key[256] = { 0 };
+	FILE* fp = NULL;
+	fopen_s(&fp, "Data/SaveData/base.txt", "r");
+	if (fp == NULL) return false;
+	while (!feof(fp)) {
+		fscanf_s(fp, "%s", _key, (int)sizeof(_key));
+		if (strcmp(_key, "save") == 0) _flag = true;
+		if (strcmp(_key, "date") == 0) {
+			fscanf_s(fp, "%d %d", &year, &month);
+		}
+	}
+	if (fp != NULL) fclose(fp);
+	if (_flag == false) {
+		year = 1000;
+		month = 1;
+		return false;
+	}
 	return true;
 }

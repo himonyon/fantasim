@@ -39,6 +39,24 @@ void CityPanel::Awake() {
 		600, 500, spr->pRenderSprite,nullptr, "charaEnhancePanel");
 	_pCharaEnhancePanel->AddComponent<CharaEnhancePanel>();
 	_pCharaEnhancePanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	//情報表示パネル
+	noDel_ptr<GameObject> _pInfoPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
+		300, 150, spr->pRenderSprite, nullptr, "infoPanel");
+	_pInfoPanel->AddComponent<InfoPanel>();
+	_pInfoPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	//オプションメニュー
+	noDel_ptr<GameObject> _pOptionMenu = gameObject->CreateObject(0,0,0, nullptr, "optionMenu");
+	_pOptionMenu->AddComponent<OptionMenu>();
+	//オプションパネル
+	noDel_ptr<GameObject> _pOptionPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
+		300, 150, spr->pRenderSprite, nullptr, "optionPanel");
+	_pOptionPanel->AddComponent<OptionPanel>();
+	_pOptionPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	//イベントパネル
+	noDel_ptr<GameObject> _pEventPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
+		700, 600, spr->pRenderSprite, nullptr, "eventPanel");
+	_pEventPanel->AddComponent<EventPanel>();
+	_pEventPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
 
 	//街情報テキスト
 	pCityInfoPanel = gameObject->CreateObject(0, 0, 0, transform);
@@ -116,10 +134,6 @@ void CityPanel::Awake() {
 }
 
 void CityPanel::Update() {
-	if (Input::GetDX(InputConfig::input["moveX"])) {
-		transform->position.x += Input::GetDX(InputConfig::input["moveX"]);
-	}
-
 	if (Input::Trg(InputConfig::input["cancel"])) {
 		pSoundManager->Play("cancel"); //cancel音
 		Close();
@@ -144,6 +158,13 @@ void CityPanel::Open(noDel_ptr<City> city) {
 	pMapCursor->SetObjEnable(false);
 
 	pCity = city;
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
+	_opr->AddOperation("changeTab", L"表示切替");
 
 	noDel_ptr<ImageRenderer> spr = gameObject->GetComponent<ImageRenderer>();
 
@@ -227,8 +248,14 @@ void CityPanel::SetCommandPanel(float top, float left) {
 
 	pBorderText[0]->transform->SetPosition(left + _leftPadding, top + _topPadding);
 	pCommandTitleText->transform->SetPosition(left + _leftPadding, top + _topPadding + 30.0f);
+	pCommandTitleText->GetComponent<Font>()->Print(L"・コマンド  残行動回数: %d/%d", 
+		pCity->GetActEnableNum() - pCity->GetActCount(), pCity->GetActEnableNum());
 
 	_topPadding = 60.0f;
+
+	//行動可能かどうか
+	bool _actEnable = true;
+	if (pCity->GetActCount() >= pCity->GetActEnableNum()) _actEnable = false;
 
 	//コマンド
 	const int _rowNum = 4;
@@ -237,6 +264,8 @@ void CityPanel::SetCommandPanel(float top, float left) {
 		const float _x = left + (_leftPadding + (i % _rowNum) * 150.0f);
 		const float _y = top + (_topPadding + ((i / _rowNum) + 1) * _textPadding);
 		pCommand[i]->transform->SetPosition(_x, _y);
+		if (_actEnable) pCommand[i]->GetComponent<Font>()->SetColor(0xffffffff);
+		else pCommand[i]->GetComponent<Font>()->SetColor(0x22ffffff);
 	}
 
 	//セレクトカーソル
@@ -282,8 +311,10 @@ void CityPanel::MoveSelectCursor() {
 
 //ターン状態遷移
 void CityPanel::TransOtherState() {
+	if (pCity->GetActCount() >= pCity->GetActEnableNum()) return;
 	if (Input::Trg(InputConfig::input["decide"])) {
 		pSoundManager->Play("decide"); //決定音
+		//遷移
 		noDel_ptr<GameManager> _pGM = gameObject->FindGameObject("gameManager")->GetComponent<GameManager>();
 		if (cursorNum == (int)eCommand::MoneyMove) _pGM->SetTurnState(eTurnState::SelMoneyMoveToCity);
 		else if (cursorNum == (int)eCommand::CharaMove) _pGM->SetTurnState(eTurnState::SelCharaMoveToCity);

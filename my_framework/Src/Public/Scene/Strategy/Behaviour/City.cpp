@@ -56,3 +56,10 @@ std::wstring City::GetBussinessText() {
 	else if (bussiness > 1.2f) return L"—Ç";
 	return L"•";
 }
+
+//s“®‚Å‚«‚é‰ñ”
+int City::GetActEnableNum() {
+	int _num = 1;
+	_num += political / 5000;
+	return _num;
+}

@@ -6,12 +6,10 @@
 #define SCREEN_WIDTH_CENTER (SCREEN_WIDTH / 2) //スクリーン幅
 #define SCREEN_HEIGHT_CENTER (SCREEN_HEIGHT / 2) //スクリーン高さ
 
-
 #define DIRECTINPUT_VERSION 0x0800
 
 //マクロ
 #define SAFE_RELEASE(x) if(x){x->Release(); x=NULL;}
-
 
 //共通ヘッダー
 #include <d3d11.h>
@@ -46,6 +44,7 @@
 using namespace DirectX;
 
 //Utility
+#include "Src/Framework/FileCreate.h"
 #include "Src/Framework/GraphicsUtility.h"
 #include "Src//Utility/noDel_ptr.h"
 #include "Src//Utility/UtilFunc.h"
@@ -85,7 +84,6 @@ using namespace DirectX;
 #include "Src/Framework/Component/Font/Font.h"
 #include "Src/Framework/Component/SoundManager/SoundManager.h"
 
-
 //スプライトアニメーション
 #include "Src/Framework/Animation/SpriteAnimation.h"
 
@@ -108,24 +106,17 @@ using namespace DirectX;
 #include "Src//Framework//Input/Joystick.h"
 #include "Src//Framework//Input/Input.h"
 
-
-
 //シェーダー設定
 #include "Src/Framework/Shader/Shader.h"
 
 //Direct3D
 #include "Src/Framework/Direct3D/Direct3D.h"
 
-
 //デバッグ
 #include "Src/Framework/DebugFont.h"
-
 
 //全体処理クラス
 #include "Src/Framework/Main.h"
 
-
 //シーン関係のヘッダ
 #include "Src/Public/Scene/SceneManager.h"
-
-

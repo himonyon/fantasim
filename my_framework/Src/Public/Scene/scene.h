@@ -6,6 +6,8 @@
 -------------------------------------------------------------*/
 #pragma once
 #include "../InputConfig.h"
+#include "../UserSetting.h"
+#include "Behaviour/Operation.h"
 #include "Object/Panel.h"
 #include "Object/Attribute.h"
 #include "Object/Skill/Skill.h"

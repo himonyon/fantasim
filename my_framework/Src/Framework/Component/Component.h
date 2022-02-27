@@ -45,10 +45,13 @@ public:
 	virtual void Execute(int state) {};
 	virtual void Execute(noDel_ptr<Collider2D> col) {};
 
+	//使用可能か
 	bool IsEnable() { return isEnable; }
 
+	//オブジェクトマネージャーへ登録済みか
 	bool IsRegisted() { return isRegisted; }
-	void SetRegistState(bool flag);
 
+	//Getter,Setter
+	void SetRegistState(bool flag);
 	void SetEnable(bool flag);
 };

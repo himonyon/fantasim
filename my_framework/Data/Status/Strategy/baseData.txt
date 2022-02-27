@@ -13,7 +13,7 @@ new id 11 name ベント country 1 position 340 600 neighbor 1 14 15  money 5800 ec
 new id 12 name レニス country 2 position 470 180 neighbor 2 6 9 13 money 6700 economic 4708 political 3067 disaster 97 support 48 business 0.9 chara 14 28 27  
 new id 13 name ワット country 3 position 520 290 neighbor 10 12 3  money 2800 economic 3100 political 2818 disaster 80 support 50 business 1 chara 1 47   
 new id 14 name ニラニチア country 3 position 490 470 neighbor 10 11 16  money 3700 economic 2000 political 3821 disaster 69 support 50 business 1 chara 2 30 45  
-new id 15 name テゴス country 1 position 450 650 neighbor 13 17   money 4900 economic 3444 political 5384 disaster 46 support 44 business 0.9 chara 22 29 56  
+new id 15 name テゴス country 1 position 450 650 neighbor 17   money 4900 economic 3444 political 5384 disaster 46 support 44 business 0.9 chara 22 29 56  
 new id 16 name メロン country 3 position 640 490 neighbor 3 14 17 19 money 5600 economic 2100 political 5181 disaster 45 support 65 business 1 chara 10 50   
 new id 17 name キニニム country 3 position 630 619 neighbor 15 16 20  money 2200 economic 2500 political 4202 disaster 87 support 95 business 1 chara 3 38   
 new id 18 name ウォール country 2 position 770 200 neighbor 2 21 22  money 4900 economic 2521 political 4204 disaster 50 support 48 business 1 chara 11 41 58  

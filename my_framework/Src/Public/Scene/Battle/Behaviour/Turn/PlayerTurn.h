@@ -1,8 +1,8 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	BattleCharaクラス(Behaviourの派生)
-	バトルで使用するキャラの挙動
+	PalyerTurnクラス(Turnの派生)
+	プレイヤーターンの管理
 
 -------------------------------------------------------------*/
 namespace nsBattle {
@@ -17,8 +17,13 @@ namespace nsBattle {
 
 		//検索オブジェクト----------------------
 		noDel_ptr<GameObject> pStatusPanel;
+		//サウンドマネージャー
+		noDel_ptr<SoundManager> pSoundManager;
 		//カーソル
 		noDel_ptr<Cursor> pCursor;
+
+		//状態変更したか確認用
+		eTurnState checkState = eTurnState::None;
 
 	private:
 		void Awake() override;

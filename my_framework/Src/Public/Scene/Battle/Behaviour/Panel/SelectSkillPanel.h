@@ -8,6 +8,9 @@
 namespace nsBattle {
 	class SelectSkillPanel : public Panel {
 	private:
+		//サウンドマネージャー
+		noDel_ptr<SoundManager> pSoundManager;
+
 		//選択されたキャラクタ
 		noDel_ptr<PlayerChara> pSelectChara;
 

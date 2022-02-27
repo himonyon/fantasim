@@ -6,6 +6,8 @@
 -------------------------------------------------------------*/
 #pragma once
 
+//マウスの入力ナンバー
+//キーボードの数字と被らないため大きめに設定
 #define MOUSE_L (501)
 #define MOUSE_R (504)
 #define MOUSE_WHEEEl (502)
@@ -13,7 +15,6 @@
 
 class Mouse {
 public:
-	//マウス(L(1) R(4) R(2))
 	static bool On(int mouse);
 	static bool Trg(int mouse);
 	static bool Rel(int mouse);

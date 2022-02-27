@@ -12,6 +12,10 @@ namespace nsStrategy {
 		None,
 		Back,
 		Field,
+		Save,
+		TurnEnd,
+		OptionMenu,
+		Option,
 		Command,
 		InvEconomic,
 		InvPolitical,
@@ -39,6 +43,8 @@ namespace nsStrategy {
 	//ターンクラス
 	class Turn : public Behaviour{
 	protected:
+		//パネル
+		noDel_ptr<InfoPanel> pInfoPanel;
 		//対象とする街
 		noDel_ptr<City> pTargetCity;
 		//当たり判定のある街
@@ -57,5 +63,8 @@ namespace nsStrategy {
 
 		//ターゲットにする街のセット
 		void SetTargetCity(noDel_ptr<City> city) { pTargetCity = city; }
+
+		//ゲーム終了
+		void EndGame(bool isClear);
 	};
 }

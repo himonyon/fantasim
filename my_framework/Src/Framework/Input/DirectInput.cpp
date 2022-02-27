@@ -94,6 +94,7 @@ void DirectInput::DestroyInput() {
 }
 
 BOOL CALLBACK DirectInput::EnumObjectsCallback(const DIDEVICEOBJECTINSTANCE* pdidoi, VOID* pContext) {
+	//コントローラーの有効検知
 	if (pdidoi->dwType & DIDFT_AXIS) {
 		DIPROPRANGE diprg;
 		diprg.diph.dwSize = sizeof(DIPROPRANGE);

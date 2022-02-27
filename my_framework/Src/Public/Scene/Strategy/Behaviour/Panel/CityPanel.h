@@ -10,6 +10,10 @@
 #include "BattlePanel.h"
 #include "CharaSelectPanel.h"
 #include "CharaEnhancePanel.h"
+#include "OptionPanel.h"
+#include "OptionMenu.h"
+#include "InfoPanel.h"
+#include "EventPanel.h"
 
 namespace nsStrategy {
 

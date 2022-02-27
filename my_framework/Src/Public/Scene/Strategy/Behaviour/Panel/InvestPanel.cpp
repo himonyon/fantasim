@@ -75,6 +75,7 @@ void InvestPanel::Update() {
 	if (Input::Trg(InputConfig::input["decide"])) {
 		if (isResult) {
 			pSoundManager->Play("decide"); //決定音
+			pCity->IncActCount(); //行動した回数を増加させる
 			Close();
 			gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Command);
 		}
@@ -88,10 +89,15 @@ void InvestPanel::Update() {
 	}
 }
 
-
 void InvestPanel::Open(noDel_ptr<City> city, int cmd) {
 	pCity = city;
 	isResult = false;
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
 
 	investMoney = minInvestMoney;
 
@@ -119,6 +125,12 @@ void InvestPanel::Open(noDel_ptr<City> city, noDel_ptr<City> city2) {
 	pCity = city;
 	pCity2 = city2;
 	isResult = false;
+
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
 
 	investMoney = minInvestMoney;
 

@@ -18,6 +18,7 @@
 #include "Behaviour/Turn/EnemyTurn.h"
 #include "Save.h"
 #include "Behaviour/GameManager.h"
+#include "../Debug.h"
 
 namespace nsStrategy {
 	class SceneStrategy : public Scene {

@@ -1,8 +1,8 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	MeshRendererクラス
-		メッシュを描画するクラス
+	MeshRendererコンポーネント
+		メッシュを描画する
 
 -------------------------------------------------------------*/
 
@@ -24,7 +24,9 @@ private:
 	static ID3D11SamplerState* pSampleLinear;//テクスチャーのサンプラー
 
 public:
+	//初期化
 	static bool Initialize();
+	//破棄
 	static void Destroy();
 
 	MeshRenderer();
@@ -37,8 +39,10 @@ public:
 	void Execute() override;
 
 private:
+	//描画
 	void Render(void);
 
+	//座標、回転、スケールの行列計算
 	XMMATRIX GetPosMatrix();
 	XMMATRIX GetRotMatrix();
 	XMMATRIX GetScaleMatrix();

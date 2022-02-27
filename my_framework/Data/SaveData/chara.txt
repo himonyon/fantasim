@@ -1,0 +1,60 @@
+id 0 name ゴブオ sp_name Gobuo attr 無 level 1 power 75 hp 75 mp 20 def 5 evd 8 move 1 skill 0 2000 10 
+id 1 name ジャック sp_name Jack attr 無 level 1 power 106 hp 42 mp 42 def 12 evd 9 move 3 skill 0 10 13 
+id 2 name カカト sp_name Kakato attr 無 level 1 power 110 hp 40 mp 48 def 8 evd 15 move 4 skill 1 37 12 
+id 3 name マデス sp_name Madesu attr 無 level 1 power 120 hp 62 mp 28 def 2 evd 8 move 2 skill 0 10 13 18 
+id 4 name ミサトサン sp_name Misatosan attr 無 level 1 power 60 hp 50 mp 20 def 7 evd 8 move 2 skill 0 1003 2002 2005 
+id 5 name モブ sp_name Mobu attr 無 level 1 power 75 hp 30 mp 30 def 12 evd 8 move 1 skill 0 10 
+id 6 name ポンガール sp_name PonGirl attr 無 level 1 power 78 hp 58 mp 24 def 5 evd 12 move 3 skill 0 1000 2001 2003 
+id 7 name リッキー sp_name Rikki attr 無 level 1 power 88 hp 68 mp 26 def 8 evd 10 move 2 skill 0 11 
+id 8 name サンチョ sp_name Sancyo attr 無 level 1 power 100 hp 70 mp 30 def 5 evd 5 move 1 skill 0 2000 10 13 
+id 9 name ユキ sp_name Yuki attr 無 level 1 power 92 hp 45 mp 50 def 8 evd 10 move 2 skill 1 1003 2002 37 
+id 10 name カグツキ sp_name Kagutuki attr 火 level 1 power 115 hp 65 mp 68 def 8 evd 10 move 4 skill 1 2 1001 38 
+id 11 name ミリ sp_name Miri attr 火 level 1 power 108 hp 85 mp 38 def 10 evd 3 move 1 skill 0 2000 10 14 
+id 12 name リグマ sp_name Riguma attr 火 level 1 power 133 hp 63 mp 30 def 5 evd 7 move 2 skill 0 2 14 13 
+id 13 name ロウ sp_name Rou attr 火 level 1 power 70 hp 42 mp 50 def 7 evd 13 move 3 skill 1 2000 18 
+id 14 name シドス sp_name Shidosu attr 火 level 1 power 99 hp 59 mp 35 def 3 evd 8 move 2 skill 0 2 10 14 
+id 15 name テル sp_name Teru attr 火 level 1 power 97 hp 48 mp 48 def 6 evd 11 move 2 skill 0 11 16 
+id 16 name ウルフィン sp_name Urufin attr 火 level 1 power 79 hp 62 mp 45 def 7 evd 15 move 3 skill 0 11 16 
+id 17 name バンガ sp_name Banga attr 火 level 1 power 88 hp 70 mp 30 def 4 evd 6 move 2 skill 0 2004 13 16 
+id 18 name ジューゾー sp_name Juzo attr 火 level 1 power 110 hp 73 mp 43 def 7 evd 13 move 4 skill 1 15 18 
+id 19 name ジャストコーズ sp_name Jastcose attr 火 level 1 power 140 hp 120 mp 80 def 14 evd 10 move 2 skill 0 17 18 
+id 20 name チートラ sp_name Chitora attr 水 level 1 power 105 hp 49 mp 36 def 7 evd 20 move 5 skill 0 23 19 24 
+id 21 name フーガ龍 sp_name Hugaryu attr 水 level 1 power 90 hp 92 mp 48 def 10 evd 12 move 2 skill 0 23 24 
+id 22 name キリア sp_name Kiria attr 水 level 1 power 88 hp 52 mp 50 def 3 evd 10 move 3 skill 1 1001 2005 21 
+id 23 name マリリア sp_name Mariria attr 水 level 1 power 92 hp 68 mp 42 def 5 evd 10 move 3 skill 1 1003 20 21 
+id 24 name マゾリア sp_name Mazoria attr 水 level 1 power 112 hp 60 mp 20 def 6 evd 10 move 2 skill 1 20 21 
+id 25 name ミスト sp_name Mist attr 水 level 1 power 100 hp 52 mp 60 def 6 evd 13 move 4 skill 1 1001 1004 21 
+id 26 name ロック sp_name Rock attr 水 level 1 power 125 hp 58 mp 30 def 8 evd 8 move 8 skill 0 3 10 22 
+id 27 name ロタ sp_name Rota attr 水 level 1 power 96 hp 74 mp 48 def 7 evd 10 move 3 skill 0 3 10 22 
+id 28 name シーサーペント sp_name Shisapent attr 水 level 1 power 103 hp 88 mp 30 def 8 evd 7 move 2 skill 0 3 2004 22 
+id 29 name スノウ sp_name Sunou attr 水 level 1 power 70 hp 38 mp 80 def 7 evd 10 move 3 skill 1 1003 2004 21 
+id 30 name ザサン sp_name Zasan attr 木 level 1 power 76 hp 68 mp 30 def 5 evd 8 move 2 skill 0 4 10 28 
+id 31 name ボンボン sp_name Bonbon attr 木 level 1 power 89 hp 48 mp 40 def 8 evd 10 move 3 skill 1 7 27 
+id 32 name クロサワ sp_name Kurosawa attr 木 level 1 power 100 hp 85 mp 28 def 4 evd 14 move 1 skill 0 9 34 
+id 33 name ミクロン sp_name Mikuron attr 木 level 1 power 103 hp 35 mp 40 def 5 evd 10 move 2 skill 1 37 25 
+id 34 name モス sp_name Mosu attr 木 level 1 power 97 hp 78 mp 40 def 6 evd 2 move 1 skill 1 1000 2004 25 
+id 35 name Mr.シス sp_name Mr.shisu attr 木 level 1 power 129 hp 60 mp 100 def 7 evd 18 move 4 skill 1 7 26 27 
+id 36 name ナトリ sp_name Natori attr 木 level 1 power 70 hp 62 mp 40 def 3 evd 10 move 2 skill 0 7 1000 26 
+id 37 name シガリア sp_name Shigaria attr 木 level 1 power 113 hp 74 mp 35 def 8 evd 10 move 2 skill 0 1002 2001 26 
+id 38 name ヤマモト sp_name Yamamoto attr 木 level 1 power 90 hp 80 mp 32 def 5 evd 10 move 2 skill 0 4 28 
+id 39 name ユラリオ sp_name Yurario attr 木 level 1 power 120 hp 75 mp 48 def 5 evd 10 move 3 skill 1 8 2002 25 
+id 40 name シャロニア sp_name Syaronia attr 光 level 1 power 125 hp 98 mp 78 def 12 evd 8 move 4 skill 0 23 30 
+id 41 name キャットアイ sp_name Catai attr 光 level 1 power 79 hp 59 mp 28 def 4 evd 20 move 5 skill 1 2003 23 29 
+id 42 name エスタス sp_name Esutasu attr 光 level 1 power 105 hp 77 mp 40 def 14 evd 6 move 2 skill 0 2001 30 13 
+id 43 name キング sp_name King attr 光 level 1 power 129 hp 90 mp 50 def 14 evd 10 move 2 skill 0 5 10 31 
+id 44 name マデス sp_name Madesu attr 光 level 1 power 107 hp 80 mp 45 def 9 evd 10 move 2 skill 1 37 29 
+id 45 name メロディア sp_name Merodia attr 光 level 1 power 92 hp 77 mp 79 def 5 evd 13 move 3 skill 1 1001 2005 37 
+id 46 name ピッピ sp_name Pippi attr 光 level 1 power 60 hp 53 mp 40 def 3 evd 12 move 3 skill 0 23 2000 
+id 47 name ピリア sp_name Biria attr 光 level 1 power 93 hp 74 mp 48 def 2 evd 12 move 2 skill 1 1000 37 29 
+id 48 name ライデン sp_name Raiden attr 光 level 1 power 110 hp 70 mp 48 def 3 evd 17 move 4 skill 0 5 31 
+id 49 name サイカ sp_name Saika attr 光 level 1 power 100 hp 62 mp 40 def 3 evd 14 move 2 skill 1 1000 1003 1004 
+id 50 name ZONE01 sp_name Zone01 attr 闇 level 1 power 110 hp 80 mp 58 def 10 evd 7 move 1 skill 0 9 35 
+id 51 name CODE-X sp_name CodeX attr 闇 level 1 power 146 hp 50 mp 120 def 3 evd 18 move 4 skill 1 32 36 
+id 52 name エンドラ sp_name Endora attr 闇 level 1 power 118 hp 110 mp 68 def 11 evd 9 move 2 skill 0 10 35 36 
+id 53 name クリス sp_name Kurisu attr 闇 level 1 power 92 hp 52 mp 42 def 3 evd 16 move 5 skill 0 2002 10 25 
+id 54 name ロンゾ sp_name Ronzo attr 闇 level 1 power 118 hp 68 mp 30 def 15 evd 9 move 2 skill 0 6 10 33 
+id 55 name ミイラ sp_name Miira attr 闇 level 1 power 78 hp 35 mp 20 def 5 evd 10 move 2 skill 0 9 23 
+id 56 name ミザリア sp_name Mizaria attr 闇 level 1 power 89 hp 47 mp 38 def 4 evd 10 move 3 skill 0 6 10 31 
+id 57 name ウマズラ sp_name Umazura attr 闇 level 1 power 79 hp 42 mp 18 def 6 evd 1 move 1 skill 0 11 2000 
+id 58 name ワトソン sp_name Watoson attr 闇 level 1 power 95 hp 56 mp 40 def 5 evd 10 move 2 skill 1 9 1001 2001 
+id 59 name ゾン sp_name Zon attr 闇 level 1 power 104 hp 72 mp 38 def 6 evd 10 move 2 skill 1 9 2000 36 36 

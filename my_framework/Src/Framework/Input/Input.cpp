@@ -1,7 +1,7 @@
 #include "../../../framework.h"
 #include "../../../environment.h"
 
-Input::eDeviceType Input::currentDevice = Input::eDeviceType::Both;
+eDeviceType Input::currentDevice = eDeviceType::Both;
 std::function<bool(std::vector<int>*& inputs)> Input::funcTrg = Input::BothDevTrg;
 std::function<bool(std::vector<int>*& inputs)> Input::funcOn = Input::BothDevOn;
 std::function<bool(std::vector<int>*& inputs)> Input::funcRel = Input::BothDevRel;
@@ -29,6 +29,7 @@ bool Input::Rel(std::vector<int>*& inputs) {
 bool Input::BothDevTrg(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Keyboard::Trg(i)) return true;
+		if (Mouse::Trg(i)) return true;
 		if (Joystick::Trg(i)) return true;
 		if (Joystick::PovTrg(i)) return true;
 		if (Joystick::StickTrg(i)) return true;
@@ -38,6 +39,7 @@ bool Input::BothDevTrg(std::vector<int>*& inputs) {
 bool Input::BothDevOn(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Keyboard::On(i)) return true;
+		if (Mouse::On(i)) return true;
 		if (Joystick::On(i)) return true;
 		if (Joystick::PovOn(i)) return true;
 		if (Joystick::StickOn(i)) return true;
@@ -47,6 +49,7 @@ bool Input::BothDevOn(std::vector<int>*& inputs) {
 bool Input::BothDevRel(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Keyboard::Rel(i)) return true;
+		if (Mouse::Rel(i)) return true;
 		if (Joystick::Rel(i)) return true;
 		if (Joystick::PovRel(i)) return true;
 		if (Joystick::StickRel(i)) return true;
@@ -57,18 +60,21 @@ bool Input::BothDevRel(std::vector<int>*& inputs) {
 bool Input::KeyboardDevTrg(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Keyboard::Trg(i)) return true;
+		if (Mouse::Trg(i)) return true;
 	}
 	return false;
 }
 bool Input::KeyboardDevOn(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Keyboard::On(i)) return true;
+		if (Mouse::On(i)) return true;
 	}
 	return false;
 }
 bool Input::KeyboardDevRel(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Keyboard::Rel(i)) return true;
+		if (Mouse::Rel(i)) return true;
 	}
 	return false;
 }
@@ -77,6 +83,7 @@ bool Input::JoystickDevTrg(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Joystick::Trg(i)) return true;
 		if (Joystick::PovTrg(i)) return true;
+		if (Joystick::StickTrg(i)) return true;
 	}
 	return false;
 }
@@ -84,6 +91,7 @@ bool Input::JoystickDevOn(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Joystick::On(i)) return true;
 		if (Joystick::PovOn(i)) return true;
+		if (Joystick::StickOn(i)) return true;
 	}
 	return false;
 }
@@ -91,6 +99,7 @@ bool Input::JoystickDevRel(std::vector<int>*& inputs) {
 	for (auto& i : *inputs) {
 		if (Joystick::Rel(i)) return true;
 		if (Joystick::PovRel(i)) return true;
+		if (Joystick::StickRel(i)) return true;
 	}
 	return false;
 }

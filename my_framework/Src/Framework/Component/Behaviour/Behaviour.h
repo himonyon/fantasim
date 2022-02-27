@@ -1,11 +1,12 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	Behaviourクラス
+	Behaviourコンポーネント
 		オブジェクトの振る舞いを扱うクラス
 
 -------------------------------------------------------------*/
 
+//Behaviourの実行タイプ
 enum class eBehaviourState {
 	Awake,
 	Update,
@@ -13,8 +14,10 @@ enum class eBehaviourState {
 
 class Behaviour : public Component {
 private:
+	//スタート関数のフラグ
 	bool startCalled = false;
 
+	//コライダー
 	noDel_ptr<Collider2D> c2d = 0;
 
 public:

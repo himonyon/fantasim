@@ -73,8 +73,6 @@ namespace nsStrategy {
 		void Open(noDel_ptr<City> city);
 
 	private:
-		//テキスト作成
-		void CreateText(noDel_ptr<Font>& target, float posX, float posY);
 
 		//ステータステキストセット
 		void SetStatusText(noDel_ptr<Charactor> chara);

@@ -162,6 +162,7 @@
     <ClInclude Include="Src\Framework\Component\Transform\Transform.h" />
     <ClInclude Include="Src\Framework\DebugFont.h" />
     <ClInclude Include="Src\Framework\Direct3D\Direct3D.h" />
+    <ClInclude Include="Src\Framework\FileCreate.h" />
     <ClInclude Include="Src\Framework\GraphicsUtility.h" />
     <ClInclude Include="Src\Framework\Input\DirectInput.h" />
     <ClInclude Include="Src\Framework\Input\Input.h" />
@@ -198,6 +199,8 @@
     <ClInclude Include="Src\Public\Scene\Battle\Object\Astar.h" />
     <ClInclude Include="Src\Public\Scene\Battle\Object\Square.h" />
     <ClInclude Include="Src\Public\Scene\Battle\scene_battle.h" />
+    <ClInclude Include="Src\Public\Scene\Behaviour\Operation.h" />
+    <ClInclude Include="Src\Public\Scene\Debug.h" />
     <ClInclude Include="Src\Public\Scene\Object\Attribute.h" />
     <ClInclude Include="Src\Public\Scene\Object\Charactor.h" />
     <ClInclude Include="Src\Public\Scene\Object\Panel.h" />
@@ -215,7 +218,11 @@
     <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaEnhancePanel.h" />
     <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaSelectPanel.h" />
     <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\CityPanel.h" />
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\EventPanel.h" />
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\InfoPanel.h" />
     <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\InvestPanel.h" />
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionMenu.h" />
+    <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionPanel.h" />
     <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectCountryPanel.h" />
     <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectNeighborPanel.h" />
     <ClInclude Include="Src\Public\Scene\Strategy\Behaviour\Turn\EnemyTurn.h" />
@@ -225,6 +232,7 @@
     <ClInclude Include="Src\Public\Scene\Strategy\scene_strategy.h" />
     <ClInclude Include="Src\Public\Scene\Title\Behaviour\TitleManager.h" />
     <ClInclude Include="Src\Public\Scene\Title\scene_title.h" />
+    <ClInclude Include="Src\Public\UserSetting.h" />
     <ClInclude Include="Src\Utility\noDel_ptr.h" />
     <ClInclude Include="Src\Utility\UtilFunc.h" />
     <ClInclude Include="targetver.h" />
@@ -248,6 +256,7 @@
     <ClCompile Include="Src\Framework\Component\Transform\Transform.cpp" />
     <ClCompile Include="Src\Framework\DebugFont.cpp" />
     <ClCompile Include="Src\Framework\Direct3D\Direct3D.cpp" />
+    <ClCompile Include="Src\Framework\FileCreate.cpp" />
     <ClCompile Include="Src\Framework\Input\DirectInput.cpp" />
     <ClCompile Include="Src\Framework\Input\Input.cpp" />
     <ClCompile Include="Src\Framework\Input\Joystick.cpp" />
@@ -281,6 +290,8 @@
     <ClCompile Include="Src\Public\Scene\Battle\Object\Astar.cpp" />
     <ClCompile Include="Src\Public\Scene\Battle\Object\Square.cpp" />
     <ClCompile Include="Src\Public\Scene\Battle\scene_battle.cpp" />
+    <ClCompile Include="Src\Public\Scene\Behaviour\Operation.cpp" />
+    <ClCompile Include="Src\Public\Scene\Debug.cpp" />
     <ClCompile Include="Src\Public\Scene\Object\Attribute.cpp" />
     <ClCompile Include="Src\Public\Scene\Object\Charactor.cpp" />
     <ClCompile Include="Src\Public\Scene\Object\Panel.cpp" />
@@ -298,7 +309,11 @@
     <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaEnhancePanel.cpp" />
     <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\CharaSelectPanel.cpp" />
     <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\CityPanel.cpp" />
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\EventPanel.cpp" />
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\InfoPanel.cpp" />
     <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\InvestPanel.cpp" />
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionMenuPanel.cpp" />
+    <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\OptionPanel.cpp" />
     <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectCountryPanel.cpp" />
     <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Panel\SelectNeighborPanel.cpp" />
     <ClCompile Include="Src\Public\Scene\Strategy\Behaviour\Turn\EnemyTurn.cpp" />
@@ -308,6 +323,7 @@
     <ClCompile Include="Src\Public\Scene\Strategy\scene_strategy.cpp" />
     <ClCompile Include="Src\Public\Scene\Title\Behaviour\TitleManager.cpp" />
     <ClCompile Include="Src\Public\Scene\Title\scene_title.cpp" />
+    <ClCompile Include="Src\Public\UserSetting.cpp" />
     <ClCompile Include="Src\Utility\UtilFunc.cpp" />
     <ClCompile Include="WICTextureLoader11.cpp" />
   </ItemGroup>

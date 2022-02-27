@@ -76,7 +76,7 @@ void SceneManager::InitializeReserveScene() {
 	if (pReservedScene == NULL) return;
 	if (pReservedScene->isInitialized) return;
 
-	//シーンの初期化
+	//シーンの初期化(別スレッドで行う)
 	std::thread th(&Scene::Initialize, pReservedScene);
 
 	th.detach();

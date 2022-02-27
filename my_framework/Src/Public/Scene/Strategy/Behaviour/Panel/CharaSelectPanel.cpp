@@ -94,6 +94,12 @@ void CharaSelectPanel::Open(noDel_ptr<City> city, noDel_ptr<City> city2) {
 	pCity = city;
 	pCity2 = city2;
 
+	//操作説明テキスト変更
+	noDel_ptr<Operation> _opr = gameObject->FindGameObject("operation")->GetComponent<Operation>();
+	_opr->ResetOperation();
+	_opr->AddOperation("decide", L"選択");
+	_opr->AddOperation("cancel", L"戻る");
+
 	Panel::Open();
 
 	cursorNum = 0;
@@ -158,6 +164,7 @@ void CharaSelectPanel::DecideMoveChara() {
 		}
 	}
 
+	pCity->IncActCount(); //行動した回数を増加させる
 	Close();
 	gameObject->FindGameObject("gameManager")->GetComponent<GameManager>()->SetTurnState(eTurnState::Command);
 }

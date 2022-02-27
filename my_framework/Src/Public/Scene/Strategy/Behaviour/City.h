@@ -31,6 +31,9 @@ namespace nsStrategy {
 		std::vector<noDel_ptr<City>> vNeighbor; 
 
 	public:
+		//行動した回数
+		int actionCount = 0;
+
 		//ステータス
 		noDel_ptr<Country> pCountry = 0;
 		int money = 0;
@@ -58,6 +61,15 @@ namespace nsStrategy {
 
 		//画像のフォーカス
 		void FocusCity(bool trg);
+
+		//行動できる回数
+		int GetActEnableNum();
+		//行動した回数のカウント
+		int GetActCount() { return actionCount; }
+		//行動回数リセット
+		void ResetActCount() { actionCount = 0; }
+		//行動した回数を増やす
+		void IncActCount() { actionCount++; }
 
 		//Setter/getter
 		void SetID(int id) { this->id = id; }

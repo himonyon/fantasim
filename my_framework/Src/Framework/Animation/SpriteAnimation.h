@@ -1,8 +1,8 @@
 /*-----------------------------------------------------------
 
 	スプライトアニメーションクラス
-		キーをフレーム数と共に設定して各キーの時間になると
-		その処理を行うアニメーション機能
+		キーをフレーム数指定して設置し、各キーの時間になると
+		そのキーに設定された処理を行うアニメーション機能
 
 -------------------------------------------------------------*/
 #pragma once
@@ -20,7 +20,7 @@ private:
 	noDel_ptr<Renderer2D> pAnimRenderer = NULL; //表示するスプライトレンダラー
 
 private:
-	//アニメーションのキーフレーム
+	//アニメーションのキーフレームクラス
 	class KeyFrame {
 	public:
 		Sprite* pSprite = 0;
@@ -30,7 +30,7 @@ private:
 		float scaleX = 1, scaleY = 1;
 		float rot = 0;
 
-		//意図的にアニメーションさせる部位か調べるトリガー
+		//キー設定時に変更が施されたプロパティか確認するためのトリガー
 		struct stTrigger {
 		public:
 			bool scale = false;
@@ -45,9 +45,8 @@ private:
 		~KeyFrame();
 	};
 
-	
-
 private:
+	//キーの配列
 	std::vector<KeyFrame*> keyFrames;
 
 	//キー情報のデフォルト値セットアップ
@@ -66,15 +65,20 @@ private:
 	void TransRot(KeyFrame* key, float rate);
 
 public:
+	//コンストラクタ：ファイルデータからキー配列を作成
 	SpriteAnimation(const WCHAR* animation_file, bool loop = false);
+	//デストラクタ
 	~SpriteAnimation();
 
-	void AnimOn(); //アニメーション実行
-	void AnimOff(); //アニメーション終了
+	//アニメーション実行
+	void AnimOn(); 
+	//アニメーション終了
+	void AnimOff();
 
 	//アニメーションさせる対象レンダラー設定
 	void SetAnimRenderer(noDel_ptr<Renderer2D>);
 
+	//Getter,Setter
 	bool IsLoop() { return isLoop; }
 	bool IsEnd() { return isEnd; }
 };

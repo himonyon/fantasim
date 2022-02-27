@@ -22,7 +22,27 @@ void EnemyChara::ChooseSkill(eSkillType type) {
 		if (skill->GetSkillType() != type) continue;
 		//適正距離ならスキルを返す
 		if (skill->GetMaxDis() >= _range && skill->GetMinDis() <= _range) {
-			pSelectSkill = skill;
+			//回復タイプの場合MPとHPを分ける
+			if (type == eSkillType::Heal) {
+				int _maxHp = pTargetChara->pCharaInfo->maxHp;
+				int _maxMp = pTargetChara->pCharaInfo->maxMp;
+				int _hp = pTargetChara->pCharaInfo->hp;
+				int _mp = pTargetChara->pCharaInfo->mp;
+				if (dynamic_noDel_cast<HealSkill>(skill)->GetHealType() == eHealType::HP) {
+					//HPが半分以上あれば回復しない
+					if (_hp >= _maxHp / 2) continue;
+					pSelectSkill = skill;
+				}
+				else {
+					//MPが半分以上あれば回復しない
+					if (_mp >= _maxMp / 2)  continue;
+					pSelectSkill = skill;
+				}
+			}
+			//ほかのスキル種の場合そのままスキル設定
+			else {
+				pSelectSkill = skill;
+			}
 			return;
 		}
 	}

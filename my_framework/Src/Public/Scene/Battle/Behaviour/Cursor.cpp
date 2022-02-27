@@ -11,11 +11,25 @@ void Cursor::Start() {
 
 void Cursor::Update() {
 	/// カーソルの移動
-	if (Input::GetDX(InputConfig::input["moveX"]) != 0) {
-		transform->position.x += Input::GetDX(InputConfig::input["moveX"]) * speed;
+	/// カーソルの移動
+	if (Input::IsMouseMove()) {
+		//ワールド座標取得
+		stVector3 _mousePos = SpriteRenderer::CalcScreenToXZ(Mouse::GetX(), Mouse::GetY(), 
+			SCREEN_WIDTH, SCREEN_HEIGHT);
+		if (Mouse::GetX() < SCREEN_WIDTH && Mouse::GetX() > 0) {
+			transform->position.x = _mousePos.x;
+		}
+		if (Mouse::GetY() < SCREEN_HEIGHT && Mouse::GetY() > 0) {
+			transform->position.y = _mousePos.y;
+		}
 	}
-	if (Input::GetDY(InputConfig::input["moveY"]) != 0) {
-		transform->position.y -= Input::GetDY(InputConfig::input["moveY"]) * speed;
+	else {
+		if (Input::GetDX(InputConfig::input["moveX"]) != 0) {
+			transform->position.x += Input::GetDX(InputConfig::input["moveX"]) * speed;
+		}
+		if (Input::GetDY(InputConfig::input["moveY"]) != 0) {
+			transform->position.y -= Input::GetDY(InputConfig::input["moveY"]) * speed;
+		}
 	}
 
 	if (transform->position.x < SpriteRenderer::WorldWHPos[0]) transform->position.x = SpriteRenderer::WorldWHPos[0];

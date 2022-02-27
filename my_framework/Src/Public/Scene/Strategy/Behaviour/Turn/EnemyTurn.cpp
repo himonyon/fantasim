@@ -9,6 +9,7 @@ void EnemyTurn::Start() {
 
 	//バトルパネル
 	pBtPanel = gameObject->FindGameObject("battlePanel")->GetComponent<BattlePanel>();
+	pInfoPanel = gameObject->FindGameObject("infoPanel")->GetComponent<InfoPanel>();
 
 	//プレイヤーの国
 	for (int i = 0; i < TERRITORY_NUM; i++) {
@@ -22,6 +23,7 @@ void EnemyTurn::Start() {
 
 void EnemyTurn::Update() {
 	if (stopSimulate) return;
+	if (pInfoPanel->IsOpen()) return;
 
 	//タイマー処理
 	timer.Execute();
@@ -127,9 +129,8 @@ void EnemyTurn::Simulate() {
 bool EnemyTurn::Battle() {
 	/*条件----------------------------------------------------
 	-キャラの合計パワー差が-30より上なら戦闘を仕掛ける
-	-確率は50%
+	-確率は40%
 	--------------------------------------------------------*/
-
 	//キャラの合計パワー
 	int _cityPower = 0;
 	for (auto& chara : pTargetCity->vOwnChara) {
@@ -147,10 +148,10 @@ bool EnemyTurn::Battle() {
 		}
 		//パワー差が-３０より大きいか確認
 		if (_cityPower - _neighPower <= -30) continue;
-		//50パーセントの確率
+		//40パーセントの確率
 		srand((unsigned int) time(NULL));
 		int _rand = rand() % 100;
-		if (_rand >= 100) continue;
+		if (_rand >= 40) continue;
 		//戦闘
 		//プレイヤーへの戦闘の場合
 		if (neigh->pCountry == pPlayerCountry) {

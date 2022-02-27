@@ -56,16 +56,16 @@ namespace nsBattle {
 		stSearchInfo searchInfo;
 
 	public:
+		//コンストラクタ
+		Square() {};
 		Square(noDel_ptr<GameObject> square, noDel_ptr<GameObject> selectSquare);
 
+		//Setter,Getter
 		void SetUnMove(bool flag, noDel_ptr<BattleChara> chara) { OnUnMoveObj = flag; pOnBattleChara = chara; }
 		bool GetIsUnMove() { return OnUnMoveObj; }
-
 		void SetMoveCost(int val) { searchInfo.move_cost = val; }
 		int GetMoveCost() const { return searchInfo.move_cost; }
-
 		noDel_ptr<Square> GetNeighbor(eNeighborDir dir) { return pNeighbor[(int)dir]; }
-
 		void SetNeighbor(noDel_ptr<Square> next, bool isHorizon);
 
 		//選択マスにカーソルが乗っているか
@@ -78,7 +78,7 @@ namespace nsBattle {
 		noDel_ptr<BattleChara> GetOnChara() { return pOnBattleChara; }
 	};
 
-	//SquareRowクラス----------------------------------------------------------------------
+	//SquareRowクラス（横一列をまとめたクラス）----------------------------------------------------------------------
 	class SquareRow {
 	public:
 		std::unordered_map<int, Square*> umRow;

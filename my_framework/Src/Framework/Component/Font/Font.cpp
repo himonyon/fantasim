@@ -125,9 +125,13 @@ void Font::Execute() {
 }
 
 void Font::registerString(const WCHAR* string, UINT32 count) {
+#pragma warning(push)
+#pragma warning(disable:4311)
+#pragma warning(disable:4302)
 	if (string == NULL)return;
 	wcsncpy_s((WCHAR*)ptr, FONT_CHARACTER_MAX, string, count);
 	this->count = count;
+#pragma warning(pop)
 }
 
 void Font::RenderString() {
@@ -329,8 +333,4 @@ int Font::GetRenderPriority() {
 	int _value = renderPriority;
 	_value += isFrontFont ? 100000 : -100000;
 	return _value;
-}
-
-ID2D1RenderTarget* Font::GetD2DRenderTarget() {
-	return pRenderTarget;
 }

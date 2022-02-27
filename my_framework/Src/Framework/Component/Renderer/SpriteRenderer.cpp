@@ -3,6 +3,9 @@
 
 float SpriteRenderer::WorldWHPos[4] = { 0,0,0,0 };
 
+XMMATRIX SpriteRenderer::View = {};
+XMMATRIX SpriteRenderer::Proj = {};
+
 SpriteRenderer::SpriteRenderer()
 {
 	for (int i = 0; i < 6; i++) {
@@ -101,14 +104,14 @@ void SpriteRenderer::Render() {
 	// プロジェクショントランスフォーム（射影変換）
 	mProj = XMMatrixPerspectiveFovLH(XM_PI / 4, (FLOAT)WINDOW_WIDTH / (FLOAT)WINDOW_HEIGHT, 0.1f, 110.0f);
 
+	View = mView;
+	Proj = mProj;
 
-	XMVECTOR screenHT;
-	XMVECTOR screenRB;
-	CalcScreenToXZ(screenHT, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, mView, mProj);
-	CalcScreenToXZ(screenRB, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT, mView, mProj);
-	WorldWHPos[0] = screenHT.m128_f32[0]; WorldWHPos[1] = screenRB.m128_f32[0];
-	WorldWHPos[2] = screenHT.m128_f32[1]; WorldWHPos[3] = screenRB.m128_f32[1];
-
+	//画面端の計算
+	stVector3 _screenLT = CalcScreenToXZ(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	stVector3 _screenRB = CalcScreenToXZ(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
+  	WorldWHPos[0] = _screenLT.x; WorldWHPos[1] = _screenRB.x;
+	WorldWHPos[2] = _screenLT.y; WorldWHPos[3] = _screenRB.y;
 
 	//使用するシェーダーの登録	
 	Direct3D::getDeviceContext()->VSSetShader(Shader::getVertexShader(Shader::eVertexShader::VS_3D)->getShader(), NULL, 0);
@@ -163,7 +166,7 @@ void SpriteRenderer::Render() {
 	{
 		ConstantBuffer1 cb;
 		cb.ambient = { 1,1,1,1 };//アンビエントををシェーダーに渡す
-		cb.diffuse = { color[0],color[1],color[2],color[3] };//ディフューズカラーをシェーダーに渡す
+		cb.diffuse = { color.r,color.g,color.b,color.a };//ディフューズカラーをシェーダーに渡す
 		cb.specular = { 1,1,1,1 };//スペキュラーをシェーダーに渡す
 		memcpy_s(pData2.pData, pData2.RowPitch, (void*)&cb, sizeof(ConstantBuffer1));
 		Direct3D::getDeviceContext()->Unmap(pConstantBuffer1, 0);
@@ -183,13 +186,13 @@ void SpriteRenderer::Render() {
 
 
 void SpriteRenderer::SetColor(float r, float g, float b, float a) {
-	color[0] = r; color[1] = g; color[2] = b; color[3] = a;
+	color.r = r; color.g = g; color.b = b; color.a = a;
 }
 void SpriteRenderer::SetColor(stColor4 color) {
-	this->color[0] = color.r; this->color[1] = color.g; this->color[2] = color.b; this->color[3] = color.a;
+	this->color.r = color.r; this->color.g = color.g; this->color.b= color.b; this->color.a = color.a;
 }
 stColor4 SpriteRenderer::GetColor() {
-	return { color[0], color[1], color[2], color[3] };
+	return { color.r, color.g, color.b, color.a };
 }
 void SpriteRenderer::SetDefaultUV() {
 	if (pRenderSprite == NULL) return; //スプライトがない場合return
@@ -250,11 +253,8 @@ XMVECTOR SpriteRenderer::CalcScreenToWorld(
 	int Sy,
 	float fZ,
 	int Screen_w,
-	int Screen_h,
-	XMMATRIX& View,
-	XMMATRIX& Prj) {
+	int Screen_h) {
 
-	//実験ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 	float _x = Camera::main != NULL ? Camera::main->transform->position.x : 0;
 	float _y = Camera::main != NULL ? Camera::main->transform->position.y : 0;
 	float _z = Camera::main != NULL ? Camera::main->transform->position.z : 0;
@@ -266,7 +266,7 @@ XMVECTOR SpriteRenderer::CalcScreenToWorld(
 	// 各行列の逆行列を算出
 	XMMATRIX InvView, InvPrj, VP, InvViewport;
 	InvView = XMMatrixInverse(NULL, tView);
-	InvPrj = XMMatrixInverse(NULL, Prj);
+	InvPrj = XMMatrixInverse(NULL, Proj);
 	VP = XMMatrixIdentity();
 	VP.r[0].m128_f32[0] = Screen_w / 2.0f; VP.r[1].m128_f32[1] = -Screen_h / 2.0f;
 	VP.r[3].m128_f32[0] = Screen_w / 2.0f; VP.r[3].m128_f32[1] = Screen_h / 2.0f;
@@ -281,38 +281,43 @@ XMVECTOR SpriteRenderer::CalcScreenToWorld(
 	//ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 }
 
-XMVECTOR SpriteRenderer::CalcScreenToXZ(
-	XMVECTOR& pout,
+stVector3 SpriteRenderer::CalcScreenToXZ(
 	int Sx,
 	int Sy,
 	int Screen_w,
-	int Screen_h,
-	XMMATRIX& View,
-	XMMATRIX& Prj
+	int Screen_h
 ) {
+	XMVECTOR _pout;
+
 	XMVECTOR nearpos;
 	XMVECTOR farpos;
 	XMVECTOR ray;
 	float tem = (float)abs(Camera::main->transform->position.z + 0.2f) / 110.0f;
-	CalcScreenToWorld(nearpos, Sx, Sy, 0.0f, Screen_w, Screen_h, View, Prj);
-	CalcScreenToWorld(farpos, Sx, Sy, 1.0f, Screen_w, Screen_h, View, Prj);
+	CalcScreenToWorld(nearpos, Sx, Sy, 0.0f, Screen_w, Screen_h);
+	CalcScreenToWorld(farpos, Sx, Sy, 1.0f, Screen_w, Screen_h);
 	ray = farpos - nearpos;
 	ray = XMVector3Normalize(ray);
 
-	// 床との交差が起きている場合は交点を
+	// XY平面との交差が起きている場合は交点を
 	// 起きていない場合は遠くの壁との交点を出力
 	if (ray.m128_f32[2] > 0) {
-		// 床交点
+		// XY平面交点
 		XMVECTOR temp = XMVECTOR{ 0,0,1,1 };
 		XMVECTOR Lray = XMVector3Dot(ray, temp);
 		XMVECTOR LP0 = XMVector3Dot((-nearpos), temp);
-		pout = nearpos + (LP0 / Lray) * ray;
-		pout.m128_f32[0] += Camera::main != NULL ? Camera::main->transform->position.x : 0;
-		pout.m128_f32[1] += Camera::main != NULL ? Camera::main->transform->position.y : 0;
+		_pout = nearpos + (LP0 / Lray) * ray;
+		_pout.m128_f32[0] += Camera::main != NULL ? Camera::main->transform->position.x : 0;
+		_pout.m128_f32[1] += Camera::main != NULL ? Camera::main->transform->position.y : 0;
 	}
 	else {
-		pout = farpos;
+		_pout = farpos;
 	}
 
-	return pout;
+	//stVector3に変換
+	stVector3 _newVec;
+	_newVec.x = _pout.m128_f32[0];
+	_newVec.y = _pout.m128_f32[1];
+	_newVec.z = _pout.m128_f32[2];
+
+	return _newVec;
 }

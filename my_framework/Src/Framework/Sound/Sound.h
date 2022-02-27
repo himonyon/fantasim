@@ -28,7 +28,6 @@ public:
 	static bool InitSound();
 	static void DestroySound();
 
-
 	void SetVolume(float volume);
 
 	bool isPlaying();

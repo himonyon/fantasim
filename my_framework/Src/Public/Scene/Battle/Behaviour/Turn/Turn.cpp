@@ -27,7 +27,7 @@ void Turn::MoveCamera() {
 		//§ŒÀ
 		float _padding = 5.0f;
 		float _left = FieldManager::StageLeft - _padding;
-		float _right = FieldManager::FieldManager::StageLeft + (FieldManager::StageSize * (FieldManager::SquareNum_X - 1)) + _padding;
+		float _right = FieldManager::StageLeft + (FieldManager::StageSize * (FieldManager::SquareNum_X - 1)) + _padding;
 		float _top = FieldManager::StageTop + _padding;
 		float _bottom = FieldManager::StageTop - (FieldManager::StageSize * (FieldManager::SquareNum_Y - 1)) - _padding;
 		if (_moveX > 0) {

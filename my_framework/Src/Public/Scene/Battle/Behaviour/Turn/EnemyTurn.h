@@ -1,8 +1,8 @@
 #pragma once
 /*-----------------------------------------------------------
 
-	BattleCharaクラス(Behaviourの派生)
-	バトルで使用するキャラの挙動
+	EnemyTurnクラス(Turn)
+	敵ターンの管理
 
 -------------------------------------------------------------*/
 namespace nsBattle {
@@ -19,6 +19,9 @@ namespace nsBattle {
 
 		//敵の配列の何番目の操作をするか
 		int enemyNum = 0;
+
+		//シミュレート時間計測
+		Timer timer;
 
 	public:
 		void Awake() override;
