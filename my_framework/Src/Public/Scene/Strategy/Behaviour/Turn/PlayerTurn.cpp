@@ -29,6 +29,7 @@ void PlayerTurn::Start() {
 }
 
 void PlayerTurn::TurnInit() {
+	if (pEventPanel == NULL) Start();
 	pEventPanel->Open();
 	SetTurnState(eTurnState::Field, 0);
 }

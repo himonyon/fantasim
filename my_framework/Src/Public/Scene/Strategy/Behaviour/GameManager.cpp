@@ -109,6 +109,11 @@ void GameManager::GameStart() {
 		pEnemyTurn->SetEnable(true);
 		pEnemyTurn->TurnInit(battleData.pE_City->GetID());
 	}
+	//結果をパネルに表示
+	noDel_ptr<InfoPanel> _infoPanel = gameObject->FindGameObject("infoPanel")->GetComponent<InfoPanel>();
+	if (_infoPanel->IsOpen()) return;
+	if (battleData.isWin) _infoPanel->Open(L"街を獲得しました。");
+	else _infoPanel->Open(L"街を奪われました。");
 
 	//バトルデータ削除
 	battleData.data = false;

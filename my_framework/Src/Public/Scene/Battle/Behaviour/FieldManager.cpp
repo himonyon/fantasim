@@ -226,6 +226,8 @@ void FieldManager::InitCharactor() {
 	//プレイヤーキャラを設定
 	int _x = 0;
 	int _y = 0;
+	//配置されたキャラのY座標一覧
+	std::vector<int> _beSetPosY;
 
 	//配置マス
 	noDel_ptr<Square> _pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
@@ -235,6 +237,15 @@ void FieldManager::InitCharactor() {
 		chara->mp = chara->maxMp;
 		
 		//配置マス設定
+
+		//位置かぶり回避
+		while (true) {
+			bool _flag = false;
+			_y = rand() % SquareNum_Y;
+			for (auto& y : _beSetPosY) if (_y == y) _flag = true;
+			if (_flag == false) break;
+		}
+		_beSetPosY.emplace_back(_y);
 		_y = rand() % SquareNum_Y;
 		_pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
 

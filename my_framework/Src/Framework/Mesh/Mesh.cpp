@@ -1,6 +1,6 @@
-#include "../../environment.h"
-#include <DirectXTex.h>
-#pragma comment(lib, "DirectXTex.lib")
+#include "../../../environment.h"
+#include "../../../DirectXTex/DirectXTex.h"
+#pragma comment(lib, "DirectXTex/Bin/Desktop_2019/x64/Debug/DirectXTex.lib")
 
 
 

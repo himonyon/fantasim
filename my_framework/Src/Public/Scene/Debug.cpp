@@ -76,6 +76,7 @@ void Debug::Battle() {
 	DebugFont::Print(50, 130, L"MP © %d ¨", vChara[rowCursor]->mp);
 }
 void Debug::SetBattle(std::vector<noDel_ptr<Charactor>> p, std::vector<noDel_ptr<Charactor>> e) {
+	vChara.clear();
 	for (auto& player : p) {
 		vChara.emplace_back(player);
 	}
