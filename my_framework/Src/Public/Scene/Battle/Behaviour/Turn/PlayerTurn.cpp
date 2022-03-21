@@ -11,7 +11,7 @@ void PlayerTurn::Awake() {
 	//ƒ^[ƒ“Ø‚è‘Ö‚¦‰æ‘œobj
 	noDel_ptr<GameObject> _startAnimObj = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 800, 300,
 		CreateSprite(new Sprite(L"Data/Image/Battle/player_turn.spr")));
-	_startAnimObj->GetComponent<ImageRenderer>()->SetRenderPriority(100);
+	_startAnimObj->SetRenderOrder(100);
 	_startAnimObj->GetComponent<ImageRenderer>()->SetColor(1, 1, 1, 0);
 	_startAnimObj->AddComponent<Animator>();
 	pTurnStartAnim = _startAnimObj->GetComponent<Animator>();

@@ -423,6 +423,21 @@
     <ClInclude Include="Src\Framework\FileCreate.h">
       <Filter>ソース ファイル\Src\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Renderer\Renderer3D.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Renderer\SpriteState.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Component\Renderer\Rendere.h">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Mesh\FbxMesh.h">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Framework\Mesh\ObjMesh.h">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="my_framework.cpp">
@@ -685,6 +700,24 @@
     </ClCompile>
     <ClCompile Include="Src\Framework\FileCreate.cpp">
       <Filter>ソース ファイル\Src\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Renderer\Renderer3D.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Renderer\SpriteState.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Component\Renderer\Rendere.cpp">
+      <Filter>ソース ファイル\Src\Framework\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Mesh\FbxMesh.cpp">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Mesh\MeshManager.cpp">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Framework\Mesh\ObjMesh.cpp">
+      <Filter>ソース ファイル\Src\Framework\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

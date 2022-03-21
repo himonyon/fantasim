@@ -8,14 +8,16 @@
 
 #pragma once
 
-class Physics2D : public Component {
-public:
-	noDel_ptr<Collider2D> col;
+namespace MyFrameWork {
+	class Physics2D : public Component {
+	public:
+		noDel_ptr<Collider2D> col;
 
-public:
-	Physics2D();
-	~Physics2D() {};
+	public:
+		Physics2D();
+		~Physics2D() {};
 
-	//コンポーネント処理
-	void Execute() override {};
-};
+		//コンポーネント処理
+		void Execute() override {};
+	};
+}

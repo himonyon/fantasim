@@ -23,40 +23,43 @@ enum class eSceneTable
 	SceneMax,
 };
 
-class SceneManager {
-private:
-	static Scene* pScene;
-	static Scene* pReservedScene;
+namespace MyFrameWork {
 
-	static eSceneTable currentScene;
-	static eSceneTable reservedScene;
+	class SceneManager {
+	private:
+		static Scene* pScene;
+		static Scene* pReservedScene;
 
-public:
-	SceneManager();
-	~SceneManager();
+		static eSceneTable currentScene;
+		static eSceneTable reservedScene;
 
-	//予約シーンの作成(初期化も実行可能)
-	static void CreateReserveScene(eSceneTable scene, bool initialize);
+	public:
+		SceneManager();
+		~SceneManager();
 
-	//予約シーンの初期化
-	static void InitializeReserveScene();
+		//予約シーンの作成(初期化も実行可能)
+		static void CreateReserveScene(eSceneTable scene, bool initialize);
 
-	//シーンの切り替え予約
-	static void SwitchScene(eSceneTable scene);
-	//シーンの切り替え
-	static void SwitchScene();
+		//予約シーンの初期化
+		static void InitializeReserveScene();
 
-	//シーンの削除
-	static void DeleteScene();
-	static void DeleteMainScene();
-	static void DeleteReserveScene();
+		//シーンの切り替え予約
+		static void SwitchScene(eSceneTable scene);
+		//シーンの切り替え
+		static void SwitchScene();
 
-	//Getter,Setter
-	/// <summary>
-	/// シーンの種類(eSceneTable)と一致する値を持つシーンを返す
-	/// </summary>
-	static Scene* GetScene(int scene);
+		//シーンの削除
+		static void DeleteScene();
+		static void DeleteMainScene();
+		static void DeleteReserveScene();
 
-	//描画対象シーン(pScene)を返す
-	static Scene* GetMainScene() { return pScene; }
-};
+		//Getter,Setter
+		/// <summary>
+		/// シーンの種類(eSceneTable)と一致する値を持つシーンを返す
+		/// </summary>
+		static Scene* GetScene(int scene);
+
+		//描画対象シーン(pScene)を返す
+		static Scene* GetMainScene() { return pScene; }
+	};
+}

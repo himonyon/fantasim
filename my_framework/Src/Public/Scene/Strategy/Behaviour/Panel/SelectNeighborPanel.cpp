@@ -15,14 +15,14 @@ void SelectNeighborPanel::Awake() {
 	_font = pDescText->GetComponent<Font>();
 	_font->Print(L"対象の国・街を選択してください");
 	_font->SetTextAlignment(eTextAlignment::Center);
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pNameText = gameObject->CreateObject(0, 0, 0, transform);
 	pNameText->transform->SetLocalPosition(0, 10.0f);
 	pNameText->AddComponent<Font>();
 	_font = pNameText->GetComponent<Font>();
 	_font->SetTextAlignment(eTextAlignment::Center);
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pArrowText = gameObject->CreateObject(0, 0, 0, transform);
 	pArrowText->transform->SetLocalPosition(0, 10.0f);
@@ -30,7 +30,7 @@ void SelectNeighborPanel::Awake() {
 	_font = pArrowText->GetComponent<Font>();
 	_font->Print(L"←　　　　　　　　　　      →");
 	_font->SetTextAlignment(eTextAlignment::Center);
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	gameObject->SetObjEnable(false);
 }

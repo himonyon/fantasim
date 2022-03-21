@@ -1,6 +1,8 @@
 #include "../../../../framework.h"
 #include "../../../../environment.h"
 
+using namespace MyFrameWork;
+
 ID2D1Factory* Font::pD2d1Factory = 0;
 IDWriteFactory* Font::pDWFactory = 0;
 ID2D1RenderTarget* Font::pRenderTarget = 0;
@@ -79,7 +81,7 @@ void Font::Destroy(void) {
 	SAFE_RELEASE(pD2d1Factory);
 }
 
-Font::Font() {
+Font::Font() : Renderer(eComponentType::UIRenderer) {
 	size = 18.0f;
 
 	rect.left = 0;
@@ -327,10 +329,4 @@ void Font::SetTextAlignment(eTextAlignment textAlignment) {
 		alignment = eTextAlignment::Center;
 		break;
 	}
-}
-
-int Font::GetRenderPriority() {
-	int _value = renderPriority;
-	_value += isFrontFont ? 100000 : -100000;
-	return _value;
 }

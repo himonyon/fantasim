@@ -21,7 +21,7 @@ void GameManager::Awake() {
 	noDel_ptr<GameObject> _pDateObj = gameObject->CreateObject(50, 50, 0);
 	_pDateObj->AddComponent<Font>();
 	pDateText = _pDateObj->GetComponent<Font>();
-	pDateText->SetRenderPriority((int)eRenderOrder::UI - 1);
+	pDateText->gameObject->SetRenderOrder((int)eRenderOrder::UI - 1);
 	pDateText->SetFontSize(20.0f);
 	pDateText->Print(L"%d”N %dŒ", year, month);
 	
@@ -31,7 +31,7 @@ void GameManager::Awake() {
 	//‘€ìà–¾‰æ–Ê
 	noDel_ptr<GameObject> _pOprObj = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT - 25, SCREEN_WIDTH, 50.0f,
 		CreateSprite(new Sprite(L"Data/Image/Common/cover.spr")), nullptr, "operation");
-	_pOprObj->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_pOprObj->SetRenderOrder((int)eRenderOrder::FrontUI);
 	_pOprObj->GetComponent<ImageRenderer>()->SetColor(1,1,1,0.5f);
 	_pOprObj->AddComponent<Operation>();
 	pOperation = _pOprObj->GetComponent<Operation>();
@@ -39,7 +39,7 @@ void GameManager::Awake() {
 	//ƒJ[ƒ\ƒ‹
 	pCursor = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 32.0f, 32.0f,
 		CreateSprite(new Sprite(L"Data/Image/Strategy/cursor.spr")), nullptr, "cursor");
-	pCursor->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::Object + 2);
+	pCursor->SetRenderOrder((int)eRenderOrder::Object + 2);
 	pCursor->AddComponent<Physics2D>();
 	pCursor->AddComponent<Collider2D>();
 	pCursor->GetComponent<Collider2D>()->SetUpCollider2D(false);
@@ -63,7 +63,7 @@ void GameManager::Awake() {
 	//ƒpƒlƒ‹ì¬[||||||||||||||||||||||||
 	noDel_ptr<Sprite> panel_sp = CreateSprite(new Sprite(L"Data/Image/Common/menu_button.spr", L"panel"));
 	noDel_ptr<GameObject> _pCityPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 700, 480, panel_sp, nullptr, "cityPanel");
-	_pCityPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pCityPanel->SetRenderOrder((int)eRenderOrder::UI);
 	_pCityPanel->AddComponent<CityPanel>();
 
 	//ƒ^[ƒ“ì¬
@@ -91,7 +91,7 @@ void GameManager::Awake() {
 	//ƒZ[ƒuƒf[ƒ^‚ª‚È‚¯‚ê‚ÎA‘€ì‚·‚é‘‚ğ‘I‘ğ‚·‚éƒpƒlƒ‹•\¦
 	pSoundManager->Play("bgm");
 	noDel_ptr<GameObject> _pSelCountryPanel = gameObject->CreateImageObject(400, 200, 300, 280, panel_sp);
-	_pSelCountryPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pSelCountryPanel->SetRenderOrder((int)eRenderOrder::UI);
 	_pSelCountryPanel->AddComponent<SelectCountryPanel>();
 	pSelectCountryPanel = _pSelCountryPanel->GetComponent<SelectCountryPanel>();
 }
@@ -227,7 +227,7 @@ void GameManager::CreateTerritory() {
 	//”wŒi‚Ìì¬
 	pBg = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, SCREEN_WIDTH, SCREEN_HEIGHT,
 		CreateSprite(new Sprite(L"Data/Image/Strategy/bg.spr")));
-	pBg->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::Background);
+	pBg->SetRenderOrder((int)eRenderOrder::Background);
 
 	//‘‚ÌF
 	stColor4 _colors[COUNTRY_NUM] = {
@@ -251,7 +251,7 @@ void GameManager::CreateTerritory() {
 		noDel_ptr<GameObject> _pCityObj = gameObject->CreateObject(0, 0, 0, nullptr, _name);
 		_pCityObj->AddComponent<ImageRenderer>();
 		noDel_ptr<ImageRenderer> spr = _pCityObj->GetComponent<ImageRenderer>();
-		spr->SetRenderPriority((int)eRenderOrder::Object);
+		spr->gameObject->SetRenderOrder((int)eRenderOrder::Object);
 		if (i < COUNTRY_NUM) {
 			spr->SetColor(_colors[i]);
 			_pCityObj->AddComponent<Country>();
@@ -379,7 +379,7 @@ void GameManager::CreateTerritory() {
 			float _roadRot = atan2f(_y2 - _y, _x2 - _x);
 			noDel_ptr<GameObject> road = gameObject->CreateImageObject(_roadPosX, _roadPosY, _roadSizeX, 12.0f, pRoad_sp);
 			noDel_ptr<ImageRenderer> spr = road->GetComponent<ImageRenderer>();
-			spr->SetRenderPriority((int)eRenderOrder::BackObject);;
+			spr->gameObject->SetRenderOrder((int)eRenderOrder::BackObject);;
 			spr->SetColor(0.6f, 0.3f, 0.0f, 0.8f);
 			road->transform->rotation.z = _roadRot;
 			vpRoad.emplace_back(road);
@@ -394,13 +394,14 @@ void GameManager::CreateSound() {
 	pSoundManager = _soundObj->GetComponent<SoundManager>();
 	//BGM
 	pSoundManager->AddSound("bgm", L"Data/Sound/Strategy/bgm.wav");
-	pSoundManager->SetVolume("bgm", 0.5f);
 	//Œˆ’è‰¹
 	pSoundManager->AddSound("decide", L"Data/Sound/Common/circle.wav");
 	//cancel‰¹
 	pSoundManager->AddSound("cancel", L"Data/Sound/Common/cross.wav");
 	//‹­‰»‰¹
 	pSoundManager->AddSound("enhance", L"Data/Sound/Strategy/statusUp.wav");
+
+	pSoundManager->SetVolume(0.1f);
 
 	///ƒ†[ƒU[î•ñ”½‰f
 	if (UserSetting::sound == false) pSoundManager->SetVolume(0);

@@ -11,9 +11,9 @@ bool BattleChara::OnHitFunc = false;
 
 void BattleChara::Awake() {
 	//回復オブジェクト
-	noDel_ptr<GameObject> _pHealHP_obj = gameObject->CreateObject(transform->position.x,transform->position.y, 0, 0.9f, 0.9f, 
+	noDel_ptr<GameObject> _pHealHP_obj = gameObject->CreateObject(transform->position.x,transform->position.y, 0, 
 		CreateSprite(new Sprite(L"Data/Image/Battle/healHP.spr")));
-	_pHealHP_obj->GetComponent<SpriteRenderer>()->SetRenderPriority(30);
+	_pHealHP_obj->SetRenderOrder(30);
 	_pHealHP_obj->GetComponent<SpriteRenderer>()->SetColor(1,1,1,0);
 	_pHealHP_obj->AddComponent<Animator>();
 	pHealAnimator = _pHealHP_obj->GetComponent<Animator>();
@@ -88,7 +88,7 @@ bool BattleChara::Move(noDel_ptr<Square> start) {
 	};
 	Camera::main->transform->position.x = transform->position.x;
 	Camera::main->transform->position.y = transform->position.y;
-	//制限
+	//カメラの移動制限
 	float _padding = 1.0f;
 	float _moveX = Camera::main->transform->position.x - transform->position.x;
 	float _moveY = Camera::main->transform->position.y - transform->position.y;
@@ -96,10 +96,10 @@ bool BattleChara::Move(noDel_ptr<Square> start) {
 	float _right = FieldManager::StageLeft + (FieldManager::StageSize * (FieldManager::SquareNum_X - 1)) + _padding;
 	float _top = FieldManager::StageTop + _padding;
 	float _bottom = FieldManager::StageTop - (FieldManager::StageSize * (FieldManager::SquareNum_Y - 1)) - _padding;
-	if (SpriteRenderer::WorldWHPos[1] < _right) Camera::main->transform->position.x += _moveX;
-	if (SpriteRenderer::WorldWHPos[0] > _left) Camera::main->transform->position.x += _moveX;
-	if (SpriteRenderer::WorldWHPos[2] < _top) Camera::main->transform->position.y += _moveY;
-	if (SpriteRenderer::WorldWHPos[3] > _bottom) Camera::main->transform->position.y += _moveY;
+	if (Renderer3D::WorldWHPos[1] < _right) Camera::main->transform->position.x += _moveX;
+	if (Renderer3D::WorldWHPos[0] > _left) Camera::main->transform->position.x += _moveX;
+	if (Renderer3D::WorldWHPos[2] < _top) Camera::main->transform->position.y += _moveY;
+	if (Renderer3D::WorldWHPos[3] > _bottom) Camera::main->transform->position.y += _moveY;
 
 	//移動力よりカウントが大きければ終了
 	if (pCharaInfo->move <= moveCount) {
@@ -172,7 +172,7 @@ void BattleChara::SetActionEnable(bool flag) {
 
 void BattleChara::Death() {
 	gameObject->SetObjEnable(false);
-	pCurSquare->SetUnMove(false, noDel_ptr<BattleChara>(this));
+	pCurSquare->SetUnMove(false, NULL);
 	pCurSquare = NULL;
 }
 

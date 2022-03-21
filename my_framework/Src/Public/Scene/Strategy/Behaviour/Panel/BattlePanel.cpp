@@ -8,21 +8,21 @@ void BattlePanel::Awake() {
 	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
 	//テキスト作成
-	float _localTop = -(gameObject->GetComponent<ImageRenderer>()->sizeY / 2);
+	float _localTop = -(gameObject->GetComponent<ImageRenderer>()->size.y / 2);
 
 	pPlayerCityNameText = gameObject->CreateObject(0, 0, 0, transform);
 	pPlayerCityNameText->AddComponent<Font>();
-	pPlayerCityNameText->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	pPlayerCityNameText->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pEnemyCityNameText = gameObject->CreateObject(0, 0, 0, transform);
 	pEnemyCityNameText->AddComponent<Font>();
-	pEnemyCityNameText->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	pEnemyCityNameText->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pStartText = gameObject->CreateObject(0, 0, 0, transform);
 	pStartText->transform->SetLocalPosition(0, -_localTop - 50.0f);
 	pStartText->AddComponent<Font>();
 	pStartText->GetComponent<Font>()->SetTextAlignment(eTextAlignment::Center);
-	pStartText->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	pStartText->SetRenderOrder((int)eRenderOrder::FrontUI);
 	pStartText->GetComponent<Font>()->Print(L"戦闘開始");
 
 	for (int i = 0; i < OWN_CHARACTOR_NUM; i++) {
@@ -30,14 +30,14 @@ void BattlePanel::Awake() {
 		pEnemyCharaText[i] = gameObject->CreateObject(0, 0, 0, transform);
 		pPlayerCharaText[i]->AddComponent<Font>();
 		pEnemyCharaText[i]->AddComponent<Font>();
-		pPlayerCharaText[i]->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
-		pEnemyCharaText[i]->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+		pPlayerCharaText[i]->SetRenderOrder((int)eRenderOrder::FrontUI);
+		pEnemyCharaText[i]->SetRenderOrder((int)eRenderOrder::FrontUI);
 	}
 
 	//セレクトカーソル
 	pSelectCursor = gameObject->CreateImageObject(0, 0, 100, 30, CreateSprite(
 		new Sprite(L"Data/Image/Common/square.spr")), transform);
-	pSelectCursor->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
+	pSelectCursor->SetRenderOrder((int)eRenderOrder::FrontObject);
 
 	//初期状態で隠しておく
 	gameObject->SetObjEnable(false);
@@ -108,8 +108,8 @@ void BattlePanel::Open(noDel_ptr<City> p_city, noDel_ptr<City> e_city, bool canc
 
 	//テキスト
 	float _textPadding = 30.0f;
-	float _localTop = -(gameObject->GetComponent<ImageRenderer>()->sizeY / 2);
-	float _localLeft = -(gameObject->GetComponent<ImageRenderer>()->sizeX / 2);
+	float _localTop = -(gameObject->GetComponent<ImageRenderer>()->size.y / 2);
+	float _localLeft = -(gameObject->GetComponent<ImageRenderer>()->size.x / 2);
 	//名前
 	pPlayerCityNameText->GetComponent<Font>()->Print(L"%s", pPlayerCity->GetName().c_str());
 	pPlayerCityNameText->transform->SetLocalPosition(_localLeft + 30.0f, _localTop + 30.0f);

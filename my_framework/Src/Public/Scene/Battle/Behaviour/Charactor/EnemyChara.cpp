@@ -91,7 +91,10 @@ bool EnemyChara::StartMove() {
 	return true;
 }
 bool EnemyChara::MoveToTarget() {
+	//移動先がない場合はfalse
 	if (pSearcher.vCloseList.size() == 0) return false;
+
+	//移動先のスタートマスを渡して移動
 	if (!BattleChara::Move(pSearcher.vCloseList.back())) {
 		fMoveFunc = &EnemyChara::StartMove;
 		return false;

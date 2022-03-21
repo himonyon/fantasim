@@ -61,7 +61,7 @@ namespace nsBattle {
 		Square(noDel_ptr<GameObject> square, noDel_ptr<GameObject> selectSquare);
 
 		//Setter,Getter
-		void SetUnMove(bool flag, noDel_ptr<BattleChara> chara) { OnUnMoveObj = flag; pOnBattleChara = chara; }
+		void SetUnMove(bool flag, noDel_ptr<BattleChara> chara);
 		bool GetIsUnMove() { return OnUnMoveObj; }
 		void SetMoveCost(int val) { searchInfo.move_cost = val; }
 		int GetMoveCost() const { return searchInfo.move_cost; }

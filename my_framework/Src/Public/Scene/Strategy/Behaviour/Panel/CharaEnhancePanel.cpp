@@ -8,8 +8,8 @@ void CharaEnhancePanel::Awake() {
 	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
 	noDel_ptr<ImageRenderer> _renderer = gameObject->GetComponent<ImageRenderer>();
-	float _sizeX = _renderer->sizeX;
-	float _sizeY = _renderer->sizeY;
+	float _sizeX = _renderer->size.x;
+	float _sizeY = _renderer->size.y;
 	float _top = transform->position.y - _sizeY / 2;
 	float _left = transform->position.x - _sizeX / 2;
 
@@ -71,7 +71,7 @@ void CharaEnhancePanel::Awake() {
 	noDel_ptr<GameObject> _pCursorObj = gameObject->CreateImageObject(0, 0, 150, 30, CreateSprite(
 		new Sprite(L"Data/Image/Common/square.spr")), transform);
 	pCursor = _pCursorObj->GetComponent<ImageRenderer>();
-	pCursor->SetRenderPriority((int)eRenderOrder::FrontUI - 1);
+	pCursor->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI - 1);
 
 	//キャラ画像
 	_textPosX = _left + _sizeX * 0.2f;
@@ -79,7 +79,7 @@ void CharaEnhancePanel::Awake() {
 	noDel_ptr<GameObject> _pCharaObj = gameObject->CreateImageObject(_textPosX, _textPosY, 150, 150, NULL, transform);
 	_pCharaObj->transform->scale.x *= -1;
 	pCharaImage = _pCharaObj->GetComponent<ImageRenderer>();
-	pCharaImage->SetRenderPriority((int)eRenderOrder::FrontUI - 1);
+	pCharaImage->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI - 1);
 	pCharaImage->SetColor(1, 1, 1, 1);
 
 	//ボーダー
@@ -88,12 +88,12 @@ void CharaEnhancePanel::Awake() {
 	noDel_ptr<GameObject> _pBorderObj = gameObject->CreateImageObject(_textPosX, _textPosY, 300, _sizeY - 150.0f, CreateSprite(
 		new Sprite(L"Data/Image/Common/border.spr")), transform);
 	pBorder = _pBorderObj->GetComponent<ImageRenderer>();
-	pBorder->SetRenderPriority((int)eRenderOrder::FrontUI + 1);
+	pBorder->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI + 1);
 
 	//パネル作成
 	pConfirmPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 250, 150,
 		_renderer->pRenderSprite, transform);
-	pConfirmPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontUI+ 10);
+	pConfirmPanel->SetRenderOrder((int)eRenderOrder::FrontUI+ 10);
 	//確認テキスト
 	noDel_ptr<GameObject> _tempObj = gameObject->CreateObject(0, 0, 0, pConfirmPanel->transform);
 	_tempObj->transform->SetLocalPosition(0, -30.0f);
@@ -101,7 +101,7 @@ void CharaEnhancePanel::Awake() {
 	pConfirmText = _tempObj->GetComponent<Font>();
 	pConfirmText->SetTextAlignment(eTextAlignment::Center);
 	pConfirmText->Print(L"キャラを強化しますか？");
-	pConfirmText->SetRenderPriority((int)eRenderOrder::FrontUI + 11);
+	pConfirmText->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI + 11);
 	//確認テキスト２
 	_tempObj = gameObject->CreateObject(0, 0, 0, pConfirmPanel->transform);
 	_tempObj->transform->SetLocalPosition(0, 10.0f);
@@ -109,7 +109,7 @@ void CharaEnhancePanel::Awake() {
 	pYesNoText = _tempObj->GetComponent<Font>();
 	pYesNoText->SetTextAlignment(eTextAlignment::Center);
 	pYesNoText->Print(L"〇：はい　　×：いいえ");
-	pYesNoText->SetRenderPriority((int)eRenderOrder::FrontUI + 11);
+	pYesNoText->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI + 11);
 
 	pConfirmPanel->SetObjEnable(false);
 
@@ -168,7 +168,7 @@ void CharaEnhancePanel::MoveCursor() {
 	//ステータステキスト更新
 	SetStatusText(pSelectCity->vOwnChara[cursorNum]);
 	//画像更新
-	pCharaImage->SetUpRenderer2D(150, 150, pSelectCity->vOwnChara[cursorNum]->GetSprite());
+	pCharaImage->SetUpImageRenderer(150, 150, pSelectCity->vOwnChara[cursorNum]->GetSprite());
 }
 
 //開く
@@ -217,7 +217,7 @@ void CharaEnhancePanel::Open(noDel_ptr<City> city) {
 
 	//初めに表示するキャラのテキストセット
 	SetStatusText(city->vOwnChara[cursorNum]);
-	pCharaImage->SetUpRenderer2D(150, 150,city->vOwnChara[cursorNum]->GetSprite());
+	pCharaImage->SetUpImageRenderer(150, 150,city->vOwnChara[cursorNum]->GetSprite());
 
 	Panel::Open();
 }

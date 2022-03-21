@@ -9,7 +9,7 @@ void CharaSelectPanel::Awake() {
 
 	noDel_ptr<Font> _font; //コンポーネント取得用
 
-	float _localTop = -(gameObject->GetComponent<ImageRenderer>()->sizeY / 2);
+	float _localTop = -(gameObject->GetComponent<ImageRenderer>()->size.y / 2);
 
 	//説明テキスト
 	pDescText = gameObject->CreateObject(0, 0, 0, transform);
@@ -18,7 +18,7 @@ void CharaSelectPanel::Awake() {
 	_font = pDescText->GetComponent<Font>();
 	_font->SetTextAlignment(eTextAlignment::Center);
 	_font->Print(L"・移動するキャラクター");
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pBorderText = gameObject->CreateObject(0, 0, 0, transform);
 	pBorderText->transform->SetLocalPosition(0, _localTop + 50.0f);
@@ -26,7 +26,7 @@ void CharaSelectPanel::Awake() {
 	_font = pBorderText->GetComponent<Font>();
 	_font->SetTextAlignment(eTextAlignment::Center);
 	_font->Print(L"""--------------------------------");
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	//キャラクターテキスト
 	for (int i = 0; i < OWN_CHARACTOR_NUM; i++) {
@@ -36,7 +36,7 @@ void CharaSelectPanel::Awake() {
 		pCharaText[i]->AddComponent<Font>();
 		_font = pCharaText[i]->GetComponent<Font>();
 		_font->SetTextAlignment(eTextAlignment::Center);
-		_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+		_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 	}
 
 	//決定テキストボタン
@@ -46,12 +46,12 @@ void CharaSelectPanel::Awake() {
 	_font = pDecideText->GetComponent<Font>();
 	_font->SetTextAlignment(eTextAlignment::Center);
 	_font->Print(L"確定");
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	//セレクトカーソル
 	pSelectCursor = gameObject->CreateImageObject(0, 0, 1, 25, CreateSprite(
 		new Sprite(L"Data/Image/Common/square.spr")), transform);
-	pSelectCursor->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
+	pSelectCursor->GetComponent<ImageRenderer>()->gameObject->SetRenderOrder((int)eRenderOrder::FrontObject);
 
 	//初期状態で隠しておく
 	gameObject->SetObjEnable(false);

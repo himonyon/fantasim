@@ -1,6 +1,8 @@
 #include "../../../framework.h"
 #include "../../../environment.h"
 
+using namespace MyFrameWork;
+
 float Joystick::stickEnableRange = 0.1f; //ジョイスティックのブレの値を除外する範囲
 float Joystick::stickFlagRange = 0.7f; //ジョイスティックのボタンとしての判定範囲
 

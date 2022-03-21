@@ -1,6 +1,8 @@
 #include "../../../framework.h"
 #include "../../../environment.h"
 
+using namespace MyFrameWork;
+
 SpriteAnimation::SpriteAnimation(const WCHAR* animation_file, bool loop) {
 	isLoop = loop;
 
@@ -62,6 +64,10 @@ SpriteAnimation::SpriteAnimation(const WCHAR* animation_file, bool loop) {
 			setKey = nullptr;
 		}
 	}
+	if (setKey != NULL) {
+		keyFrames.emplace_back(setKey);
+		setKey = nullptr;
+	}
 }
 
 void SpriteAnimation::SetUpDefaultValue(KeyFrame* key) {
@@ -74,9 +80,10 @@ void SpriteAnimation::SetUpDefaultValue(KeyFrame* key) {
 	key->rot = 0;
 }
 
-void SpriteAnimation::SetAnimRenderer(noDel_ptr<Renderer2D> renderer) {
-	if (renderer == NULL) return;
-	pAnimRenderer = renderer;
+void SpriteAnimation::SetAnimRenderer(noDel_ptr<SpriteState> renderSprite) {
+	if (renderSprite == NULL) return;
+	pAnimRenderer = renderSprite;
+
 	//キー情報の反映
 	//スプライトはNULLの場合なにも変更を加えないため、各キーの情報としては反映させない
 	//Positionも移動量をとっているため次のキーには反映させない

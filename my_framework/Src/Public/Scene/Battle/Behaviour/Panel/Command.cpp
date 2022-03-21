@@ -17,7 +17,7 @@ void CommandPanel::Awake() {
 	//セレクトカーソル
 	pSelecter = gameObject->CreateImageObject(0, 0, 150.0f, 80.0f,
 		CreateSprite(new Sprite(L"Data/Image/Common/square.spr")), transform);
-	pSelecter->GetComponent<ImageRenderer>()->SetRenderPriority(5);
+	pSelecter->SetRenderOrder(5);
 	pSelecter->GetComponent<ImageRenderer>()->SetColor(1, 1, 1, 0.6f);
 
 	//移動
@@ -162,7 +162,7 @@ void CommandPanel::CreateCommand(const WCHAR* text,noDel_ptr<Sprite> bgImage, eC
 	_font->SetTextAlignment(eTextAlignment::Center);
 	_font->SetFontSize(22.0f);
 	_font->Print(text);
-	_font->SetRenderPriority(10);
+	_font->gameObject->SetRenderOrder(10);
 
 	_command->type = type;
 

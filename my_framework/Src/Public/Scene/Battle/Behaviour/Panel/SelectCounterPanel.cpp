@@ -10,11 +10,11 @@ void  SelectCounterPanel::Awake() {
 
 	pSelecter = gameObject->CreateImageObject(0, 0, 150.0f, 30.0f,
 		CreateSprite(new Sprite(L"Data/Image/Common/square.spr")), transform);
-	pSelecter->GetComponent<ImageRenderer>()->SetRenderPriority(5);
+	pSelecter->SetRenderOrder(5);
 	pSelecter->GetComponent<ImageRenderer>()->SetColor(1, 1, 1, 0.6f);
 
-	float _sizeX = gameObject->GetComponent<ImageRenderer>()->sizeX;
-	float _sizeY = gameObject->GetComponent<ImageRenderer>()->sizeY;
+	float _sizeX = gameObject->GetComponent<ImageRenderer>()->size.x;
+	float _sizeY = gameObject->GetComponent<ImageRenderer>()->size.y;
 	float _top = -_sizeY / 2;
 	float _left = -_sizeX / 2;
 	float _x = 0, _y = 0;
@@ -23,7 +23,7 @@ void  SelectCounterPanel::Awake() {
 	pTitleText = gameObject->CreateObject(0, 0, 0, transform);
 	pTitleText->AddComponent<Font>();
 	pTitleText->GetComponent<Font>()->Print(L"反撃スキルを選択");
-	pTitleText->GetComponent<Font>()->SetRenderPriority(10);
+	pTitleText->SetRenderOrder(10);
 	pTitleText->transform->SetLocalPosition(_left + _sizeX * 0.1f, _top + _sizeY * 0.05f);
 
 	//スキル名
@@ -34,7 +34,7 @@ void  SelectCounterPanel::Awake() {
 		noDel_ptr<GameObject> _temp = gameObject->CreateObject(0, 0, 0, transform);
 		_temp->transform->SetLocalPosition(_x, _y);
 		_temp->AddComponent<Font>();
-		_temp->GetComponent<Font>()->SetRenderPriority(10);
+		_temp->SetRenderOrder(10);
 		pSkillTexts[i] = _temp->GetComponent<Font>();
 	}
 	pSkillTexts[MAX_OWN_SKILL]->transform->position.y = _top + _sizeY * 0.4f;
@@ -42,7 +42,7 @@ void  SelectCounterPanel::Awake() {
 	//説明文
 	pBorder = gameObject->CreateObject(0, 0, 0, transform);
 	pBorder->AddComponent<Font>();
-	pBorder->GetComponent<Font>()->SetRenderPriority(10);
+	pBorder->SetRenderOrder(10);
 	pBorder->GetComponent<Font>()->Print(L"----------------------------------------------------");
 	pBorder->transform->SetLocalPosition(_left + _sizeX * 0.02f, _top + _sizeY * 0.5f);
 
@@ -51,7 +51,7 @@ void  SelectCounterPanel::Awake() {
 	for (int i = 0; i < DescNum; i++) {
 		noDel_ptr<GameObject> _temp = gameObject->CreateObject(0, 0, 0, transform);
 		_temp->AddComponent<Font>();
-		_temp->GetComponent<Font>()->SetRenderPriority(10);
+		_temp->SetRenderOrder(10);
 		pDescText[i] = _temp->GetComponent<Font>();
 	}
 
@@ -168,8 +168,8 @@ void SelectCounterPanel::SetDescText(noDel_ptr<Skill> skill) {
 	if (skill->GetSkillType() == eSkillType::Attack) SetAttackDescText(skill);
 }
 void SelectCounterPanel::SetAttackDescText(noDel_ptr<Skill> skill) {
-	float _sizeX = gameObject->GetComponent<ImageRenderer>()->sizeX;
-	float _sizeY = gameObject->GetComponent<ImageRenderer>()->sizeY;
+	float _sizeX = gameObject->GetComponent<ImageRenderer>()->size.x;
+	float _sizeY = gameObject->GetComponent<ImageRenderer>()->size.y;
 	float _top = -_sizeY / 2;
 	float _left = -_sizeX / 2;
 	float _x = 0, _y = 0;

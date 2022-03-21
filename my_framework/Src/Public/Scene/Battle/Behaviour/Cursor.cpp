@@ -14,7 +14,7 @@ void Cursor::Update() {
 	/// カーソルの移動
 	if (Input::IsMouseMove()) {
 		//ワールド座標取得
-		stVector3 _mousePos = SpriteRenderer::CalcScreenToXZ(Mouse::GetX(), Mouse::GetY(), 
+		stVector3 _mousePos = Renderer3D::CalcScreenToXZ(Mouse::GetX(), Mouse::GetY(), 
 			SCREEN_WIDTH, SCREEN_HEIGHT);
 		if (Mouse::GetX() < SCREEN_WIDTH && Mouse::GetX() > 0) {
 			transform->position.x = _mousePos.x;
@@ -32,9 +32,9 @@ void Cursor::Update() {
 		}
 	}
 
-	if (transform->position.x < SpriteRenderer::WorldWHPos[0]) transform->position.x = SpriteRenderer::WorldWHPos[0];
-	if (transform->position.x > SpriteRenderer::WorldWHPos[1]) transform->position.x = SpriteRenderer::WorldWHPos[1];
-	if (transform->position.y > SpriteRenderer::WorldWHPos[2]) transform->position.y = SpriteRenderer::WorldWHPos[2];
-	if (transform->position.y < SpriteRenderer::WorldWHPos[3]) transform->position.y = SpriteRenderer::WorldWHPos[3];
+	if (transform->position.x < Renderer3D::WorldWHPos[0]) transform->position.x = Renderer3D::WorldWHPos[0];
+	if (transform->position.x > Renderer3D::WorldWHPos[1]) transform->position.x = Renderer3D::WorldWHPos[1];
+	if (transform->position.y > Renderer3D::WorldWHPos[2]) transform->position.y = Renderer3D::WorldWHPos[2];
+	if (transform->position.y < Renderer3D::WorldWHPos[3]) transform->position.y = Renderer3D::WorldWHPos[3];
 }
 

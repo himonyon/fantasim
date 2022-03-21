@@ -7,18 +7,21 @@
 
 -------------------------------------------------------------*/
 
-class Component;
+namespace MyFrameWork {
 
-class MessageSystem {
-public:
-	MessageSystem() {};
-	virtual ~MessageSystem() {};
+	class Component;
 
-	//コンポーネントへメッセージを送る
-	static void SendMessageToCom(noDel_ptr<Component> com, std::wstring str);
-	//メッセージの削除
-	void DeleteMessage(std::wstring str);
+	class MessageSystem {
+	public:
+		MessageSystem() {};
+		virtual ~MessageSystem() {};
 
-public:
-	std::vector<std::wstring> messages;
-};
+		//コンポーネントへメッセージを送る
+		static void SendMessageToCom(noDel_ptr<Component> com, std::wstring str);
+		//メッセージの削除
+		void DeleteMessage(std::wstring str);
+
+	public:
+		std::vector<std::wstring> messages;
+	};
+}

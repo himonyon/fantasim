@@ -8,12 +8,12 @@ void BattlePanel::Awake() {
 	//サウンドマネージャー
 	pSoundManager = gameObject->FindGameObject("soundManager")->GetComponent<SoundManager>();
 
-	float _sizeX = gameObject->GetComponent<ImageRenderer>()->sizeX;
-	float _sizeY = gameObject->GetComponent<ImageRenderer>()->sizeY;
+	float _sizeX = gameObject->GetComponent<ImageRenderer>()->size.x;
+	float _sizeY = gameObject->GetComponent<ImageRenderer>()->size.y;
 	float _top = -_sizeY / 2;
 	float _left = -_sizeX / 2;
 
-	gameObject->GetComponent<ImageRenderer>()->SetRenderPriority(-10);
+	gameObject->SetRenderOrder(-10);
 
 	//キャラクタ(バトル画面に表示するモデル)
 	pPlayerView = gameObject->CreateImageObject(0,0, 100.0f, 100.0f, NULL, transform);
@@ -37,22 +37,22 @@ void BattlePanel::Awake() {
 	noDel_ptr<Sprite> pPanel_sp = CreateSprite(new Sprite(L"Data/Image/Common/menu_button.spr"));
 	pCharaInfoPanel[playerNum] = gameObject->CreateImageObject(0, 0, 600.0f, 190.0f, pPanel_sp, transform);
 	pCharaInfoPanel[playerNum]->transform->SetLocalPosition(_left + _sizeX * 0.266f, _top + _sizeY * 0.58f);
-	pCharaInfoPanel[playerNum]->GetComponent<ImageRenderer>()->SetRenderPriority(-5);
+	pCharaInfoPanel[playerNum]->SetRenderOrder(-5);
 	pCharaInfoPanel[enemyNum] = gameObject->CreateImageObject(0, 0, 600.0f, 190.0f, pPanel_sp, transform);
 	pCharaInfoPanel[enemyNum]->transform->SetLocalPosition(_left + _sizeX * 0.734f, _top + _sizeY * 0.58f);
-	pCharaInfoPanel[enemyNum]->GetComponent<ImageRenderer>()->SetRenderPriority(-5);
+	pCharaInfoPanel[enemyNum]->SetRenderOrder(-5);
 	//バトルテキストパネル
 	pBattleTextPanel = gameObject->CreateImageObject(0, 0, 1200.0f, 200.0f, pPanel_sp, transform);
 	pBattleTextPanel->transform->SetLocalPosition(_left + _sizeX * 0.5f, _top + _sizeY * 0.84f);
-	pBattleTextPanel->GetComponent<ImageRenderer>()->SetRenderPriority(-5);
+	pBattleTextPanel->SetRenderOrder(-5);
 
 	//キャラパネルの中身
 	SetInfoPanel(playerNum);
 	SetInfoPanel(enemyNum);
 
 	//バトルテキスト
-	_sizeX = pBattleTextPanel->GetComponent<ImageRenderer>()->sizeX;
-	_sizeY = pBattleTextPanel->GetComponent<ImageRenderer>()->sizeY;
+	_sizeX = pBattleTextPanel->GetComponent<ImageRenderer>()->size.x;
+	_sizeY = pBattleTextPanel->GetComponent<ImageRenderer>()->size.y;
 	_top = -_sizeY / 2;
 	_left = -_sizeX / 2;
 	noDel_ptr<GameObject> _textB = gameObject->CreateObject(0, 0, 0, pBattleTextPanel->transform);
@@ -64,7 +64,7 @@ void BattlePanel::Awake() {
 	//アニメーション
 	noDel_ptr<GameObject> _atAnim = gameObject->CreateImageObject(0,0, 200.0f, 200.0f, 
 		CreateSprite(new Sprite(L"Data/Image/Battle/attack_effect.spr")));
-	_atAnim->GetComponent<ImageRenderer>()->SetRenderPriority(100);
+	_atAnim->SetRenderOrder(100);
 	_atAnim->AddComponent<Animator>();
 	pAttack_anim = _atAnim->GetComponent<Animator>();
 	pAttack_anim->AddAnimation("attack", new SpriteAnimation(L"Data/Animation/attack.anim"));
@@ -118,9 +118,9 @@ void BattlePanel::Open(noDel_ptr<PlayerChara> player, noDel_ptr<EnemyChara> enem
 
 	//キャラ絵の設定
 	float _charaSize = 250.0f;
-	pPlayerView->GetComponent<ImageRenderer>()->SetUpRenderer2D(_charaSize, _charaSize, pPlayerInfo->GetSprite());
+	pPlayerView->GetComponent<ImageRenderer>()->SetUpImageRenderer(_charaSize, _charaSize, pPlayerInfo->GetSprite());
 	pPlayerView->GetComponent<ImageRenderer>()->SetColor(1,1,1,1);
-	pEnemyView->GetComponent<ImageRenderer>()->SetUpRenderer2D(_charaSize, _charaSize, pEnemyInfo->GetSprite());
+	pEnemyView->GetComponent<ImageRenderer>()->SetUpImageRenderer(_charaSize, _charaSize, pEnemyInfo->GetSprite());
 	pEnemyView->GetComponent<ImageRenderer>()->SetColor(1,1,1,1);
 
 	//名前/スキル
@@ -131,8 +131,8 @@ void BattlePanel::Open(noDel_ptr<PlayerChara> player, noDel_ptr<EnemyChara> enem
 
 	//属性
 	float _attrSize = 25.0f;
-	pAttrObj[playerNum]->GetComponent<ImageRenderer>()->SetUpRenderer2D(_attrSize, _attrSize, pPlayerInfo->GetAttr()->GetSprite());
-	pAttrObj[enemyNum]->GetComponent<ImageRenderer>()->SetUpRenderer2D(_attrSize, _attrSize, pEnemyInfo->GetAttr()->GetSprite());
+	pAttrObj[playerNum]->GetComponent<ImageRenderer>()->SetUpImageRenderer(_attrSize, _attrSize, pPlayerInfo->GetAttr()->GetSprite());
+	pAttrObj[enemyNum]->GetComponent<ImageRenderer>()->SetUpImageRenderer(_attrSize, _attrSize, pEnemyInfo->GetAttr()->GetSprite());
 
 	//HP、MPバーの設定
 	SetBarPosition(pHPBar[playerNum]->GetComponent<ImageRenderer>(), pHPFrame[playerNum]->GetComponent<ImageRenderer>(),
@@ -154,8 +154,8 @@ void BattlePanel::Open(noDel_ptr<PlayerChara> player, noDel_ptr<EnemyChara> enem
 }
 
 void BattlePanel::SetInfoPanel(int index) {
-	float _sizeX = pCharaInfoPanel[index]->GetComponent<ImageRenderer>()->sizeX;
-	float _sizeY = pCharaInfoPanel[index]->GetComponent<ImageRenderer>()->sizeY;
+	float _sizeX = pCharaInfoPanel[index]->GetComponent<ImageRenderer>()->size.x;
+	float _sizeY = pCharaInfoPanel[index]->GetComponent<ImageRenderer>()->size.y;
 	float _top = -_sizeY / 2;
 	float _left = -_sizeX / 2;
 
@@ -185,7 +185,7 @@ void BattlePanel::SetInfoPanel(int index) {
 	//フレーム
 	pHPFrame[index] = gameObject->CreateImageObject(0, 0, _sizeX * 0.6f, 18.0f, pFrame_sp, pCharaInfoPanel[index]->transform);
 	pHPFrame[index]->transform->SetLocalPosition(_localBarPosX, _localHPPosY);
-	pHPFrame[index]->GetComponent<ImageRenderer>()->SetRenderPriority(1);
+	pHPFrame[index]->SetRenderOrder(1);
 
 	//HPテキスト
 	noDel_ptr<GameObject> _HPText = gameObject->CreateObject(0, 0, 0, pCharaInfoPanel[index]->transform);
@@ -200,7 +200,7 @@ void BattlePanel::SetInfoPanel(int index) {
 	//フレーム
 	pMPFrame[index] = gameObject->CreateImageObject(0, 0, _sizeX * 0.6f, 18.0f, pFrame_sp, pCharaInfoPanel[index]->transform);
 	pMPFrame[index]->transform->SetLocalPosition(_localBarPosX, _localMPPosY);
-	pMPFrame[index]->GetComponent<ImageRenderer>()->SetRenderPriority(1);
+	pMPFrame[index]->SetRenderOrder(1);
 
 	//MPテキスト
 	noDel_ptr<GameObject> _MPText = gameObject->CreateObject(0, 0, 0, pCharaInfoPanel[index]->transform);
@@ -211,7 +211,7 @@ void BattlePanel::SetInfoPanel(int index) {
 
 void BattlePanel::SetBarPosition(noDel_ptr<ImageRenderer> pImage, noDel_ptr<ImageRenderer> pFrame, int curVal, int maxVal) {
 	//HP,MPバーのスケーリングと調整
-	float _barSize = pImage->sizeX;
+	float _barSize = pImage->size.x;
 	float _scale = (float)curVal / (float)maxVal;
 	pImage->transform->scale.x = _scale;
 	pImage->transform->position.x = pFrame->transform->position.x - ((_barSize - (_barSize * _scale)) / 2);

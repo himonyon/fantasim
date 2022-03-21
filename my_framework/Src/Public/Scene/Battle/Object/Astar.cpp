@@ -115,6 +115,10 @@ void Astar::GetCulcedStartSquare(noDel_ptr<Square> start, noDel_ptr<Square> goal
 	vCloseList.emplace_back(start);
 	//実行
 	SearchShortPath(start, goal);
+	//スタート地点がが目的地になった場合リセットする
+	if (vCloseList.back() == start) {
+		Reset();
+	}
 }
 void Astar::SearchShortPath(noDel_ptr<Square> start, noDel_ptr<Square> goal) {
 	//隣のマスを探索してオープンリストに登録
@@ -123,14 +127,9 @@ void Astar::SearchShortPath(noDel_ptr<Square> start, noDel_ptr<Square> goal) {
 		noDel_ptr<Square> _neigh = start->GetNeighbor(static_cast<eNeighborDir>(i));
 		if (_neigh == NULL) continue;
 
-		//もし目的地(キャラがいる場所)の場合終了
-		if (_neigh == goal) {
-			return;
-		}
-
 		//障害物は無視
 		if (_neigh->GetMoveCost() <= 0) continue;
-		if (_neigh->GetIsUnMove()) continue;
+		if (_neigh->GetIsUnMove() && _neigh != goal) continue;
 		//リストにあればスルー
 		if (CheckOpenList(_neigh)) continue;
 		if (CheckCloseList(_neigh)) continue;
@@ -168,6 +167,12 @@ void Astar::SearchShortPath(noDel_ptr<Square> start, noDel_ptr<Square> goal) {
 
 	//探索マスがゴールなら終了
 	if (_pNext == goal) {
+		for (int i = 0; i < vCloseList.size(); i++) {
+			if (vCloseList[i] == goal) {
+				vCloseList.erase(vCloseList.begin() + i);
+				break;
+			}
+		}
 		return;
 	}
 

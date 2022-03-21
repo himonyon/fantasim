@@ -10,8 +10,8 @@ void EventPanel::Awake() {
 
 
 	noDel_ptr<ImageRenderer> _renderer = gameObject->GetComponent<ImageRenderer>();
-	float _sizeX = _renderer->sizeX;
-	float _sizeY = _renderer->sizeY;
+	float _sizeX = _renderer->size.x;
+	float _sizeY = _renderer->size.y;
 	float _top = transform->position.y - _sizeY / 2;
 	float _left = transform->position.x - _sizeX / 2;
 

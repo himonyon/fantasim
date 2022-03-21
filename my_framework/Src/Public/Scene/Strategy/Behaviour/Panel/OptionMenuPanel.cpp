@@ -16,7 +16,7 @@ void OptionMenu::Awake() {
 	//セレクトカーソル
 	pSelecter = gameObject->CreateImageObject(0, 0, 150.0f, 80.0f,
 		CreateSprite(new Sprite(L"Data/Image/Common/square.spr")), transform);
-	pSelecter->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontUI+1);
+	pSelecter->SetRenderOrder((int)eRenderOrder::FrontUI+1);
 	pSelecter->GetComponent<ImageRenderer>()->SetColor(1, 1, 1, 0.6f);
 
 	//ターン終了
@@ -69,7 +69,7 @@ void OptionMenu::CreateCommand(const WCHAR* text, noDel_ptr<Sprite> bgImage, eOp
 	std::shared_ptr<stOptionMenu> _command = std::make_shared<stOptionMenu>();
 
 	_command->pBackGorund = gameObject->CreateImageObject(0, 0, sizeX, sizeY, bgImage, transform);
-	_command->pBackGorund->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_command->pBackGorund->SetRenderOrder((int)eRenderOrder::FrontUI);
 	_command->pText = gameObject->CreateObject(0, 0, 0, _command->pBackGorund->transform);
 	_command->pBackGorund->transform->SetLocalPosition(0, _localY);
 	_command->pText->transform->SetLocalPosition(0, -10);
@@ -78,7 +78,7 @@ void OptionMenu::CreateCommand(const WCHAR* text, noDel_ptr<Sprite> bgImage, eOp
 	_font->SetTextAlignment(eTextAlignment::Center);
 	_font->SetFontSize(22.0f);
 	_font->Print(text);
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI + 2);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI + 2);
 
 	_command->type = type;
 

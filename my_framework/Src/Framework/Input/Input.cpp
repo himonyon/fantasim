@@ -1,6 +1,8 @@
 #include "../../../framework.h"
 #include "../../../environment.h"
 
+using namespace MyFrameWork;
+
 eDeviceType Input::currentDevice = eDeviceType::Both;
 std::function<bool(std::vector<int>*& inputs)> Input::funcTrg = Input::BothDevTrg;
 std::function<bool(std::vector<int>*& inputs)> Input::funcOn = Input::BothDevOn;

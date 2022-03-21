@@ -14,21 +14,21 @@ void InvestPanel::Awake() {
 	pDescText->AddComponent<Font>();
 	_font = pDescText->GetComponent<Font>();
 	_font->SetTextAlignment(eTextAlignment::Center);
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pPriceText = gameObject->CreateObject(0, 0, 0, transform);
 	pPriceText->transform->SetLocalPosition(0, 10.0f);
 	pPriceText->AddComponent<Font>();
 	_font = pPriceText->GetComponent<Font>();
 	_font->SetTextAlignment(eTextAlignment::Center);
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pResultText = gameObject->CreateObject(0, 0, 0, transform);
 	pResultText->transform->SetLocalPosition(0, 0);
 	pResultText->AddComponent<Font>();
 	_font = pResultText->GetComponent<Font>();
 	_font->SetTextAlignment(eTextAlignment::Center);
-	_font->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_font->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 
 	gameObject->SetObjEnable(false);

@@ -31,17 +31,17 @@ void Turn::MoveCamera() {
 		float _top = FieldManager::StageTop + _padding;
 		float _bottom = FieldManager::StageTop - (FieldManager::StageSize * (FieldManager::SquareNum_Y - 1)) - _padding;
 		if (_moveX > 0) {
-			if (SpriteRenderer::WorldWHPos[1] < _right) Camera::main->transform->position.x += _moveX;
+			if (Renderer3D::WorldWHPos[1] < _right) Camera::main->transform->position.x += _moveX;
 		}
 		else if (_moveX < 0) {
-			if (SpriteRenderer::WorldWHPos[0] > _left) Camera::main->transform->position.x += _moveX;
+			if (Renderer3D::WorldWHPos[0] > _left) Camera::main->transform->position.x += _moveX;
 		}
 
 		if (_moveY > 0) {
-			if (SpriteRenderer::WorldWHPos[2] < _top) Camera::main->transform->position.y += _moveY;
+			if (Renderer3D::WorldWHPos[2] < _top) Camera::main->transform->position.y += _moveY;
 		}
 		else if (_moveY < 0) {
-			if (SpriteRenderer::WorldWHPos[3] > _bottom) Camera::main->transform->position.y += _moveY;
+			if (Renderer3D::WorldWHPos[3] > _bottom) Camera::main->transform->position.y += _moveY;
 		}
 	}
 }

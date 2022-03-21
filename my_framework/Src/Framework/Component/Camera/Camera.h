@@ -7,16 +7,18 @@
 
 #pragma once
 
-class Camera : public Component {
-public:
-	static noDel_ptr<Camera> main;
+namespace MyFrameWork {
+	class Camera : public Component {
+	public:
+		static noDel_ptr<Camera> main;
 
-public:
-	Camera();
-	~Camera() {};
+	public:
+		Camera();
+		~Camera() {};
 
-	//メインカメラのセット
-	void SetMain() { main = noDel_ptr<Camera>(this); }
-	//コンポーネント処理
-	void Execute() override {};
-};
+		//メインカメラのセット
+		void SetMain() { main = noDel_ptr<Camera>(this); }
+		//コンポーネント処理
+		void Execute() override {};
+	};
+}

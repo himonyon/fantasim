@@ -11,15 +11,15 @@ void SceneBattle::Initialize() {
 	pCam->GetComponent<Camera>()->SetMain();
 
 	//カーソル、背景
-	pCursor = CreateObject(0, 0, 0, 0.9f, 0.9f, CreateSprite(new Sprite(L"Data/Image/Battle/cursor01.spr")), NULL, "cursor");
+	pCursor = CreateObject(0, 0, 0, CreateSprite(new Sprite(L"Data/Image/Battle/cursor01.spr")), NULL, "cursor");
 	pCursor->AddComponent<Cursor>();
 	pCursor->AddComponent<Collider2D>();
 	pCursor->AddComponent<Physics2D>();
-	pCursor->GetComponent<SpriteRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject + 1);
+	pCursor->SetRenderOrder((int)eRenderOrder::FrontObject + 1);
 	pCursor->GetComponent<Collider2D>()->SetUpCollider2D(0.2f, 0.2f, false);
 
 	pBg = CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, SCREEN_WIDTH, SCREEN_HEIGHT, CreateSprite(new Sprite(L"Data/Image/Battle/bg.spr")));
-	pBg->GetComponent<ImageRenderer>()->isFrontImg = false;
+	pBg->SetFrontRenderOrderType(false);
 
 	//パネル-------------------------------------------------------------------
 	//ステータス

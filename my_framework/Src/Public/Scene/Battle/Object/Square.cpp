@@ -7,14 +7,17 @@ using namespace nsBattle;
 int Square::ID_Count = 0;
 
 Square::Square(noDel_ptr<GameObject> square, noDel_ptr<GameObject> selectSquare) {
+	//マス
 	this->pSquare = square;
 	transform = pSquare->transform;
+
+	//選択マス
 	this->pSelectSquare = selectSquare;
-	this->pSelectSquare->AddComponent<SelectSquare>();
-	this->pSelectSquare->AddComponent<Collider2D>();
-	this->pSelectSquare->GetComponent<Collider2D>()->SetUpCollider2D(0.9f, 0.9f, false);
-	this->pSelectSquare->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1, 0.8f);
-	this->pSelectSquare->GetComponent<SpriteRenderer>()->SetRenderPriority(1);
+	pSelectSquare->AddComponent<SelectSquare>();
+	pSelectSquare->AddComponent<Collider2D>();
+	pSelectSquare->GetComponent<Collider2D>()->SetUpCollider2D(0.9f, 0.9f, false);
+	pSelectSquare->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1, 0.8f);
+	pSelectSquare->SetRenderOrder(1);
 
 	for (int i = 0; i < (int)eNeighborDir::Max; i++) pNeighbor[i] = NULL;
 
@@ -44,6 +47,10 @@ void Square::ShowSelectSquare(bool flag, bool isEnable) {
 	else {
 		pSelectSquare->GetComponent<SelectSquare>()->SetSelectEnable(isEnable);
 	}
+}
+
+void Square::SetUnMove(bool flag, noDel_ptr<BattleChara> chara){
+	OnUnMoveObj = flag; pOnBattleChara = chara;
 }
 
 //SeerchInfo---------------------------------------------------------

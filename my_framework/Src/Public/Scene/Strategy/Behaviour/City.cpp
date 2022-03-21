@@ -5,12 +5,12 @@ using namespace nsStrategy;
 
 void City::Start() {
 	noDel_ptr<ImageRenderer> spr = gameObject->GetComponent<ImageRenderer>();
-	spr->SetUpRenderer2D(CITY_SIZE, CITY_SIZE, pCity_sp);
+	spr->SetUpImageRenderer(CITY_SIZE, CITY_SIZE, pCity_sp);
 	gameObject->AddComponent<Collider2D>();
 	gameObject->GetComponent<Collider2D>()->SetUpCollider2D(false);
 
-	pCityFrame = gameObject->CreateImageObject(transform->position.x, transform->position.y, spr->sizeX, spr->sizeY, pCityFrame_sp, transform);
-	pCityFrame->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::Object + 1);
+	pCityFrame = gameObject->CreateImageObject(transform->position.x, transform->position.y, spr->size.x, spr->size.y, pCityFrame_sp, transform);
+	pCityFrame->SetRenderOrder((int)eRenderOrder::Object + 1);
 
 	pCityPanel = gameObject->FindGameObject("cityPanel");
 }

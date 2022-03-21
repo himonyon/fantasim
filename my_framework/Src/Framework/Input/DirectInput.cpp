@@ -1,6 +1,8 @@
 #include "../../../framework.h"
 #include "../../../environment.h"
 
+using namespace MyFrameWork;
+
 HDC DirectInput::hdc = 0;
 LPDIRECTINPUT8 DirectInput::pInput = 0;
 LPDIRECTINPUTDEVICE8 DirectInput::pKeyDevice = 0;

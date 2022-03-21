@@ -1,6 +1,8 @@
 #include "../../../framework.h"
 #include "../../../environment.h"
 
+using namespace MyFrameWork;
+
 ID3D11Device* Direct3D::pDevice = NULL;
 ID3D11DeviceContext* Direct3D::pDeviceContext = NULL;
 IDXGIDevice* Direct3D::pDXGI;	//DXGIデバイス
@@ -179,7 +181,7 @@ void Direct3D::DestroyD3D()
 //
 void Direct3D::Clear() {
 	//画面クリア（実際は単色で画面を塗りつぶす処理）
-	float ClearColor[4] = { 0,0,1,1 };// クリア色作成　RGBAの順
+	float ClearColor[4] = { 0,0.5f,1,1 };// クリア色作成　RGBAの順
 	pDeviceContext->ClearRenderTargetView(pRenderTargetView, ClearColor);//画面クリア
 	pDeviceContext->ClearDepthStencilView(pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);//深度バッファクリア
 	//レンダーターゲットビューと深度ステンシルビューをパイプラインにバインド

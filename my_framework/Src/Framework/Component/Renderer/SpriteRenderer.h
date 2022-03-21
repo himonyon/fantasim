@@ -6,69 +6,36 @@
 
 -------------------------------------------------------------*/
 
-class SpriteRenderer : public Renderer2D {
-private:
-	//頂点バッファ
-	ID3D11Buffer* pVertexBuffer = 0;
+namespace MyFrameWork {
+	class SpriteRenderer : public SpriteState {
+	private:
+		//頂点バッファ
+		ID3D11Buffer* pVertexBuffer = 0;
 
-	static const int indexNum = 6;
+	public:
+		SpriteRenderer();
+		~SpriteRenderer(void);
 
-	static XMMATRIX View;
-	static XMMATRIX Proj;
+		//頂点情報
+		stVertex3D vtx[Sprite::VertexNum];
 
-public:
-	stColor4 color = { 1,1,1,1 };
+		//コンポーネント処理
+		void Execute() override;
 
-public:
-	SpriteRenderer();
-	~SpriteRenderer(void);
+		//コンポーネント初期化
+		void SetUpSpriteRenderer(noDel_ptr<Sprite> sprite);
 
-	//画面の上下左右の位置座標
-	static float WorldWHPos[4];
+		//色の設定、取得
+		void SetColor(float r, float g, float b, float a) override;
+		void SetColor(stColor4 color) override;
+		stColor4 GetColor() override;
 
-	//頂点情報
-	stVertex3D vtx[indexNum];
+		//スプライトの状態を初期状態に戻す(UV)
+		void SetDefaultUV() override;
 
-	//コンポーネント処理
-	void Execute() override;
+	private:
+		//描画
+		void Render(void) override;
 
-	//コンポーネント初期化
-	void SetUpRenderer2D(float sizeX, float sizeY, noDel_ptr<Sprite> sprite);
-
-	//色の設定、取得
-	void SetColor(float r, float g, float b, float a) override;
-	void SetColor(stColor4 color) override;
-	stColor4 GetColor() override;
-
-	//スプライトの状態を初期状態に戻す(ColorとUV)
-	void SetDefaultUV() override; 
-
-private:
-	//描画
-	void Render(void);
-
-	//頂点情報の更新
-	void SetVertexState();
-
-	//座標、回転、スケールの行列計算
-	XMMATRIX GetPosMatrix();
-	XMMATRIX GetRotMatrix();
-	XMMATRIX GetScaleMatrix();
-
-public:
-	static XMVECTOR CalcScreenToWorld(
-		XMVECTOR& pout,
-		int Sx,
-		int Sy,
-		float fZ,
-		int Screen_w,
-		int Screen_h
-	);
-	// XZ平面とスクリーン座標の交点算出関数
-	static stVector3 CalcScreenToXZ(
-		int Sx,
-		int Sy,
-		int Screen_w,
-		int Screen_h
-	);
-};
+	};
+}

@@ -13,8 +13,8 @@ void OptionPanel::Awake() {
 
 	//親サイズ
 	noDel_ptr<ImageRenderer> _renderer = gameObject->GetComponent<ImageRenderer>();
-	float _sizeX = _renderer->sizeX;
-	float _sizeY = _renderer->sizeY;
+	float _sizeX = _renderer->size.x;
+	float _sizeY = _renderer->size.y;
 
 	float _textX = -(_sizeX / 2) + 60.0f;
 

@@ -6,14 +6,17 @@
 
 -------------------------------------------------------------*/
 
-class Object {
-private:
-	static int max_instance;
-	int instanceID = 0;
+namespace MyFrameWork {
 
-public:
-	Object();
-	virtual ~Object() {};
+	class Object {
+	private:
+		static int max_instance;
+		int instanceID = 0;
 
-	int GetInstanceID() const { return instanceID; }
-};
+	public:
+		Object();
+		virtual ~Object() {};
+
+		int GetInstanceID() const { return instanceID; }
+	};
+}

@@ -24,7 +24,7 @@ void FieldManager::Awake() {
 	//操作説明画面
 	noDel_ptr<GameObject> _pOprObj = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT - 25, SCREEN_WIDTH, 50.0f,
 		CreateSprite(new Sprite(L"Data/Image/Common/cover.spr")), nullptr, "operation");
-	_pOprObj->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	_pOprObj->SetRenderOrder((int)eRenderOrder::FrontUI);
 	_pOprObj->GetComponent<ImageRenderer>()->SetColor(1, 1, 1, 0.5f);
 	_pOprObj->AddComponent<Operation>();
 	pOperation = _pOprObj->GetComponent<Operation>();
@@ -111,7 +111,7 @@ void FieldManager::InitStage() {
 		L"Data/Image/Battle/battle_bg_1.spr",
 		L"Data/Image/Battle/battle_bg_2.spr",
 	};
-	_pBattlePanel->SetUpRenderer2D(SCREEN_WIDTH, SCREEN_HEIGHT,
+	_pBattlePanel->SetUpImageRenderer(SCREEN_WIDTH, SCREEN_HEIGHT,
 		CreateSprite(new Sprite(_battleBG[stageType - 1].c_str())));
 	//選択時画像
 	noDel_ptr<Sprite> selectSquare = CreateSprite(new Sprite(L"Data/Image/Battle/square.spr"));
@@ -143,8 +143,8 @@ void FieldManager::InitStage() {
 		//障害物
 		if (_type == 0) {
 			//オブジェクトとマスクラス作成
-			_pSquareObj = gameObject->CreateObject(_posX, _posY, 0, StageSize, StageSize, obstacleSprite);
-			_pSelectSquareObj = gameObject->CreateObject(_posX, _posY, 0, StageSize, StageSize, selectSquare);
+			_pSquareObj = gameObject->CreateObject(_posX, _posY, 0,  obstacleSprite);
+			_pSelectSquareObj = gameObject->CreateObject(_posX, _posY, 0, selectSquare);
 			_pSquare = new Square(_pSquareObj, _pSelectSquareObj);
 			//移動コストの設定
 			_pSquare->SetMoveCost(0);
@@ -152,8 +152,8 @@ void FieldManager::InitStage() {
 		//道
 		else if (_type == 1) {
 			//オブジェクトとマスクラス作成
-			_pSquareObj = gameObject->CreateObject(_posX, _posY, 0, StageSize, StageSize, fieldSprite);
-			_pSelectSquareObj = gameObject->CreateObject(_posX, _posY, 0, StageSize, StageSize, selectSquare);
+			_pSquareObj = gameObject->CreateObject(_posX, _posY, 0, fieldSprite);
+			_pSelectSquareObj = gameObject->CreateObject(_posX, _posY, 0,  selectSquare);
 			_pSquare = new Square(_pSquareObj, _pSelectSquareObj);
 			//移動コストの設定
 			_pSquare->SetMoveCost(1);
@@ -237,7 +237,6 @@ void FieldManager::InitCharactor() {
 		chara->mp = chara->maxMp;
 		
 		//配置マス設定
-
 		//位置かぶり回避
 		while (true) {
 			bool _flag = false;
@@ -246,12 +245,11 @@ void FieldManager::InitCharactor() {
 			if (_flag == false) break;
 		}
 		_beSetPosY.emplace_back(_y);
-		_y = rand() % SquareNum_Y;
 		_pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
 
 		noDel_ptr<GameObject> _pChara = gameObject->CreateObject(_pTargetSquare->transform->position.x,
-			_pTargetSquare->transform->position.y, 0, 0.9f, 0.9f, chara->GetSprite());
-		_pChara->GetComponent<SpriteRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
+			_pTargetSquare->transform->position.y, 0,  chara->GetSprite());
+		_pChara->SetRenderOrder((int)eRenderOrder::FrontObject);
 		_pChara->AddComponent<Collider2D>();
 		_pChara->GetComponent<Collider2D>()->SetUpCollider2D(StageSize * 0.5f, StageSize * 0.5f, false);
 		_pChara->AddComponent<PlayerChara>();
@@ -266,6 +264,7 @@ void FieldManager::InitCharactor() {
 	}
 
 	//座標初期設定
+	_beSetPosY.clear();
 	_x = SquareNum_X - 1;
 	_y = 0;
 
@@ -275,12 +274,18 @@ void FieldManager::InitCharactor() {
 		chara->hp = chara->maxHp;
 		chara->mp = chara->maxMp;
 		//配置マス設定
-		_y = rand() % SquareNum_Y;
+		while (true) {
+			bool _flag = false;
+			_y = rand() % SquareNum_Y;
+			for (auto& y : _beSetPosY) if (_y == y) _flag = true;
+			if (_flag == false) break;
+		}
+		_beSetPosY.emplace_back(_y);
 		_pTargetSquare = noDel_ptr<Square>(umStageRows[_y]->umRow[_x]);
 
 		noDel_ptr<GameObject> _pChara = gameObject->CreateObject(_pTargetSquare->transform->position.x,
-			_pTargetSquare->transform->position.y, 0, 0.9f, 0.9f, chara->GetSprite());
-		_pChara->GetComponent<SpriteRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
+			_pTargetSquare->transform->position.y, 0,  chara->GetSprite());
+		_pChara->SetRenderOrder((int)eRenderOrder::FrontObject);
 		_pChara->AddComponent<Collider2D>();
 		_pChara->GetComponent<Collider2D>()->SetUpCollider2D(StageSize * 0.5f, StageSize * 0.5f, false);
 		_pChara->AddComponent<EnemyChara>();
@@ -312,6 +317,8 @@ void FieldManager::CreateSound() {
 	pSoundManager->AddSound("death", L"Data/Sound/Battle/death.wav");
 	//攻撃
 	pSoundManager->AddSound("attack", L"Data/Sound/Battle/attack.wav");
+
+	pSoundManager->SetVolume(0.1f);
 
 	///ユーザー情報反映
 	if (UserSetting::sound == false) pSoundManager->SetVolume(0);

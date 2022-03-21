@@ -1,6 +1,8 @@
 #include "../../../../framework.h"
 #include "../../../../environment.h"
 
+using namespace MyFrameWork;
+
 Transform::Transform() : Component(eComponentType::Transform) {
 	position = { 0,0,0 };
 	b_position = position;

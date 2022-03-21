@@ -19,12 +19,12 @@ void SelectCountryPanel::Awake() {
 		pText[i] = gameObject->CreateObject(0, 0, 0);
 		pText[i]->AddComponent<Font>();
 		pText_font[i] = pText[i]->GetComponent<Font>();
-		pText_font[i]->SetRenderPriority((int)eRenderOrder::UI + 1);
+		pText_font[i]->gameObject->SetRenderOrder((int)eRenderOrder::UI + 1);
 		pText_font[i]->SetRectWH(
 			transform->position.x,
 			transform->position.y,
-			gameObject->GetComponent<ImageRenderer>()->sizeX,
-			gameObject->GetComponent<ImageRenderer>()->sizeY
+			gameObject->GetComponent<ImageRenderer>()->size.x,
+			gameObject->GetComponent<ImageRenderer>()->size.y
 		);
 		pText_font[i]->SetTextAlignment(eTextAlignment::Left);
 	}

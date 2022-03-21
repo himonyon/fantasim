@@ -27,6 +27,11 @@ noDel_ptr<U> static_noDel_cast(noDel_ptr<T> ptr) {
     return noDel_ptr<U>(static_cast<U*>(_ptr));
 }
 
+//•¶š—ñ‚ğ‹æØ‚é
+void Split(char split_char, char* buffer, std::vector<std::string>& out);
+//•¶š—ñ‚ğ’u‚«Š·‚¦‚é
+void Replace(char search_char, char replace_char, char* buffer);
+
 //intŒ^‚Ì”š‚Ì{‚P[‚P‚ğw’è‚Ì•(0~maxNum)‚Ås‚¤
 int CountUpInRange(int target, int maxRange);
 int CountDownInRange(int target, int maxRange);

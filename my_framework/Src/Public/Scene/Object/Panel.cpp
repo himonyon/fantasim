@@ -16,5 +16,5 @@ void Panel::CreateText(noDel_ptr<Font>& target, float posX, float posY) {
 	noDel_ptr<GameObject> _tempObj = gameObject->CreateObject(posX, posY, 0, transform);
 	_tempObj->AddComponent<Font>();
 	target = _tempObj->GetComponent<Font>();
-	target->SetRenderPriority((int)eRenderOrder::FrontUI);
+	target->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI);
 }

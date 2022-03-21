@@ -13,7 +13,7 @@ void TitleManager::Awake() {
 	pOpening_sd = std::make_unique<Sound>(L"Data/Sound/Title/title_bgm.wav");
 	pOpening_sd->Play();
 
-	gameObject->GetComponent<ImageRenderer>()->SetRenderPriority(-10);
+	gameObject->SetRenderOrder(-10);
 
 	//ƒ†[ƒU[î•ñ”½‰f
 	LoadSetting();
@@ -114,6 +114,6 @@ void TitleManager::LoadSetting() {
 		Input::SetKeyboardDevice();
 	}
 
-	if (UserSetting::sound) pOpening_sd->SetVolume(0.5f);
+	if (UserSetting::sound) pOpening_sd->SetVolume(0.1f);
 	else pOpening_sd->SetVolume(0);
 }

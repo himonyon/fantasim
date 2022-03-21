@@ -18,32 +18,32 @@ void CityPanel::Awake() {
 	noDel_ptr<GameObject> _pInvestPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 400, 150, 
 		spr->pRenderSprite,	nullptr, "investPanel");
 	_pInvestPanel->AddComponent<InvestPanel>();
-	_pInvestPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pInvestPanel->SetRenderOrder((int)eRenderOrder::UI);
 	//バトルパネル
 	noDel_ptr<GameObject> _pBattlePanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 400, 300, spr->pRenderSprite,
 		nullptr, "battlePanel");
 	_pBattlePanel->AddComponent<BattlePanel>();
-	_pBattlePanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pBattlePanel->SetRenderOrder((int)eRenderOrder::UI);
 	//キャラ選択パネル
 	noDel_ptr<GameObject> _pCharaSelectPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER, 300, 300,
 		spr->pRenderSprite, nullptr, "charaSelectPanel");
 	_pCharaSelectPanel->AddComponent<CharaSelectPanel>();
-	_pCharaSelectPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pCharaSelectPanel->SetRenderOrder((int)eRenderOrder::UI);
 	//近隣選択パネル
 	noDel_ptr<GameObject> _pSelectNeighborPanel = gameObject->CreateImageObject(200, 70, 350, 100, spr->pRenderSprite,
 		nullptr, "selectNeighborPanel");
 	_pSelectNeighborPanel->AddComponent<SelectNeighborPanel>();
-	_pSelectNeighborPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pSelectNeighborPanel->SetRenderOrder((int)eRenderOrder::UI);
 	//キャラ強化パネル
 	noDel_ptr<GameObject> _pCharaEnhancePanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
 		600, 500, spr->pRenderSprite,nullptr, "charaEnhancePanel");
 	_pCharaEnhancePanel->AddComponent<CharaEnhancePanel>();
-	_pCharaEnhancePanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pCharaEnhancePanel->SetRenderOrder((int)eRenderOrder::UI);
 	//情報表示パネル
 	noDel_ptr<GameObject> _pInfoPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
 		300, 150, spr->pRenderSprite, nullptr, "infoPanel");
 	_pInfoPanel->AddComponent<InfoPanel>();
-	_pInfoPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pInfoPanel->SetRenderOrder((int)eRenderOrder::UI);
 	//オプションメニュー
 	noDel_ptr<GameObject> _pOptionMenu = gameObject->CreateObject(0,0,0, nullptr, "optionMenu");
 	_pOptionMenu->AddComponent<OptionMenu>();
@@ -51,34 +51,34 @@ void CityPanel::Awake() {
 	noDel_ptr<GameObject> _pOptionPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
 		300, 150, spr->pRenderSprite, nullptr, "optionPanel");
 	_pOptionPanel->AddComponent<OptionPanel>();
-	_pOptionPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pOptionPanel->SetRenderOrder((int)eRenderOrder::UI);
 	//イベントパネル
 	noDel_ptr<GameObject> _pEventPanel = gameObject->CreateImageObject(SCREEN_WIDTH_CENTER, SCREEN_HEIGHT_CENTER,
 		700, 600, spr->pRenderSprite, nullptr, "eventPanel");
 	_pEventPanel->AddComponent<EventPanel>();
-	_pEventPanel->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::UI);
+	_pEventPanel->SetRenderOrder((int)eRenderOrder::UI);
 
 	//街情報テキスト
 	pCityInfoPanel = gameObject->CreateObject(0, 0, 0, transform);
 
 	pCityNameText = gameObject->CreateObject(0, 0, 0, transform);
 	pCityNameText->AddComponent<Font>();
-	pCityNameText->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	pCityNameText->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	pCityStatusText = gameObject->CreateObject(0, 0, 0, pCityInfoPanel->transform);
 	pCityStatusText->AddComponent<Font>();
-	pCityStatusText->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	pCityStatusText->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 	//キャラクター一覧表示テキスト
 	pCharaInfoPanel = gameObject->CreateObject(0, 0, 0, transform);
 	for (int i = 0; i < OWN_CHARACTOR_NUM; i++) {
 		pCharaInfoText[i] = gameObject->CreateObject(0, 0, 0, pCharaInfoPanel->transform);
 		pCharaInfoText[i]->AddComponent<Font>();
-		pCharaInfoText[i]->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+		pCharaInfoText[i]->SetRenderOrder((int)eRenderOrder::FrontUI);
 
 		pAttrObj[i] = gameObject->CreateObject(0, 0, 0, pCharaInfoText[i]->transform);
 		pAttrObj[i]->AddComponent<ImageRenderer>();
-		pAttrObj[i]->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
+		pAttrObj[i]->SetRenderOrder((int)eRenderOrder::FrontObject);
 	}
 
 	//行動一覧テキスト
@@ -87,20 +87,20 @@ void CityPanel::Awake() {
 	//セレクトカーソル
 	pSelectCursor = gameObject->CreateImageObject(0, 0, 100, 30, CreateSprite(
 		new Sprite(L"Data/Image/Common/square.spr")),pCommandPanel->transform);
-	pSelectCursor->GetComponent<ImageRenderer>()->SetRenderPriority((int)eRenderOrder::FrontObject);
+	pSelectCursor->SetRenderOrder((int)eRenderOrder::FrontObject);
 
 	//ボーダー
 	for (int i = 0; i < 2; i++) {
 		pBorderText[i] = gameObject->CreateObject(0, 0, 0, pCommandPanel->transform);
 		pBorderText[i]->AddComponent<Font>();
-		pBorderText[i]->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+		pBorderText[i]->SetRenderOrder((int)eRenderOrder::FrontUI);
 		pBorderText[i]->GetComponent<Font>()->Print(L"---------------------------------------------------------------------\n");
 	}
 
 	//コマンド＆コマンド説明テキスト
 	pCommandTitleText = gameObject->CreateObject(0, 0, 0, pCommandPanel->transform);
 	pCommandTitleText->AddComponent<Font>();
-	pCommandTitleText->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+	pCommandTitleText->SetRenderOrder((int)eRenderOrder::FrontUI);
 	pCommandTitleText->GetComponent<Font>()->Print(L"・コマンド");
 
 	for (int i = 0; i < (int)eCommand::Max; i++) {
@@ -108,8 +108,8 @@ void CityPanel::Awake() {
 		pCommandTexts[i] = gameObject->CreateObject(0, 0, 0, pCommandPanel->transform);
 		pCommand[i]->AddComponent<Font>();
 		pCommandTexts[i]->AddComponent<Font>();
-		pCommand[i]->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
-		pCommandTexts[i]->GetComponent<Font>()->SetRenderPriority((int)eRenderOrder::FrontUI);
+		pCommand[i]->SetRenderOrder((int)eRenderOrder::FrontUI);
+		pCommandTexts[i]->SetRenderOrder((int)eRenderOrder::FrontUI);
 	}
 
 	pCommand[(int)eCommand::Economic]->GetComponent<Font>()->Print(L"生産力向上");
@@ -169,16 +169,16 @@ void CityPanel::Open(noDel_ptr<City> city) {
 	noDel_ptr<ImageRenderer> spr = gameObject->GetComponent<ImageRenderer>();
 
 	if (pCity->pCountry->IsPlayer()) {
-		spr->sizeY = 450.0f;
+		spr->size.y = 450.0f;
 		isPlayerCity = true;
 	}
 	else {
-		spr->sizeY = 180.0f;
+		spr->size.y = 180.0f;
 		isPlayerCity = false;
 	}
 
-	float _top = transform->position.y - spr->sizeY / 2;
-	float _left = transform->position.x - spr->sizeX / 2;
+	float _top = transform->position.y - spr->size.y / 2;
+	float _left = transform->position.x - spr->size.x / 2;
 
 	SetCityStatus(_top, _left);
 
@@ -225,7 +225,7 @@ void CityPanel::SetCityStatus(float top, float left) {
 		const float _y = top + (_topPadding + ((i / _rowNum) + 1) * _textPadding);
 		pCharaInfoText[i]->transform->SetPosition(_x, _y);
 		pAttrObj[i]->transform->SetLocalPosition(-20.0f, 12.0f);
-		pAttrObj[i]->GetComponent<ImageRenderer>()->SetUpRenderer2D(25.0f,25.0f,
+		pAttrObj[i]->GetComponent<ImageRenderer>()->SetUpImageRenderer(25.0f,25.0f,
 			noDel_ptr<Sprite>(pCity->vOwnChara[i]->GetAttr()->GetSprite()));
 		pCharaInfoText[i]->GetComponent<Font>()->Print(L"%s 戦闘力:%d", pCity->vOwnChara[i]->GetName().c_str(),
 			pCity->vOwnChara[i]->power);

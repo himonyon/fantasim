@@ -9,7 +9,7 @@ void Country::Start() {
 	//Š×—ŽÏ‚Ý‚È‚çŠX‚Ìˆ—‚ÅI—¹
 	if (isFalled)return;
 
-	gameObject->GetComponent<ImageRenderer>()->SetUpRenderer2D(COUNTRY_SIZE, COUNTRY_SIZE, pCountry_sp);
+	gameObject->GetComponent<ImageRenderer>()->SetUpImageRenderer(COUNTRY_SIZE, COUNTRY_SIZE, pCountry_sp);
 
 	 pCityFrame->SetObjEnable(false);
 }
@@ -56,7 +56,7 @@ void Country::ChangeBelongCountry(noDel_ptr<Country> country) {
 	
 	if (!isFalled) {
 		isFalled = true;
-		gameObject->GetComponent<ImageRenderer>()->SetUpRenderer2D(CITY_SIZE, CITY_SIZE, pCity_sp);
+		gameObject->GetComponent<ImageRenderer>()->SetUpImageRenderer(CITY_SIZE, CITY_SIZE, pCity_sp);
 		if(pCityFrame != NULL) pCityFrame->SetObjEnable(true);
 	}
 
@@ -70,7 +70,7 @@ void Country::SetIsPlayer() {
 		pPlayerText = gameObject->CreateObject(transform->position.x, transform->position.y + 40.0f, 0);
 		pPlayerText->AddComponent<Font>();
 		noDel_ptr<Font> font = pPlayerText->GetComponent<Font>();
-		font->SetRenderPriority((int)eRenderOrder::UI - 1);
+		font->gameObject->SetRenderOrder((int)eRenderOrder::UI - 1);
 		font->SetTextAlignment(eTextAlignment::Center);
 		font->SetFontSize(20.0f);
 		font->Print(L"Player");

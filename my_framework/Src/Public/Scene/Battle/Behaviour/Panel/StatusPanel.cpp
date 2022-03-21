@@ -5,11 +5,11 @@
 using namespace nsBattle;
 
 void StatusPanel::Awake() {
-	gameObject->GetComponent<ImageRenderer>()->SetRenderPriority(-10);
+	gameObject->SetRenderOrder(-10);
 
 	//パネルの上下とサイズ
-	float _sizeX = gameObject->GetComponent<ImageRenderer>()->sizeX;
-	float _sizeY = gameObject->GetComponent<ImageRenderer>()->sizeY;
+	float _sizeX = gameObject->GetComponent<ImageRenderer>()->size.x;
+	float _sizeY = gameObject->GetComponent<ImageRenderer>()->size.y;
 	float _top = transform->position.y - (_sizeY / 2);
 	float _left = transform->position.x - (_sizeX / 2);
 
@@ -68,7 +68,7 @@ void StatusPanel::Open(noDel_ptr<BattleChara>  battleChara) {
 	Panel::Open();
 	//位置設定
 	//ワールドの中央
-	float _center = (SpriteRenderer::WorldWHPos[1] + SpriteRenderer::WorldWHPos[0]) / 2;
+	float _center = (Renderer3D::WorldWHPos[1] + Renderer3D::WorldWHPos[0]) / 2;
 	if (battleChara->transform->position.x > _center) transform->SetPosition(250, 150);
 	else transform->SetPosition(SCREEN_WIDTH - 250, 150);
 
@@ -79,10 +79,10 @@ void StatusPanel::Open(noDel_ptr<BattleChara>  battleChara) {
 	pNameText->GetComponent<Font>()->Print(L"%s", chara->GetName().c_str());
 	pHPText->GetComponent<Font>()->Print(L"%d/%d", chara->hp, chara->maxHp);
 	pMPText->GetComponent<Font>()->Print(L"%d/%d", chara->mp, chara->maxMp);
-	pAttrObj->GetComponent<ImageRenderer>()->SetUpRenderer2D(32.0f, 32.0f, chara->GetAttr()->GetSprite());
+	pAttrObj->GetComponent<ImageRenderer>()->SetUpImageRenderer(32.0f, 32.0f, chara->GetAttr()->GetSprite());
 
 	//HP,MPバーのスケーリングと調整
-	float _barSize = pHPBar->GetComponent<ImageRenderer>()->sizeX;
+	float _barSize = pHPBar->GetComponent<ImageRenderer>()->size.x;
 	float _scale = (float)chara->hp / (float)chara->maxHp;
 	pHPBar->transform->scale.x = _scale;
 	pHPBar->transform->position.x = pHPFrame->transform->position.x - ((_barSize - (_barSize * _scale)) / 2);

@@ -6,10 +6,12 @@
 #define SCREEN_WIDTH_CENTER (SCREEN_WIDTH / 2) //スクリーン幅
 #define SCREEN_HEIGHT_CENTER (SCREEN_HEIGHT / 2) //スクリーン高さ
 
+
 #define DIRECTINPUT_VERSION 0x0800
 
 //マクロ
 #define SAFE_RELEASE(x) if(x){x->Release(); x=NULL;}
+
 
 //共通ヘッダー
 #include <d3d11.h>
@@ -23,6 +25,7 @@
 #include <string>
 #include <time.h>
 #include <vector>
+#include <codecvt> 
 #include <unordered_map>
 #include <mutex>
 #include <thread>
@@ -42,6 +45,8 @@
 #pragma comment(lib,"d3dCompiler.lib")
 
 using namespace DirectX;
+namespace MyFrameWork {}
+using namespace MyFrameWork;
 
 //Utility
 #include "Src/Framework/FileCreate.h"
@@ -50,13 +55,19 @@ using namespace DirectX;
 #include "Src//Utility/UtilFunc.h"
 
 
-//フレームワークのヘッダー
+//フレームワークのヘッダー-----------------------------------
+
+//シェーダー設定
+#include "Src/Framework/Shader/Shader.h"
+
 //スプライト
 #include "Src/Framework/Sprite/Sprite.h"
 #include "Src/Framework/Sprite/SpriteManager.h"
 
 //メッシュ
 #include "Src//Framework//Mesh/Mesh.h"
+#include "Src//Framework//Mesh/FbxMesh.h"
+#include "Src//Framework//Mesh/ObjMesh.h"
 #include "Src//Framework//Mesh/MeshManager.h"
 
 //サウンド
@@ -73,15 +84,18 @@ using namespace DirectX;
 
 //コンポーネント群
 #include "Src/Framework/Component/Transform/Transform.h"
-#include "Src/Framework/Component/Camera/Camera.h"
 #include "Src/Framework/Component/Collider/Collider2D.h"
 #include "Src/Framework/Component/Physics/Physics2D.h"
-#include "Src/Framework/Component/Renderer/MeshRenderer.h"
 #include "Src/Framework/Component/Renderer/Renderer2D.h"
+#include "Src/Framework/Component/Renderer/Renderer3D.h"
+#include "Src/Framework/Component/Renderer/Rendere.h"
+#include "Src/Framework/Component/Renderer/SpriteState.h"
+#include "Src/Framework/Component/Renderer/MeshRenderer.h"
 #include "Src/Framework/Component/Renderer/SpriteRenderer.h"
 #include "Src/Framework/Component/Renderer/ImageRenderer.h"
 #include "Src/Framework/Component/Behaviour/Behaviour.h"
 #include "Src/Framework/Component/Font/Font.h"
+#include "Src/Framework/Component/Camera/Camera.h"
 #include "Src/Framework/Component/SoundManager/SoundManager.h"
 
 //スプライトアニメーション
@@ -106,17 +120,18 @@ using namespace DirectX;
 #include "Src//Framework//Input/Joystick.h"
 #include "Src//Framework//Input/Input.h"
 
-//シェーダー設定
-#include "Src/Framework/Shader/Shader.h"
-
-//Direct3D
-#include "Src/Framework/Direct3D/Direct3D.h"
 
 //デバッグ
 #include "Src/Framework/DebugFont.h"
 
+//Direct3D
+#include "Src/Framework/Direct3D/Direct3D.h"
+
 //全体処理クラス
 #include "Src/Framework/Main.h"
 
+
 //シーン関係のヘッダ
 #include "Src/Public/Scene/SceneManager.h"
+
+

@@ -25,7 +25,7 @@ void Operation::CreateOperation() {
 		_pTextObj->AddComponent<Font>();
 		oprText[i].trigger = false;
 		oprText[i].pText = _pTextObj->GetComponent<Font>();
-		oprText[i].pText->SetRenderPriority((int)eRenderOrder::FrontUI + 1);
+		oprText[i].pText->gameObject->SetRenderOrder((int)eRenderOrder::FrontUI + 1);
 		oprText[i].pText->SetFontSize(24.0f);
 		oprText[i].pText->SetTextAlignment(eTextAlignment::Right);
 	}
