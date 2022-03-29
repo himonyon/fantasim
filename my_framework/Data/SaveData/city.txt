@@ -1,27 +1,27 @@
-new id 0 name レダニア country 0 position 100.000000 200.000000 player neighbor 6 7 money 4500 economic 1900 political 4612 disaster 56 support 84 action 0 bussiness 0.700000 chara 51 
-new id 1 name マスティフ country 1 position 150.000000 620.000000 neighbor 8 11 money 5000 economic 2346 political 4816 disaster 99 support 78 action 0 bussiness 1.100000 chara 35 
-new id 2 name メタノール country 2 position 600.000000 100.000000 neighbor 12 18 money 7900 economic 2307 political 5120 disaster 88 support 66 action 0 bussiness 0.900000 chara 26 
-new id 3 name ゾルフガード country 3 position 660.000000 350.000000 neighbor 13 22 16 money 4800 economic 2500 political 3603 disaster 72 support 95 action 0 bussiness 1.300000 chara 43 
-new id 4 name ミッドガル country 4 position 1000.000000 600.000000 neighbor 20 23 26 money 6400 economic 2447 political 4983 disaster 99 support 70 action 0 bussiness 1.200000 chara 19 
-new id 5 name デトロイト country 5 position 1180.000000 200.000000 neighbor 24 25 money 3900 economic 3836 political 2567 disaster 87 support 72 action 0 bussiness 1.300000 chara 12 
-new id 6 name ゲルダ country 0 position 300.000000 150.000000 neighbor 0 12 money 3400 economic 2200 political 3017 disaster 94 support 61 action 0 bussiness 1.600000 chara 13 48 36 
-new id 7 name マテルダ country 0 position 250.000000 260.000000 neighbor 0 10 money 6700 economic 2600 political 2046 disaster 68 support 44 action 1 bussiness 1.800000 chara 4 37 54 
-new id 8 name リニア country 1 position 210.000000 450.000000 neighbor 1 10 money 6700 economic 4711 political 4143 disaster 66 support 71 action 0 bussiness 1.200000 chara 16 23 24 
-new id 9 name セーリア country 2 position 400.000000 70.000000 neighbor 12 money 5000 economic 3584 political 2342 disaster 75 support 93 action 0 bussiness 1.500000 chara 5 53 
-new id 10 name グロキシニア country 1 position 350.000000 350.000000 neighbor 7 8 13 14 money 3900 economic 3551 political 2383 disaster 65 support 72 action 0 bussiness 0.600000 chara 15 31 55 
-new id 11 name ベント country 1 position 340.000000 600.000000 neighbor 1 14 15 money 5800 economic 2584 political 4375 disaster 58 support 88 action 0 bussiness 0.500000 chara 0 49 
-new id 12 name レニス country 2 position 470.000000 180.000000 neighbor 2 6 9 13 money 6700 economic 4708 political 3067 disaster 97 support 48 action 0 bussiness 0.900000 chara 14 28 27 
-new id 13 name ワット country 3 position 520.000000 290.000000 neighbor 10 12 3 money 2800 economic 3100 political 2818 disaster 80 support 50 action 0 bussiness 1.000000 chara 1 47 
-new id 14 name ニラニチア country 3 position 490.000000 470.000000 neighbor 10 11 16 money 3700 economic 2000 political 3821 disaster 69 support 50 action 0 bussiness 1.000000 chara 2 30 45 
-new id 15 name テゴス country 1 position 450.000000 650.000000 neighbor 17 money 4900 economic 3444 political 5384 disaster 46 support 44 action 0 bussiness 0.900000 chara 22 29 56 
-new id 16 name メロン country 3 position 640.000000 490.000000 neighbor 3 14 17 19 money 5600 economic 2100 political 5181 disaster 45 support 65 action 0 bussiness 1.000000 chara 10 50 
-new id 17 name キニニム country 3 position 630.000000 619.000000 neighbor 15 16 20 money 2200 economic 2500 political 4202 disaster 87 support 95 action 0 bussiness 1.000000 chara 3 38 
-new id 18 name ウォール country 2 position 770.000000 200.000000 neighbor 2 21 22 money 4900 economic 2521 political 4204 disaster 50 support 48 action 0 bussiness 1.000000 chara 11 41 58 
-new id 19 name マリア country 3 position 780.000000 430.000000 neighbor 16 23 money 5000 economic 1900 political 2253 disaster 40 support 58 action 0 bussiness 1.100000 chara 17 40 
-new id 20 name シーネ country 4 position 800.000000 580.000000 neighbor 4 17 money 4700 economic 2458 political 4286 disaster 43 support 95 action 0 bussiness 1.300000 chara 20 39 46 
-new id 21 name ニルフ country 5 position 930.000000 100.000000 neighbor 18 24 money 4600 economic 4843 political 3362 disaster 78 support 54 action 0 bussiness 1.500000 chara 6 32 57 
-new id 22 name アガレス country 3 position 930.000000 260.000000 neighbor 3 18 23 money 3200 economic 3000 political 4126 disaster 46 support 67 action 0 bussiness 1.400000 chara 18 52 
-new id 23 name ザガン country 4 position 930.000000 400.000000 neighbor 4 19 22 25 money 6000 economic 3194 political 2421 disaster 89 support 41 action 0 bussiness 0.700000 chara 8 34 
-new id 24 name ミステリー country 5 position 1020.000000 140.000000 neighbor 5 21 money 3600 economic 3857 political 2270 disaster 75 support 53 action 0 bussiness 1.000000 chara 21 42 59 
-new id 25 name ヤンマー country 5 position 1160.000000 380.000000 neighbor 5 23 money 5100 economic 2952 political 4749 disaster 55 support 57 action 0 bussiness 1.000000 chara 9 33 
-new id 26 name ニベア country 4 position 1180.000000 600.000000 neighbor 4 23 money 5100 economic 4209 political 3909 disaster 69 support 78 action 0 bussiness 1.300000 chara 7 44 25 25 
+new id 0 name レダニア country 0 position 100.000000 200.000000 neighbor 6 7 money 4500 economic 1900 political 4612 disaster 56 support 84 action 0 bussiness 0.000000 chara 51 
+new id 1 name マスティフ country 1 position 150.000000 620.000000 neighbor 8 11 money 5000 economic 2346 political 4816 disaster 99 support 78 action 0 bussiness 0.000000 chara 35 
+new id 2 name メタノール country 2 position 600.000000 100.000000 player neighbor 12 18 money 7900 economic 2307 political 5120 disaster 88 support 66 action 0 bussiness 0.000000 chara 26 
+new id 3 name ゾルフガード country 3 position 660.000000 350.000000 neighbor 13 22 16 money 4800 economic 2500 political 3603 disaster 72 support 95 action 0 bussiness 0.000000 chara 43 
+new id 4 name ミッドガル country 4 position 1000.000000 600.000000 neighbor 20 23 26 money 6400 economic 2447 political 4983 disaster 99 support 70 action 0 bussiness 0.000000 chara 19 
+new id 5 name デトロイト country 5 position 1180.000000 200.000000 neighbor 24 25 money 3900 economic 3836 political 2567 disaster 87 support 72 action 0 bussiness 0.000000 chara 12 
+new id 6 name ゲルダ country 0 position 300.000000 150.000000 neighbor 0 12 money 3400 economic 2200 political 3017 disaster 94 support 61 action 0 bussiness 0.000000 chara 13 48 36 
+new id 7 name マテルダ country 0 position 250.000000 260.000000 neighbor 0 10 money 6700 economic 2600 political 2046 disaster 68 support 44 action 0 bussiness 0.000000 chara 4 37 54 
+new id 8 name リニア country 1 position 210.000000 450.000000 neighbor 1 10 money 6700 economic 4711 political 4143 disaster 66 support 71 action 0 bussiness 0.000000 chara 16 23 24 
+new id 9 name セーリア country 2 position 400.000000 70.000000 neighbor 12 money 5000 economic 3584 political 2342 disaster 75 support 93 action 0 bussiness 0.000000 chara 5 53 
+new id 10 name グロキシニア country 1 position 350.000000 350.000000 neighbor 7 8 13 14 money 3900 economic 3551 political 2383 disaster 65 support 72 action 0 bussiness 0.000000 chara 15 31 55 
+new id 11 name ベント country 1 position 340.000000 600.000000 neighbor 1 14 15 money 5800 economic 2584 political 4375 disaster 58 support 88 action 0 bussiness 0.000000 chara 0 49 
+new id 12 name レニス country 2 position 470.000000 180.000000 neighbor 2 6 9 13 money 6700 economic 4708 political 3067 disaster 97 support 48 action 1 bussiness 0.000000 chara 14 28 27 
+new id 13 name ワット country 3 position 520.000000 290.000000 neighbor 10 12 3 money 2800 economic 3100 political 2818 disaster 80 support 50 action 0 bussiness 0.000000 chara 1 47 
+new id 14 name ニラニチア country 3 position 490.000000 470.000000 neighbor 10 11 16 money 3700 economic 2000 political 3821 disaster 69 support 50 action 0 bussiness 0.000000 chara 2 30 45 
+new id 15 name テゴス country 1 position 450.000000 650.000000 neighbor 17 money 4900 economic 3444 political 5384 disaster 46 support 44 action 0 bussiness 0.000000 chara 22 29 56 
+new id 16 name メロン country 3 position 640.000000 490.000000 neighbor 3 14 17 19 money 5600 economic 2100 political 5181 disaster 45 support 65 action 0 bussiness 0.000000 chara 10 50 
+new id 17 name キニニム country 3 position 630.000000 619.000000 neighbor 15 16 20 money 2200 economic 2500 political 4202 disaster 87 support 95 action 0 bussiness 0.000000 chara 3 38 
+new id 18 name ウォール country 2 position 770.000000 200.000000 neighbor 2 21 22 money 4900 economic 2521 political 4204 disaster 50 support 48 action 1 bussiness 0.000000 chara 11 41 58 
+new id 19 name マリア country 3 position 780.000000 430.000000 neighbor 16 23 money 5000 economic 1900 political 2253 disaster 40 support 58 action 0 bussiness 0.000000 chara 17 40 
+new id 20 name シーネ country 4 position 800.000000 580.000000 neighbor 4 17 money 4700 economic 2458 political 4286 disaster 43 support 95 action 0 bussiness 0.000000 chara 20 39 46 
+new id 21 name ニルフ country 5 position 930.000000 100.000000 neighbor 18 24 money 4600 economic 4843 political 3362 disaster 78 support 54 action 0 bussiness 0.000000 chara 6 32 57 
+new id 22 name アガレス country 3 position 930.000000 260.000000 neighbor 3 18 23 money 3200 economic 3000 political 4126 disaster 46 support 67 action 0 bussiness 0.000000 chara 18 52 
+new id 23 name ザガン country 4 position 930.000000 400.000000 neighbor 4 19 22 25 money 6000 economic 3194 political 2421 disaster 89 support 41 action 0 bussiness 0.000000 chara 8 34 
+new id 24 name ミステリー country 5 position 1020.000000 140.000000 neighbor 5 21 money 3600 economic 3857 political 2270 disaster 75 support 53 action 0 bussiness 0.000000 chara 21 42 59 
+new id 25 name ヤンマー country 5 position 1160.000000 380.000000 neighbor 5 23 money 5100 economic 2952 political 4749 disaster 55 support 57 action 0 bussiness 0.000000 chara 9 33 
+new id 26 name ニベア country 4 position 1180.000000 600.000000 neighbor 4 23 money 5100 economic 4209 political 3909 disaster 69 support 78 action 0 bussiness 0.000000 chara 7 44 25 25 25 

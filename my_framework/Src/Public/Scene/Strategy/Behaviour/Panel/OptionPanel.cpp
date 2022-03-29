@@ -131,7 +131,7 @@ void OptionPanel::SoundSetting(bool sound) {
 	if (sound) {
 		pSoundText[1]->Print(L"ON");
 		pSoundManager->SetVolume(1);
-		pSoundManager->SetVolume("bgm", 0.5f);
+		pSoundManager->SetVolume("bgm", 0.1f);
 	}
 	else {
 		pSoundText[1]->Print(L"OFF");

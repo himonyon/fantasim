@@ -1,2 +1,2 @@
 sound 1
-device 1 
+device 0 

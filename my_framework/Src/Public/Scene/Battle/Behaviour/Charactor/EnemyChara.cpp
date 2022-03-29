@@ -86,13 +86,26 @@ bool EnemyChara::Move() {
 	return true;
 }
 bool EnemyChara::StartMove() {
-	pSearcher.GetCulcedStartSquare(pTargetChara->GetCurrentSquare(), GetCurrentSquare());
+	//使用できるスキルの最短距離を探す
+	int _minSkillDis = 100;
+	for (auto& skill : pCharaInfo->GetSkills()) {
+		if (skill->GetSkillType() != eSkillType::Attack) continue;
+		if (pCharaInfo->mp < skill->GetConsumeMP()) continue;
+		if (skill->GetMinDis() < _minSkillDis) _minSkillDis = skill->GetMinDis();
+	}
+	if (_minSkillDis == 100) _minSkillDis = 1; //使用スキルがない場合は１を代入しておく
+
+	//スキルの届く位置かつターゲットキャラに近い場所を探す
+	pSearcher.GetCulcedStartSquare(pTargetChara->GetCurrentSquare(), GetCurrentSquare(), _minSkillDis);
 	fMoveFunc = &EnemyChara::MoveToTarget;
 	return true;
 }
 bool EnemyChara::MoveToTarget() {
 	//移動先がない場合はfalse
-	if (pSearcher.vCloseList.size() == 0) return false;
+	if (pSearcher.vCloseList.size() == 0) {
+		fMoveFunc = &EnemyChara::StartMove;
+		return false;
+	}
 
 	//移動先のスタートマスを渡して移動
 	if (!BattleChara::Move(pSearcher.vCloseList.back())) {

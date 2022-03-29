@@ -57,4 +57,4 @@ id 55 name ミイラ sp_name Miira attr 闇 level 1 power 78 hp 35 mp 20 def 5 evd 1
 id 56 name ミザリア sp_name Mizaria attr 闇 level 1 power 89 hp 47 mp 38 def 4 evd 10 move 3 skill 0 6 10 31 
 id 57 name ウマズラ sp_name Umazura attr 闇 level 1 power 79 hp 42 mp 18 def 6 evd 1 move 1 skill 0 11 2000 
 id 58 name ワトソン sp_name Watoson attr 闇 level 1 power 95 hp 56 mp 40 def 5 evd 10 move 2 skill 1 9 1001 2001 
-id 59 name ゾン sp_name Zon attr 闇 level 1 power 104 hp 72 mp 38 def 6 evd 10 move 2 skill 1 9 2000 36 36 
+id 59 name ゾン sp_name Zon attr 闇 level 1 power 104 hp 72 mp 38 def 6 evd 10 move 2 skill 1 9 2000 36 36 36 

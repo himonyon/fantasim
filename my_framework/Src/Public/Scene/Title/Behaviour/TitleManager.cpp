@@ -60,7 +60,7 @@ void TitleManager::Awake() {
 
 void TitleManager::Update() {
 	//ストラテジーシーンへ遷移
-	if (Input::Trg(InputConfig::input["decide"])) {
+	if (Keyboard::Trg(DIK_SPACE) || Joystick::Trg(JOY_CIRCLE)) {
 		TransScene();
 	}
 

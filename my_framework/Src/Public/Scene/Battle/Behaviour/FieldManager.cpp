@@ -303,14 +303,12 @@ void FieldManager::CreateSound() {
 	pSoundManager = _pSoundObj->GetComponent<SoundManager>();
 	//BGM
 	pSoundManager->AddSound("bgm", L"Data/Sound/Battle/bgm.wav");
-	pSoundManager->SetVolume("bgm", 0.5f);
 	//決定音
 	pSoundManager->AddSound("decide", L"Data/Sound/Common/circle.wav");
 	//キャンセル音
 	pSoundManager->AddSound("cancel", L"Data/Sound/Common/cross.wav");
 	//バトル時BGM
 	pSoundManager->AddSound("battle", L"Data/Sound/Battle/battle.wav");
-	pSoundManager->SetVolume("battle", 0.5f);
 	//ダメージ
 	pSoundManager->AddSound("damage", L"Data/Sound/Battle/damage.wav");
 	//死亡
